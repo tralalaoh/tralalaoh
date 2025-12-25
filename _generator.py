@@ -18,7 +18,7 @@ def generate_addons_xml():
                         with open(addon_path, "r", encoding="utf-8") as f:
                             xml_content = f.read().strip()
                             if xml_content.startswith("<?xml"):
-                                xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, 1).strip()
+                                xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, count=1).strip()
                             xbmc_addons.append(xml_content)
                     except Exception as e:
                         print(f"Error reading {addon_path}: {e}")
@@ -27,7 +27,7 @@ def generate_addons_xml():
         with open("addon.xml", "r", encoding="utf-8") as f:
             xml_content = f.read().strip()
             if xml_content.startswith("<?xml"):
-                xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, 1).strip()
+                xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, count=1).strip()
             xbmc_addons.append(xml_content)
 
     final_xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<addons>\n'
