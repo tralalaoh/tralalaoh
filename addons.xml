@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="repository.tralalaoh" name="Tralalaoh Repository" version="1.0.0" provider-name="tralalaoh">
-    <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
-        <dir>
-            <info compressed="false">https://tralalaoh.github.io/tralalaoh/addons.xml</info>
-            <checksum>https://tralalaoh.github.io/tralalaoh/addons.xml.md5</checksum>
-            <datadir zip="true">https://tralalaoh.github.io/tralalaoh/zips/</datadir>
-        </dir>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Tralalaoh's Kodi Addons</summary>
-        <description>Repository for 3SK Video and other addons.</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-        </assets>
-    </extension>
-</addon>
 <addon id="plugin.video.3sk" name="3SK Video" version="1.0.0" provider-name="Your Name">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
@@ -44,6 +27,23 @@ v1.0.0 (2025-12-24)
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="repository.tralalaoh" name="Tralalaoh Repository" version="1.0.0" provider-name="tralalaoh">
+    <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
+        <dir>
+            <info compressed="false">https://tralalaoh.github.io/tralalaoh/addons.xml</info>
+            <checksum>https://tralalaoh.github.io/tralalaoh/addons.xml.md5</checksum>
+            <datadir zip="true">https://tralalaoh.github.io/tralalaoh/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Tralalaoh's Kodi Addons</summary>
+        <description>Repository for 3SK Video and other addons.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
         </assets>
     </extension>
 </addon>

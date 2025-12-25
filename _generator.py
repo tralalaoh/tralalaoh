@@ -2,33 +2,12 @@ import os
 import hashlib
 import re
 
-# Configuration
-# Path where your addon ZIPs are located
 ADDONS_DIR = "zips"
 
 def generate_addons_xml():
-    """
-    Generates the main addons.xml file.
-    It collects all addon.xml files from zips/ and the root folder.
-    """
     xbmc_addons = []
 
-    # 1. Search for the Repository addon.xml in the ROOT folder
-    if os.path.exists("addon.xml"):
-        try:
-            with open("addon.xml", "r", encoding="utf-8") as f:
-                xml_content = f.read().strip()
-                # Clean XML declaration
-                if xml_content.startswith("<?xml"):
-                    xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, 1).strip()
-                xbmc_addons.append(xml_content)
-                print("✅ Found Repository addon.xml in root")
-        except Exception as e:
-            print(f"❌ Error reading root addon.xml: {e}")
-    else:
-        print("⚠️  WARNING: No 'addon.xml' found in root. Your repo might not work correctly.")
-
-    # 2. Search for Plugin addon.xml files in the ZIPS folder
+    # 1. Scan ZIPS
     if os.path.exists(ADDONS_DIR):
         for root, dirs, files in os.walk(ADDONS_DIR):
             for file_name in files:
@@ -40,34 +19,60 @@ def generate_addons_xml():
                             if xml_content.startswith("<?xml"):
                                 xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, 1).strip()
                             xbmc_addons.append(xml_content)
-                            print(f"✅ Found Plugin in: {addon_path}")
                     except Exception as e:
-                        print(f"❌ Error reading {addon_path}: {e}")
+                        print(f"Error: {e}")
 
-    # 3. Compile the final addons.xml
+    # 2. Scan ROOT Repo XML
+    if os.path.exists("addon.xml"):
+        with open("addon.xml", "r", encoding="utf-8") as f:
+            xml_content = f.read().strip()
+            if xml_content.startswith("<?xml"):
+                xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content, 1).strip()
+            xbmc_addons.append(xml_content)
+
     final_xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<addons>\n'
     final_xml += "\n".join(xbmc_addons)
     final_xml += '\n</addons>'
 
-    # Write the file
     with open("addons.xml", "w", encoding="utf-8") as f:
         f.write(final_xml)
 
-    print(f"🎉 Generated addons.xml with {len(xbmc_addons)} entries.")
-    return final_xml
+    # Generate MD5
+    m = hashlib.md5(final_xml.encode("utf-8")).hexdigest()
+    with open("addons.xml.md5", "w") as f:
+        f.write(m)
 
-def generate_md5(xml_content):
-    """
-    Generates the addons.xml.md5 validation file.
-    """
-    try:
-        m = hashlib.md5(xml_content.encode("utf-8")).hexdigest()
-        with open("addons.xml.md5", "w") as f:
-            f.write(m)
-        print("🎉 Generated addons.xml.md5")
-    except Exception as e:
-        print(f"❌ Error generating MD5: {e}")
+    print("✅ addons.xml & md5 generated.")
+
+def generate_html_index():
+    """Crée un fichier index.html pour que Kodi puisse voir les fichiers"""
+    html = "<html><body><h1>Kodi Repo</h1><ul>"
+
+    # Lien vers le dossier zips
+    html += '<li><a href="zips/">zips/</a></li>'
+    html += '<li><a href="addons.xml">addons.xml</a></li>'
+
+    # Lister le contenu de zips
+    for root, dirs, files in os.walk(ADDONS_DIR):
+        relative_root = os.path.relpath(root, ".")
+        if relative_root == ".": continue
+
+        # Créer des index dans les sous-dossiers aussi
+        sub_html = "<html><body><ul>"
+        sub_html += '<li><a href="../">.. (Parent)</a></li>'
+        for f in files:
+            if f.endswith(".zip"):
+                sub_html += f'<li><a href="{f}">{f}</a></li>'
+        sub_html += "</ul></body></html>"
+
+        with open(os.path.join(root, "index.html"), "w") as f:
+            f.write(sub_html)
+
+    html += "</ul></body></html>"
+    with open("index.html", "w") as f:
+        f.write(html)
+    print("✅ index.html generated (Browsable Mode).")
 
 if __name__ == "__main__":
-    xml = generate_addons_xml()
-    generate_md5(xml)
+    generate_addons_xml()
+    generate_html_index()
