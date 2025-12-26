@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.turkish123" name="Turkish123" version="1.0.0" provider-name="YourName">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.31.0"/>
+        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Turkish123 Video Streaming</summary>
+        <description lang="en_GB">Watch Turkish series and shows from Turkish123. Features smart caching for fast playback, favorites, watch history, and resume positions.</description>
+        <disclaimer lang="en_GB">The authors do not host or distribute any of the content displayed by this addon. The authors have no affiliation with the content provider.</disclaimer>
+        <platform>all</platform>
+        <license>MIT</license>
+        <website>https://www2.turkish123.org</website>
+        <source>https://github.com/yourusername/plugin.video.turkish123</source>
+        <news>
+v1.0.0 (2025-12-25)
+- Initial release
+- Browse series catalog
+- Smart 2-level caching (fast playback)
+- Search functionality
+- Favorites system
+- Watch history and continue watching
+- Resume playback positions
+- Auto-play next episode
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
