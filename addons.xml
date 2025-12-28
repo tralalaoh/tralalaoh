@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.video.3sk" name="3SK Video" version="1.1.0" provider-name="Your Name">
+<addon id="plugin.video.3sk" name="3SK Video" version="1.1.0" provider-name="Tralalaoh">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.31.0"/>
@@ -29,12 +29,12 @@ v1.0.0 (2025-12-24)
 - Play episodes with stream resolution
         </news>
         <assets>
-            <icon>icon.png</icon>
+            <icon>3sk.jpg</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.turkish123" name="Turkish123" version="1.0.0" provider-name="YourName">
+<addon id="plugin.video.turkish123" name="Turkish123" version="1.0.0" provider-name="Tralalaoh">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.31.0"/>
@@ -63,7 +63,7 @@ v1.0.0 (2025-12-25)
 - Auto-play next episode
         </news>
         <assets>
-            <icon>icon.png</icon>
+            <icon>turkish123.jpg</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
