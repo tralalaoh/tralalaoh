@@ -1,0 +1,11 @@
+{
+    "name": "Turkish Series Player",
+    "id": "turkish_series_player",
+    "plugin": "plugin.video.turkish.player",
+    "priority": 100,
+    "is_resolvable": "true",
+    "assert": {
+        "playable": true
+    },
+    "play_episode": "plugin://plugin.video.turkish.player/?action=play&tmdb_id={tmdb}&season={season}&episode={episode}&title={title}&year={year}"
+}
