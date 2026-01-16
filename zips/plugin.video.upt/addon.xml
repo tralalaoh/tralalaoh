@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.upt" name="Universal Progress Tracker" version="2.1.2" provider-name="TRALALAOH">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    
+    <extension point="xbmc.service" library="service.py" start="startup" />
+    
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en_GB">Universal Progress Tracker - Track your progress across all addons</summary>
+        <description lang="en_GB">Automatically tracks playback progress for all videos in Kodi. Creates shortcuts for easy resume from Continue Watching menu. Works with any addon - no modifications needed!</description>
+        <license>GPL-3.0-only</license>
+        <forum></forum>
+        <website></website>
+        <source></source>
+        <news>
+v1.0.0 (2026-01-03)
+- Initial release
+- Automatic playback tracking
+- Continue Watching menu with resume
+- Clean poster-based interface
+- Configurable settings with instant apply
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>

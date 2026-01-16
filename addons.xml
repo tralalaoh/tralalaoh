@@ -127,6 +127,39 @@ v1.0.0 (2025-12-27)
         </assets>
     </extension>
 </addon>
+<addon id="plugin.video.upt" name="Universal Progress Tracker" version="2.1.2" provider-name="TRALALAOH">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    
+    <extension point="xbmc.service" library="service.py" start="startup" />
+    
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en_GB">Universal Progress Tracker - Track your progress across all addons</summary>
+        <description lang="en_GB">Automatically tracks playback progress for all videos in Kodi. Creates shortcuts for easy resume from Continue Watching menu. Works with any addon - no modifications needed!</description>
+        <license>GPL-3.0-only</license>
+        <forum></forum>
+        <website></website>
+        <source></source>
+        <news>
+v1.0.0 (2026-01-03)
+- Initial release
+- Automatic playback tracking
+- Continue Watching menu with resume
+- Clean poster-based interface
+- Configurable settings with instant apply
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
 <addon id="repository.tralalaoh" name="Tralalaoh Repository" version="1.0.0" provider-name="tralalaoh">
     <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
         <dir>
@@ -141,6 +174,77 @@ v1.0.0 (2025-12-27)
         <platform>all</platform>
         <assets>
             <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.turkish.player" 
+       name="Turkish Series Player" 
+       version="1.2.0" 
+       provider-name="Tralalaoh">
+    
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.31.0"/>
+        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
+    </requires>
+    
+    <extension point="xbmc.python.pluginsource" library="player.py">
+        <provides>video</provides>
+    </extension>
+    
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Turkish Series Player for TMDb Helper</summary>
+        <description lang="en_GB">High-performance player addon for Turkish series with multi-provider support.
+
+🎬 Features:
+- 3SK Engine (Arabic audio) - Multiple servers available
+- Qrmzi Engine (Arabic audio) - Forensically verified streams
+- Turkish123 Engine (English subtitles) - Direct access
+- Multi-provider stream selection dialog
+- Smart caching for instant playback
+- Optimized for Android TV
+- Multi-threaded stream resolution
+
+📺 Use with TMDb Helper for best experience!
+
+⚙️ Configuration:
+Go to addon settings to enable/disable providers individually.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <website>https://github.com/hamza/plugin.video.turkish.player</website>
+        <news>
+v1.2.0 (2026-01-16)
+- 🎯 NEW: Multi-provider stream selection dialog!
+- ✨ NEW: Shows ALL streams from enabled providers
+- 🏷️ NEW: Stream labels show provider + audio type
+- 🔧 UPDATED: Qrmzi engine with forensic verification (matches qrmzi.py)
+- 🌐 UPDATED: Qrmzi base URL (www.qrmzi.tv)
+- ⚙️ NEW: Individual provider toggles in settings
+- 📝 IMPROVED: Stream format: [Provider] Name (Audio Type)
+
+v1.1.2 (2026-01-16)
+- 🛠 CRITICAL FIX: 3SK streams NOW WORK! (Origin header matches Referer)
+- 🔧 FIX: Qrmzi URL generation (dash-separated, not URL-encoded)
+- ✅ TESTED: 403 errors resolved, playback confirmed
+
+v1.1.1 (2026-01-16)
+- 🛠 CRITICAL FIX: Streams now play! (Fixed Referer header encoding)
+- ✨ NEW: Provider name shown in selection dialog [3SK]
+- 🔍 Better episode identification
+
+v1.1.0 (2026-01-16)
+- 🎯 NEW: 3SK shows ALL episode matches - user chooses!
+- 🔍 NEW: Qrmzi forensic verification (Latin name matching)
+- ⚡ FASTER: Multi-threaded Qrmzi resolution (5 workers)
+- ✅ RELIABLE: No more wrong series matches
+- 🎭 Multi-provider fallback system
+
+v1.0.0 (2026-01-16)
+- Initial release as TMDb Helper player
+        </news>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>
