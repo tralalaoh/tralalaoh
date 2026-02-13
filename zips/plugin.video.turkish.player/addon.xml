@@ -66,7 +66,7 @@ v1.0.0 (2026-01-16)
         </news>
         <assets>
             <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
+            <fanart>fanart.png</fanart>
         </assets>
     </extension>
 </addon>
