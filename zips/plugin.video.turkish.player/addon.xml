@@ -65,8 +65,8 @@ v1.0.0 (2026-01-16)
 - Initial release as TMDb Helper player
         </news>
         <assets>
-            <icon>resources/icon.png</icon>
-            <fanart>resources/fanart.jpg</fanart>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>

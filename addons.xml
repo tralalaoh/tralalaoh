@@ -184,8 +184,8 @@ v1.0.0 (2026-01-16)
 - Initial release as TMDb Helper player
         </news>
         <assets>
-            <icon>resources/icon.png</icon>
-            <fanart>resources/fanart.jpg</fanart>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>
@@ -209,10 +209,10 @@ v2.6.3 (2026-01-23)
 - FIXED: Proper logger with Little Tigre branding
 
         </news>
-        <assets>
-            <icon>resources/media/icon.png</icon>
-            <fanart>resources/media/fanart.png</fanart>
-        </assets>
+            <assets>
+                <icon>icon.png</icon>
+                <fanart>fanart.png</fanart>
+            </assets>
     </extension>
 </addon>
 <addon id="plugin.video.littlefox" 
@@ -334,10 +334,10 @@ v2.0.0 (2026-01-23)
 - All features preserved and enhanced
 - Much more maintainable codebase
         </news>
-        <assets>
-            <icon>resources/media/icon.png</icon>
-            <fanart>resources/media/fanart.png</fanart>
-        </assets>
+            <assets>
+                <icon>icon.png</icon>
+                <fanart>fanart.png</fanart>
+            </assets>
     </extension>
 </addon>
 </addons>

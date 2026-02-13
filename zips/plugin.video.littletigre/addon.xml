@@ -21,7 +21,7 @@ v2.6.3 (2026-01-23)
         </news>
             <assets>
                 <icon>icon.png</icon>
-                <fanart>fanart.jpg</fanart>
+                <fanart>fanart.png</fanart>
             </assets>
     </extension>
 </addon>
