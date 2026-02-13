@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.littleracun" name="Little Racun" version="2.1.0" provider-name="Hamza">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.31.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Little Racun - Bridge Stremio with Kodi</summary>
+        <description lang="en_GB">Little Racun bridges the Stremio addon AIO Metadata (aiometadata.elfhosted.com) with Kodi, providing seamless access to multiple streaming catalogs and metadata sources. Supports TMDB, TVDB, MAL, Netflix, HBO Max, Disney+, and more. Integrates with Stremio Bridge, Fen Light, Otaku, and other Kodi players.</description>
+        <platform>all</platform>
+        <license>GPL-3.0</license>
+        <website>https://github.com/yourusername/little-racun</website>
+        <source>https://github.com/yourusername/little-racun</source>
+        <news>
+v2.1.0 (2026-01-23)
+- Rebranded to Little Racun 🦝
+- Player management in Settings
+- Download players from URL
+- View and delete players
+- Smart episode ID translation
+- On-demand IMDB/TMDB translation
+- Season folder grouping
+- Fast browsing (10x performance improvement)
+
+v2.0.0 (2026-01-23)
+- Complete code refactor - modular architecture
+- Extended provider grouping (TMDB, TVDB, MAL, streaming)
+- 65% fewer menu entries with organized folders
+- Search functionality fixed
+- All features preserved and enhanced
+- Much more maintainable codebase
+        </news>
+        <assets>
+            <icon>resources/media/Littleracun.png</icon>
+            <fanart>resources/media/Littleracun_FHD.png</fanart>
+        </assets>
+    </extension>
+</addon>

@@ -1,0 +1,12 @@
+{
+    "name": "Little Tigre 🐯",
+    "id": "littletigre",
+    "plugin": "plugin.video.littletigre",
+    "priority": 1000,
+    "is_resolvable": "true",
+    "assert": {
+        "playable": true
+    },
+    "play_movie": "plugin://plugin.video.littletigre/?action=play_with_dialog&imdb_id={imdb}&tmdb_id={tmdb}&tvdb_id={tvdb}&title={title}&year={year}&type=movie&mal_id={mal}&anilist_id={anilist}&kitsu_id={kitsu}",
+    "play_episode": "plugin://plugin.video.littletigre/?action=play_with_dialog&imdb_id={imdb}&tmdb_id={tmdb}&tvdb_id={tvdb}&title={title}&year={year}&season={season}&episode={episode}&type=episode&mal_id={mal}&anilist_id={anilist}&kitsu_id={kitsu}"
+}

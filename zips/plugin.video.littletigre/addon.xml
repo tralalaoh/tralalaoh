@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.littletigre" name="Little Tigre" version="2.6.3" provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.27.0"/>
+        <import addon="script.module.routing" version="0.2.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Little Tigre 🐯 - Your Friendly Streaming Companion</summary>
+        <description lang="en_GB">Little Tigre bridges TMDb Helper or any metadat addons to Stremio addons (Comet, Torrentio, MediaFusion, AIO Streams) with full anime support. Professional Router-Controller-Service architecture. Features: multi-debrid support (Real-Debrid, Torbox), Kitsu/MAL/AniList anime IDs, metadata persistence, color-coded streams, cached stream prioritization, smart filtering.</description>
+        <platform>all</platform>
+        <license>GPL-3.0</license>
+        <news>
+v2.6.3 (2026-01-23)
+- FIXED: Corrupted settings.py and settings.xml
+- FIXED: Proper logger with Little Tigre branding
+
+        </news>
+        <assets>
+            <icon>resources/media/Littletigre.png</icon>
+            <fanart>resources/media/Littletigre_FHD.png</fanart>
+        </assets>
+    </extension>
+</addon>

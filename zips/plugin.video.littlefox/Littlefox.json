@@ -1,0 +1,11 @@
+{
+    "name": "Little Fox",
+    "id": "littlefox",
+    "plugin": "plugin.video.littlefox",
+    "priority": 100,
+    "is_resolvable": "true",
+    "assert": {
+        "playable": true
+    },
+    "play_episode": "plugin://plugin.video.littlefox/?action=play&tmdb_id={tmdb}&imdb_id={imdb}&tvdb_id={tvdb}&season={season}&episode={episode}&title={title}&year={year}&poster={poster}&fanart={fanart}&clearlogo={clearlogo}&logo={logo}&plot={plot}&rating={rating}&thumbnail={thumbnail}&mal_id={mal}&anilist_id={anilist}&kitsu_id={kitsu}"
+}
