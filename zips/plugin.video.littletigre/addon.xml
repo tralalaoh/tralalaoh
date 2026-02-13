@@ -19,9 +19,9 @@ v2.6.3 (2026-01-23)
 - FIXED: Proper logger with Little Tigre branding
 
         </news>
-        <assets>
-            <icon>resources/media/icon.png</icon>
-            <fanart>resources/media/fanart.png</fanart>
-        </assets>
+            <assets>
+                <icon>icon.png</icon>
+                <fanart>fanart.jpg</fanart>
+            </assets>
     </extension>
 </addon>

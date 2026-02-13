@@ -33,9 +33,9 @@ v2.0.0 (2026-01-23)
 - All features preserved and enhanced
 - Much more maintainable codebase
         </news>
-        <assets>
-            <icon>resources/media/icon.png</icon>
-            <fanart>resources/media/fanart.png</fanart>
-        </assets>
+            <assets>
+                <icon>icon.png</icon>
+                <fanart>fanart.jpg</fanart>
+            </assets>
     </extension>
 </addon>
