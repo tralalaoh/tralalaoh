@@ -248,4 +248,155 @@ v1.0.0 (2026-01-16)
         </assets>
     </extension>
 </addon>
+<addon id="plugin.video.littletigre" name="Little Tigre" version="2.6.3" provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.27.0"/>
+        <import addon="script.module.routing" version="0.2.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Little Tigre 🐯 - Your Friendly Streaming Companion</summary>
+        <description lang="en_GB">Little Tigre bridges TMDb Helper or any metadat addons to Stremio addons (Comet, Torrentio, MediaFusion, AIO Streams) with full anime support. Professional Router-Controller-Service architecture. Features: multi-debrid support (Real-Debrid, Torbox), Kitsu/MAL/AniList anime IDs, metadata persistence, color-coded streams, cached stream prioritization, smart filtering.</description>
+        <platform>all</platform>
+        <license>GPL-3.0</license>
+        <news>
+v2.6.3 (2026-01-23)
+- FIXED: Corrupted settings.py and settings.xml
+- FIXED: Proper logger with Little Tigre branding
+
+        </news>
+        <assets>
+            <icon>resources/media/Littletigre.png</icon>
+            <fanart>resources/media/Littletigre_FHD.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.littlefox" 
+       name="Little Fox" 
+       version="2.5.3" 
+       provider-name="Hamza">
+    
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.resolveurl" version="5.1.0"/>
+        <import addon="script.module.requests" version="2.31.0"/>
+        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
+    </requires>
+    
+    <extension point="xbmc.python.pluginsource" library="player.py">
+        <provides>video</provides>
+    </extension>
+    
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Little Fox - Turkish Series Player</summary>
+        <description lang="en_GB">Little Fox - Your clever companion for Turkish series streaming!
+
+Professional-grade player addon with multi-provider support and smart stream selection.
+
+Architecture:
+- Providers: Scrape sites (3SK, Qrmzi, Turkish123, YouTube, EgyDead)
+- Resolvers: Extract streams (YouTube Piped API, ResolveURL)
+- Core: Orchestrate providers and resolvers
+- Player: Kodi 21 compatible playback
+- ID Translator: IMDb to TMDB translation
+
+Features:
+- Interactive Selection Loop
+- Smart server retry with blocking error dialogs
+- Quality-based server ranking
+- Multi-provider support
+- YouTube via Piped API (HLS streams)
+- Auto-translate subtitles (Turkish to English)
+- Kodi 21 Omega compatible
+- Compatible with AIO Metadata, Seren, The Crew
+
+ID Support:
+- TMDB ID: Direct usage (tmdb_id=12345)
+- IMDb ID: Auto-translation to TMDB (imdb_id=tt1234567)
+- Episode IMDb: Automatically finds parent series
+- In-Memory Cache: Fast repeated lookups
+
+Configuration:
+- Enable/disable providers individually
+- Configure search mode (parallel/sequential)
+- Adjust timeouts and concurrency
+- Custom TMDB API key support
+
+Compatible with AIO Metadata, TMDb Helper, Seren, The Crew!</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <website>https://github.com/hamza/plugin.video.littlefox</website>
+        <source>https://github.com/hamza/plugin.video.littlefox</source>
+        <forum>https://forum.kodi.tv/</forum>
+        <news>v2.5.3 (2026-01-24) - Critical Fixes
+- FIXED: Python syntax errors (emoji only in strings now)
+- FIXED: Kodi 21 addon.xml compatibility
+- FIXED: Settings.xml warnings
+- Little Fox branding preserved
+
+v2.5.2 (2026-01-24) - Little Fox Release
+- Rebranded to Little Fox
+- Fox-themed logging
+- Fixed AIO Metadata compatibility
+- Non-resolvable mode
+
+v2.5.1 (2026-01-23) - IMDb ID Translation
+- IMDb to TMDB ID translator
+- Episode IMDb ID support
+- In-memory caching
+
+v2.5.0 (2026-01-22) - Sub-Resolver Architecture
+- Sub-Resolver Pattern
+- YouTube Piped API resolver
+- Kodi 21 Omega compatibility
+        </news>
+        <assets>
+            <icon>Littlefox.png</icon>
+            <fanart>Littlefox.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.littleracun" name="Little Racun" version="2.1.0" provider-name="Hamza">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.31.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Little Racun - Bridge Stremio with Kodi</summary>
+        <description lang="en_GB">Little Racun bridges the Stremio addon AIO Metadata (aiometadata.elfhosted.com) with Kodi, providing seamless access to multiple streaming catalogs and metadata sources. Supports TMDB, TVDB, MAL, Netflix, HBO Max, Disney+, and more. Integrates with Stremio Bridge, Fen Light, Otaku, and other Kodi players.</description>
+        <platform>all</platform>
+        <license>GPL-3.0</license>
+        <website>https://github.com/yourusername/little-racun</website>
+        <source>https://github.com/yourusername/little-racun</source>
+        <news>
+v2.1.0 (2026-01-23)
+- Rebranded to Little Racun 🦝
+- Player management in Settings
+- Download players from URL
+- View and delete players
+- Smart episode ID translation
+- On-demand IMDB/TMDB translation
+- Season folder grouping
+- Fast browsing (10x performance improvement)
+
+v2.0.0 (2026-01-23)
+- Complete code refactor - modular architecture
+- Extended provider grouping (TMDB, TVDB, MAL, streaming)
+- 65% fewer menu entries with organized folders
+- Search functionality fixed
+- All features preserved and enhanced
+- Much more maintainable codebase
+        </news>
+        <assets>
+            <icon>resources/media/Littleracun.png</icon>
+            <fanart>resources/media/Littleracun_FHD.png</fanart>
+        </assets>
+    </extension>
+</addon>
 </addons>
