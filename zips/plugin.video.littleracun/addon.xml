@@ -34,8 +34,8 @@ v2.0.0 (2026-01-23)
 - Much more maintainable codebase
         </news>
         <assets>
-            <icon>resources/media/Littleracun.png</icon>
-            <fanart>resources/media/Littleracun_FHD.png</fanart>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.png</fanart>
         </assets>
     </extension>
 </addon>

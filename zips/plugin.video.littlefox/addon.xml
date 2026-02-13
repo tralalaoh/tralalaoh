@@ -79,8 +79,8 @@ v2.5.0 (2026-01-22) - Sub-Resolver Architecture
 - Kodi 21 Omega compatibility
         </news>
         <assets>
-            <icon>Littlefox.png</icon>
-            <fanart>Littlefox.png</fanart>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
         </assets>
     </extension>
 </addon>

@@ -20,8 +20,8 @@ v2.6.3 (2026-01-23)
 
         </news>
         <assets>
-            <icon>resources/media/Littletigre.png</icon>
-            <fanart>resources/media/Littletigre_FHD.png</fanart>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.png</fanart>
         </assets>
     </extension>
 </addon>
