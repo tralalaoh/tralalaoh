@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.rabitewatch"
+       name="Rabite Watch"
+       version="1.0.0"
+       provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.22.0"/>
+        <import addon="script.module.qrcode" version="0.0.0"/>
+    </requires>
+
+    <!-- Plugin Extension - Menu/UI -->
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+
+    <!-- Service Extension - Background sync -->
+    <extension point="xbmc.service" library="service.py" start="login"/>
+
+    <!-- Metadata -->
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Continue Watching and browse lists from Trakt, AniList and Simkl</summary>
+        <description lang="en_GB">Rabite Watch pulls your watch progress and lists from Trakt, AniList, and Simkl.
+Features:
+- Continue Watching with resume points aggregated from all services
+- Browse Watchlist / Watching / Watched / Dropped per service
+- Resume percentage stored per service and merged into a single smart resume point
+- Force-resume or jump to exact position when playing
+- No scrobbling - pure pull and browse addon</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>media/icon.png</icon>
+            <fanart>media/fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>

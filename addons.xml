@@ -1,106 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.video.3sk" name="3SK Video" version="1.1.0" provider-name="Tralalaoh">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.31.0"/>
-        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="main.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">3SK Video Streaming Addon</summary>
-        <description lang="en_GB">Watch series and episodes from 3SK streaming service. This addon provides access to a wide variety of TV shows and series.</description>
-        <disclaimer lang="en_GB">The authors do not host or distribute any of the content displayed by this addon. The authors have no affiliation with the content provider.</disclaimer>
-        <platform>all</platform>
-        <license>MIT</license>
-        <website>https://github.com/yourusername/plugin.video.3sk</website>
-        <source>https://github.com/yourusername/plugin.video.3sk</source>
-        <news>
-v1.1.0 (2025-12-25)
-- Added real-time search functionality
-- Search results show episodes with automatic parent series detection
-- Selecting an episode from search navigates to full series page
-v1.0.0 (2025-12-24)
-- Initial release
-- Browse series catalog
-- View episode lists
-- Play episodes with stream resolution
-        </news>
-        <assets>
-            <icon>3sk.jpg</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="plugin.video.turkish123" name="Turkish123" version="1.0.0" provider-name="Tralalaoh">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.31.0"/>
-        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="main.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Turkish123 Video Streaming</summary>
-        <description lang="en_GB">Watch Turkish series and shows from Turkish123. Features smart caching for fast playback, favorites, watch history, and resume positions.</description>
-        <disclaimer lang="en_GB">The authors do not host or distribute any of the content displayed by this addon. The authors have no affiliation with the content provider.</disclaimer>
-        <platform>all</platform>
-        <license>MIT</license>
-        <website>https://www2.turkish123.org</website>
-        <source>https://github.com/yourusername/plugin.video.turkish123</source>
-        <news>
-v1.0.0 (2025-12-25)
-- Initial release
-- Browse series catalog
-- Smart 2-level caching (fast playback)
-- Search functionality
-- Favorites system
-- Watch history and continue watching
-- Resume playback positions
-- Auto-play next episode
-        </news>
-        <assets>
-            <icon>turkish123.jpg</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="plugin.video.upt" name="Universal Progress Tracker" version="2.1.2" provider-name="TRALALAOH">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    
-    <extension point="xbmc.service" library="service.py" start="startup" />
-    
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary lang="en_GB">Universal Progress Tracker - Track your progress across all addons</summary>
-        <description lang="en_GB">Automatically tracks playback progress for all videos in Kodi. Creates shortcuts for easy resume from Continue Watching menu. Works with any addon - no modifications needed!</description>
-        <license>GPL-3.0-only</license>
-        <forum></forum>
-        <website></website>
-        <source></source>
-        <news>
-v1.0.0 (2026-01-03)
-- Initial release
-- Automatic playback tracking
-- Continue Watching menu with resume
-- Clean poster-based interface
-- Configurable settings with instant apply
-        </news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
 <addon id="repository.tralalaoh" name="Tralalaoh Repository" version="1.0.0" provider-name="tralalaoh">
     <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
         <dir>
@@ -267,6 +166,153 @@ v2.0.0 (2026-01-23)
                 <icon>icon.png</icon>
                 <fanart>fanart.png</fanart>
             </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.rabitewatch"
+       name="Rabite Watch"
+       version="1.0.0"
+       provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.22.0"/>
+        <import addon="script.module.qrcode" version="0.0.0"/>
+    </requires>
+
+    <!-- Plugin Extension - Menu/UI -->
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+
+    <!-- Service Extension - Background sync -->
+    <extension point="xbmc.service" library="service.py" start="login"/>
+
+    <!-- Metadata -->
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Continue Watching and browse lists from Trakt, AniList and Simkl</summary>
+        <description lang="en_GB">Rabite Watch pulls your watch progress and lists from Trakt, AniList, and Simkl.
+Features:
+- Continue Watching with resume points aggregated from all services
+- Browse Watchlist / Watching / Watched / Dropped per service
+- Resume percentage stored per service and merged into a single smart resume point
+- Force-resume or jump to exact position when playing
+- No scrobbling - pure pull and browse addon</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>media/icon.png</icon>
+            <fanart>media/fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="skin.littleduck" version="1.0.25" name="littleduck"
+	provider-name="Tralalaoh">
+	<requires>
+		<import addon="xbmc.gui" version="5.17.0" />
+		<import addon="script.littleduck.helper" />
+		<import addon="script.skinvariables" version="2.1.28" />
+		<import addon="resource.images.studios.coloured" version="0.0.1" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
+		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
+		<res width="2040" height="1080" aspect="17:9" default="false" folder="xml" />
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
+		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
+		<theme name="curial" mediadir="themes/curial" />
+		<theme name="flat" mediadir="themes/flat" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>http://forum.kodi.tv/</forum>
+		<source>https://github.com/xbmc/skin.estuary/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/images/customizable_widgets.jpg</screenshot>
+			<screenshot>resources/images/infopanel.jpg</screenshot>
+			<screenshot>resources/images/viewtypes1.jpg</screenshot>
+		</assets>
+		<summary lang="en_GB">littleduck skin by Tralalaoh (Estuary MOD)</summary>
+		<summary lang="en_NZ">littleduck skin by Tralalaoh (Estuary MOD)</summary>
+		<summary lang="en_US">littleduck skin by Tralalaoh (Estuary MOD)</summary>
+		<description lang="en_GB">littleduck is a custom Kodi skin built on Estuary with a Netflix-inspired dark theme, duck gold accents, and deep integration with TMDb Helper and Rabitewatch. Designed for a clean, curated home screen experience.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
+		<description lang="en_NZ">littleduck is a custom Kodi skin built on Estuary with a Netflix-inspired dark theme, duck gold accents, and deep integration with TMDb Helper and Rabitewatch. Designed for a clean, curated home screen experience.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
+		<description lang="en_US">littleduck is a custom Kodi skin built on Estuary with a Netflix-inspired dark theme, duck gold accents, and deep integration with TMDb Helper and Rabitewatch. Designed for a clean, curated home screen experience.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
+	</extension>
+</addon>
+<addon id="script.littleduck.helper" name="littleduck Helper" version="0.6.21" provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.19.1"/>
+    </requires>
+    <extension point="xbmc.service" library="resources/lib/service.py" start="startup" />
+    <extension point="xbmc.python.script" library="resources/lib/default.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">littleduck Helper Service</summary>
+        <description lang="en_GB">Background service for littleduck skin. Provides ratings integration (MDbList API), widget management, unified search, and dynamic content loading. This addon runs automatically in the background when using the littleduck skin.</description>
+        <disclaimer lang="en_GB">Requires littleduck skin to function properly.</disclaimer>
+        <news>v0.6.21 - Service addon now manageable in Add-ons → Services section</news>
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum />
+        <source />
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="repository.resolveurl" name="ResolveURL Repository" provider-name="gujal" version="1.0.0">
+  <extension point="xbmc.addon.repository" name="ResolveURL Repository">
+    <dir>
+      <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+      <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+      <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <description lang="en_GB">ResolveURL and Link Tester</description>
+    <license></license>
+    <language></language>
+    <website></website>
+    <news></news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets> 
+  </extension>
+</addon>
+<addon id="repository.jurialmunkey" name="jurialmunkey Alpha Repository" version="3.5" provider-name="jurialmunkey">
+    <extension point="xbmc.addon.repository" name="jurialmunkey Alpha Repository">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/repo/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/repo/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/repo/zips/</datadir>
+        </dir>
+        <dir minversion="19.9.1" maxversion="20.9.0">
+            <info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/nexusrepo/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/nexusrepo/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/nexusrepo/zips/</datadir>
+        </dir>
+        <dir minversion="20.9.1">
+            <info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>jurialmunkey Alpha Repository</summary>
+        <description>A repository for alpha releases of jurialmunkey's skins.</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
     </extension>
 </addon>
 </addons>
