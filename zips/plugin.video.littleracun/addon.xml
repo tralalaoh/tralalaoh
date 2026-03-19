@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.littleracun" name="Little Racun" version="2.1.0" provider-name="Hamza">
+<addon id="plugin.video.littleracun" name="Little Racun" version="2.1.1" provider-name="Hamza">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.31.0"/>
@@ -35,7 +35,7 @@ v2.0.0 (2026-01-23)
         </news>
             <assets>
                 <icon>icon.png</icon>
-                <fanart>fanart.png</fanart>
+                <fanart>fanart.jpg</fanart>
             </assets>
     </extension>
 </addon>

@@ -1,72 +1,62 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.littlefox" 
-       name="Little Fox" 
-       version="2.5.3" 
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+    Little Fox — Addon Manifest
+    Kodi addon.xml format: https://kodi.wiki/view/Addon.xml
+-->
+<addon id="plugin.video.littlefox"
+       name="Little Fox"
+       version="2.5.4"
        provider-name="Hamza">
-    
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         DEPENDENCIES
+         All imports are hard requirements; Kodi will refuse to enable the
+         addon if any of these are missing or below the stated version.
+         ═══════════════════════════════════════════════════════════════════ -->
     <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.resolveurl" version="5.1.0"/>
-        <import addon="script.module.requests" version="2.31.0"/>
+        <!-- Kodi 19 Matrix+ Python 3 runtime -->
+        <import addon="xbmc.python"                version="3.0.0"/>
+        <!-- URL resolver for hosted video embeds (doodstream, vidspeed, etc.) -->
+        <import addon="script.module.resolveurl"   version="5.1.0"/>
+        <!-- HTTP requests library -->
+        <import addon="script.module.requests"     version="2.31.0"/>
+        <!-- HTML scraping library -->
         <import addon="script.module.beautifulsoup4" version="4.11.0"/>
     </requires>
-    
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         PLUGIN ENTRY POINT
+         ═══════════════════════════════════════════════════════════════════ -->
     <extension point="xbmc.python.pluginsource" library="player.py">
         <provides>video</provides>
     </extension>
-    
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         METADATA
+         ═══════════════════════════════════════════════════════════════════ -->
     <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Little Fox - Turkish Series Player</summary>
-        <description lang="en_GB">Little Fox - Your clever companion for Turkish series streaming!
+        <summary lang="en_GB">Little Fox — Turkish Series Player</summary>
 
-Professional-grade player addon with multi-provider support and smart stream selection.
+        <description lang="en_GB">Stream Turkish series with Arabic or English audio from multiple providers.
 
-Architecture:
-- Providers: Scrape sites (3SK, Qrmzi, Turkish123, YouTube, EgyDead)
-- Resolvers: Extract streams (YouTube Piped API, ResolveURL)
-- Core: Orchestrate providers and resolvers
-- Player: Kodi 21 compatible playback
-- ID Translator: IMDb to TMDB translation
+Supports IMDb and TMDB IDs. Compatible with AIO Metadata, TMDb Helper, Seren, and The Crew.
 
-Features:
-- Interactive Selection Loop
-- Smart server retry with blocking error dialogs
-- Quality-based server ranking
-- Multi-provider support
-- YouTube via Piped API (HLS streams)
-- Auto-translate subtitles (Turkish to English)
-- Kodi 21 Omega compatible
-- Compatible with AIO Metadata, Seren, The Crew
+Features multi-provider search, smart server selection, quality ranking, and auto-translated subtitles.</description>
 
-ID Support:
-- TMDB ID: Direct usage (tmdb_id=12345)
-- IMDb ID: Auto-translation to TMDB (imdb_id=tt1234567)
-- Episode IMDb: Automatically finds parent series
-- In-Memory Cache: Fast repeated lookups
-
-Configuration:
-- Enable/disable providers individually
-- Configure search mode (parallel/sequential)
-- Adjust timeouts and concurrency
-- Custom TMDB API key support
-
-Compatible with AIO Metadata, TMDb Helper, Seren, The Crew!</description>
         <platform>all</platform>
         <license>MIT</license>
         <website>https://github.com/hamza/plugin.video.littlefox</website>
         <source>https://github.com/hamza/plugin.video.littlefox</source>
         <forum>https://forum.kodi.tv/</forum>
+
         <news>v2.5.3 (2026-01-24) - Critical Fixes
-- FIXED: Python syntax errors (emoji only in strings now)
-- FIXED: Kodi 21 addon.xml compatibility
-- FIXED: Settings.xml warnings
-- Little Fox branding preserved
+- Fixed Python syntax errors
+- Fixed Kodi 21 addon.xml compatibility
+- Fixed settings.xml warnings
 
 v2.5.2 (2026-01-24) - Little Fox Release
 - Rebranded to Little Fox
-- Fox-themed logging
 - Fixed AIO Metadata compatibility
-- Non-resolvable mode
 
 v2.5.1 (2026-01-23) - IMDb ID Translation
 - IMDb to TMDB ID translator
@@ -76,11 +66,12 @@ v2.5.1 (2026-01-23) - IMDb ID Translation
 v2.5.0 (2026-01-22) - Sub-Resolver Architecture
 - Sub-Resolver Pattern
 - YouTube Piped API resolver
-- Kodi 21 Omega compatibility
-        </news>
+- Kodi 21 Omega compatibility</news>
+
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.png</fanart>
         </assets>
     </extension>
+
 </addon>
