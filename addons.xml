@@ -195,7 +195,7 @@ Features:
         </assets>
     </extension>
 </addon>
-<addon id="skin.littleduck" version="1.0.27" name="littleduck"
+<addon id="skin.littleduck" version="1.0.28" name="littleduck"
 	provider-name="Tralalaoh">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0" />
