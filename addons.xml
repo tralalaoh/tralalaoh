@@ -1,83 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="repository.tralalaoh" name="Tralalaoh Repository" version="1.0.1" provider-name="tralalaoh">
-    <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
-        <dir>
-            <info compressed="false">https://tralalaoh.github.io/tralalaoh/addons.xml</info>
-            <checksum>https://tralalaoh.github.io/tralalaoh/addons.xml.md5</checksum>
-            <datadir zip="true">https://tralalaoh.github.io/tralalaoh/zips/</datadir>
-        </dir>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Tralalaoh's Kodi Addons</summary>
-        <description>Repository for 3SK Video and other addons.</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-        </assets>
-    </extension>
-</addon>
-<addon id="plugin.video.littletigre" name="Little Tigre" version="2.6.4" provider-name="Tralalaoh">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.27.0"/>
-        <import addon="script.module.routing" version="0.2.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="main.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Little Tigre 🐯 - Your Friendly Streaming Companion</summary>
-        <description lang="en_GB">Little Tigre bridges TMDb Helper or any metadat addons to Stremio addons (Comet, Torrentio, MediaFusion, AIO Streams) with full anime support. Professional Router-Controller-Service architecture. Features: multi-debrid support (Real-Debrid, Torbox), Kitsu/MAL/AniList anime IDs, metadata persistence, color-coded streams, cached stream prioritization, smart filtering.</description>
-        <platform>all</platform>
-        <license>GPL-3.0</license>
-        <news>
-v2.6.3 (2026-01-23)
-- FIXED: Corrupted settings.py and settings.xml
-- FIXED: Proper logger with Little Tigre branding
+<addon id="plugin.video.littlefox" name="Little Fox" version="1.0.2" provider-name="Hamza">
 
-        </news>
-            <assets>
-                <icon>icon.png</icon>
-                <fanart>fanart.jpg</fanart>
-            </assets>
-    </extension>
-</addon>
-<!--
-    Little Fox — Addon Manifest
-    Kodi addon.xml format: https://kodi.wiki/view/Addon.xml
--->
-<addon id="plugin.video.littlefox"
-       name="Little Fox"
-       version="2.5.4"
-       provider-name="Hamza">
-
-    <!-- ═══════════════════════════════════════════════════════════════════
-         DEPENDENCIES
-         All imports are hard requirements; Kodi will refuse to enable the
-         addon if any of these are missing or below the stated version.
-         ═══════════════════════════════════════════════════════════════════ -->
+    
     <requires>
-        <!-- Kodi 19 Matrix+ Python 3 runtime -->
-        <import addon="xbmc.python"                version="3.0.0"/>
-        <!-- URL resolver for hosted video embeds (doodstream, vidspeed, etc.) -->
-        <import addon="script.module.resolveurl"   version="5.1.0"/>
-        <!-- HTTP requests library -->
-        <import addon="script.module.requests"     version="2.31.0"/>
-        <!-- HTML scraping library -->
-        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
+        
+        <import addon="xbmc.python" version="3.0.0" />
+        
+        <import addon="script.module.resolveurl" version="5.1.0" />
+        
+        <import addon="script.module.requests" version="2.31.0" />
+        
+        <import addon="script.module.beautifulsoup4" version="4.11.0" />
     </requires>
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         PLUGIN ENTRY POINT
-         ═══════════════════════════════════════════════════════════════════ -->
+    
     <extension point="xbmc.python.pluginsource" library="player.py">
         <provides>video</provides>
     </extension>
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         METADATA
-         ═══════════════════════════════════════════════════════════════════ -->
+    
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Little Fox — Turkish Series Player</summary>
 
@@ -93,24 +35,13 @@ Features multi-provider search, smart server selection, quality ranking, and aut
         <source>https://github.com/hamza/plugin.video.littlefox</source>
         <forum>https://forum.kodi.tv/</forum>
 
-        <news>v2.5.3 (2026-01-24) - Critical Fixes
-- Fixed Python syntax errors
-- Fixed Kodi 21 addon.xml compatibility
-- Fixed settings.xml warnings
+        <news>v1.0.1 (2026-03-26)
+- NEW: Premium server selection dialog (poster, plot, color-coded badges)
+- NEW: Dedicated logger module
+- NEW: Accent bar: green=1080p, amber=720p/HD, slate=lower quality
 
-v2.5.2 (2026-01-24) - Little Fox Release
-- Rebranded to Little Fox
-- Fixed AIO Metadata compatibility
-
-v2.5.1 (2026-01-23) - IMDb ID Translation
-- IMDb to TMDB ID translator
-- Episode IMDb ID support
-- In-memory caching
-
-v2.5.0 (2026-01-22) - Sub-Resolver Architecture
-- Sub-Resolver Pattern
-- YouTube Piped API resolver
-- Kodi 21 Omega compatibility</news>
+v1.0.0 (2026-01-24)
+- Initial versioned release</news>
 
         <assets>
             <icon>icon.png</icon>
@@ -119,10 +50,10 @@ v2.5.0 (2026-01-22) - Sub-Resolver Architecture
     </extension>
 
 </addon>
-<addon id="plugin.video.littleracun" name="Little Racun" version="2.1.1" provider-name="Hamza">
+<addon id="plugin.video.littleracun" name="Little Racun" version="1.0.2" provider-name="Hamza">
     <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.31.0"/>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.31.0" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
@@ -152,6 +83,35 @@ v2.0.0 (2026-01-23)
 - Search functionality fixed
 - All features preserved and enhanced
 - Much more maintainable codebase
+        </news>
+            <assets>
+                <icon>icon.png</icon>
+                <fanart>fanart.jpg</fanart>
+            </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.littletigre" name="Little Tigre" version="1.0.2" provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.27.0" />
+        <import addon="script.module.routing" version="0.2.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Little Tigre 🐯 - Your Friendly Streaming Companion</summary>
+        <description lang="en_GB">Little Tigre bridges TMDb Helper or any metadat addons to Stremio addons (Comet, Torrentio, MediaFusion, AIO Streams) with full anime support. Professional Router-Controller-Service architecture. Features: multi-debrid support (Real-Debrid, Torbox), Kitsu/MAL/AniList anime IDs, metadata persistence, color-coded streams, cached stream prioritization, smart filtering.</description>
+        <platform>all</platform>
+        <license>GPL-3.0</license>
+        <news>
+v1.0.1 (2026-03-26)
+- NEW: Bit depth detection (10bit/12bit/8bit) shown alongside codec
+- NEW: Release flag badges: [PROPER], [REPACK], [DUBBED]
+- IMPROVED: Stream metadata detection using word-boundary regexes
+
+v1.0.0 (2026-01-23)
+- Initial versioned release
         </news>
             <assets>
                 <icon>icon.png</icon>
@@ -195,6 +155,146 @@ Features:
         </assets>
     </extension>
 </addon>
+<addon id="plugin.video.themoviedb.helper"
+version="6.15.1"
+name="TMDb Helper"
+provider-name="jurialmunkey">
+<requires>
+  <import addon="xbmc.python" version="3.0.1"/>
+  <import addon="script.module.requests" version="2.9.1"/>
+  <import addon="script.module.pil" version="1.1.7"/>
+  <import addon="script.module.addon.signals" version="0.0.6" />
+  <import addon="script.module.jurialmunkey" version="0.2.31" />
+  <import addon="script.module.infotagger" version="0.0.5" />
+  <import addon="script.module.qrcode" version="6.1.0" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="resources/plugin.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.python.script" library="resources/script.py" />
+<extension point="xbmc.service" library="resources/service.py" />
+<extension point="xbmc.python.module" library="resources/modules"/>
+<extension point="xbmc.addon.metadata">
+  <reuselanguageinvoker>false</reuselanguageinvoker>
+  <summary lang="de_DE">TMDb Helfer</summary>
+  <summary lang="en_GB">TMDb Helper</summary>
+  <summary lang="zh_CN">TMDb 助手</summary>
+  <description lang="de_DE">TMDb Helper liefert Details über Filme, Fernsehsendungen und Schauspieler aus TMDb. Benutzer können auf eine Vielzahl von Listen aus TMDb TVDb MDbList und Trakt zugreifen.</description>
+  <description lang="en_GB">TMDb Helper provides details about movies, tvshows and actors from TMDb. Users can access a variety of lists from TMDb TVDb MDbList and Trakt.</description>
+  <description lang="pl_PL">TMDb Helper dostarcza szczegółowych informacji o filmach, serialach i aktorach z serwisu TMDb. Użytkownicy mają dostęp do szeregu list z serwisów TMDb, TVDb, MDbList i Trakt.</description>
+  <description lang="sv_SE">TMDb Helper tillhandahåller information om filmer, tv-serier och skådespelare från TMDb. Användare kan få tillgång till en mängd olika listor från TMDb, TVDb, MDbList och Trakt.</description>
+  <description lang="zh_CN">TMDb 助手从 TMDb（影视数据库） 获取电影、电视剧及演员的详细信息。用户可访问来自 TMDb、TVDb、MDbList 和 Trakt 的各类影视列表。</description>
+  <disclaimer lang="de_DE">Daten bereitgestellt von TMDb TVDb MDbList OMDb FanartTV und Trakt. Einige der Informationen werden von TheTVDB.com bereitgestellt. Bitte erwäge sie zu unterstützen. https://thetvdb.com/subscribe</disclaimer>
+  <disclaimer lang="en_GB">Data provided by TMDb TVDb MDbList OMDb FanartTV and Trakt. Some of the information is provided by TheTVDB.com. Please consider supporting them. https://thetvdb.com/subscribe</disclaimer>
+  <disclaimer lang="pl_PL">Dane dostarczane przez TMDb TVDb MDbList OMDb FanartTV i Trakt. Niektóre informacje pochodzą z serwisu TheTVDB.com. Prosimy o rozważenie wsparcia tych serwisów. https://thetvdb.com/subscribe</disclaimer>
+  <disclaimer lang="sv_SE">Data tillhandahållen av TMDb TVDb MDbList OMDb FanartTV och Trakt. En del av informationen tillhandahålls av TheTVDB.com. Stöd dem gärna. https://thetvdb.com/subscribe</disclaimer>
+  <disclaimer lang="zh_CN">数据由 TMDb、TVDb、MDbList、OMDb、FanartTV 和 Trakt 提供。部分信息由 TheTVDB.com 提供，建议您支持他们。订阅链接：https://thetvdb.com/subscribe</disclaimer>
+  <license>GPL-3.0-or-later</license>
+  <website>https://github.com/jurialmunkey/plugin.video.themoviedb.helper</website>
+  <forum>https://forum.kodi.tv/showthread.php?tid=345847</forum>
+  <assets>
+    <icon>icon.png</icon>
+    <fanart>fanart.jpg</fanart>
+    <clearlogo>clearlogo.png</clearlogo>
+    <screenshot>resources/screenshot-01.jpg</screenshot>
+    <screenshot>resources/screenshot-02.jpg</screenshot>
+  </assets>
+</extension>
+</addon>
+<addon id="repository.tralalaoh" name="Tralalaoh Repository" version="1.0.1" provider-name="tralalaoh">
+    <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
+        <dir>
+            <info compressed="false">https://tralalaoh.github.io/tralalaoh/addons.xml</info>
+            <checksum>https://tralalaoh.github.io/tralalaoh/addons.xml.md5</checksum>
+            <datadir zip="true">https://tralalaoh.github.io/tralalaoh/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Tralalaoh's Kodi Addons</summary>
+        <description>Repository for 3SK Video and other addons.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="script.littleduck.helper" name="littleduck Helper" version="0.6.22" provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.19.1"/>
+    </requires>
+    <extension point="xbmc.service" library="resources/lib/service.py" start="startup" />
+    <extension point="xbmc.python.script" library="resources/lib/default.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">littleduck Helper Service</summary>
+        <description lang="en_GB">Background service for littleduck skin. Provides ratings integration (MDbList API), widget management, unified search, and dynamic content loading. This addon runs automatically in the background when using the littleduck skin.</description>
+        <disclaimer lang="en_GB">Requires littleduck skin to function properly.</disclaimer>
+        <news>v0.6.21 - Service addon now manageable in Add-ons → Services section</news>
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum />
+        <source />
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.194" provider-name="gujal">
+    <requires>
+        <!-- <import addon="xbmc.python" version="3.0.0" /> -->
+        <import addon="script.module.six" />
+        <import addon="script.module.kodi-six" />
+        <import addon="plugin.video.youtube" optional="true" />
+        <import addon="script.module.python.twitch" optional="true" />
+        <import addon="plugin.googledrive" optional="true" />
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.python.pluginsource" library="lib/default.py" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en_GB">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+        <summary lang="es_ES">Resolver enlaces a videos de sitios populares para poder reproducirlos en XBMC/Kodi.</summary>
+        <summary lang="hr_HR">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju.</summary>
+        <summary lang="el_GR">Επίλυση συνδέσμων κοινών εξυπηρετητών σε μορφή βίντεο ικανό για αναπαραγωγή στο XBMC/Kodi.</summary>
+        <description lang="en_GB">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
+        <description lang="el_GR">Επίλυση συνδέσμων κοινών εξυπηρετητών σε μορφή βίντεο ικανό για αναπαραγωγή στο XBMC/Kodi, απλοποίηση της ανάπτυξης των προσθέτων που χρησιμοποιούν πολλαπλούς εξυπηρετητές για υλικό βίντεο</description>
+        <description lang="hr_HR">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju, pojednostavnjuje razvoj priključaka za video dodatke koji zahtjevaju višestruke video izvore.</description>
+        <disclaimer lang="en_GB">This script only resolves video content from legitimate file lockers without prejudice. If this script is being used by 3rd parties to resolve content that you feel infringes upon your Intellectual Property then please take your complaints to the actual website or developer linking to such content and not here. This script in no way searches for any content whatsoever.</disclaimer>
+        <disclaimer lang="el_GR">Το ανωτέρο σενάριο το μόνο που κάνει είναι να επιλύει οπτικοακουστικό περιεχόμενο από νόμιμες πηγές χωρίς προκατάληψη. Εάν το ανωτέρο σενάριο χρησιμοποιηθεί από τρίτους ώστε να επιλύσει περιεχόμενο το οποίο σας προκαλεί αντίδραση ότι παραβιάζει την πνευματική σας ιδιοκτησία παρακαλώ μεταφέρετε τα παραπονά σας στον ιστότοπο τον οποίο βρίσκεται το εν λόγω περιεχόμενο η τον δημιουργό ο οποίος πραγματοποιεί την σύνδεση και όχι εδω. Το σενάριο αυτό ουδεμία περίπτωση πραγματοποιεί αναζήτηση περιεχομένου.</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="script.skinvariables"
+version="2.1.35"
+name="Skin Variables"
+provider-name="jurialmunkey">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.jurialmunkey" version="0.2.28" />
+  <import addon="script.module.infotagger" version="0.0.5" />
+</requires>
+<extension point="xbmc.python.script" library="script.py" />
+<extension point="xbmc.python.pluginsource" library="plugin.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.addon.metadata">
+  <summary lang="en_GB">Skin Variables helps skinners to construct variables and expressions for multiple containers and listitems using a template</summary>
+  <summary lang="fr_FR">Skin Variables aide les skinners à créer des variables et des expressions pour plusieurs conteneurs et listes à l'aide d'un modèle</summary>
+  <description lang="en_GB">Skin Variables helps skinners to construct variables and expressions for multiple containers and listitems using a template</description>
+  <description lang="fr_FR">Skin Variables aide les skinners à créer des variables et des expressions pour plusieurs conteneurs et listes à l'aide d'un modèle</description>
+  <disclaimer lang="en_GB">For skinners</disclaimer>
+  <disclaimer lang="fr_FR">Pour les skinners</disclaimer>
+  <license>GPL-3.0-or-later</license>
+  <assets>
+    <icon>icon.png</icon>
+    <fanart>fanart.jpg</fanart>
+  </assets>
+</extension>
+</addon>
 <addon id="skin.littleduck" version="1.0.28" name="littleduck"
 	provider-name="Tralalaoh">
 	<requires>
@@ -232,76 +332,5 @@ Features:
 		<description lang="en_NZ">littleduck is a custom Kodi skin built on Estuary with a Netflix-inspired dark theme, duck gold accents, and deep integration with TMDb Helper and Rabitewatch. Designed for a clean, curated home screen experience.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">littleduck is a custom Kodi skin built on Estuary with a Netflix-inspired dark theme, duck gold accents, and deep integration with TMDb Helper and Rabitewatch. Designed for a clean, curated home screen experience.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon>
-<addon id="script.littleduck.helper" name="littleduck Helper" version="0.6.22" provider-name="Tralalaoh">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.19.1"/>
-    </requires>
-    <extension point="xbmc.service" library="resources/lib/service.py" start="startup" />
-    <extension point="xbmc.python.script" library="resources/lib/default.py" />
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">littleduck Helper Service</summary>
-        <description lang="en_GB">Background service for littleduck skin. Provides ratings integration (MDbList API), widget management, unified search, and dynamic content loading. This addon runs automatically in the background when using the littleduck skin.</description>
-        <disclaimer lang="en_GB">Requires littleduck skin to function properly.</disclaimer>
-        <news>v0.6.21 - Service addon now manageable in Add-ons → Services section</news>
-        <platform>all</platform>
-        <license>GPL-2.0-only</license>
-        <forum />
-        <source />
-        <assets>
-            <icon>resources/media/icon.png</icon>
-            <fanart>resources/media/fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="repository.resolveurl" name="ResolveURL Repository" provider-name="gujal" version="1.0.0">
-  <extension point="xbmc.addon.repository" name="ResolveURL Repository">
-    <dir>
-      <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-      <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-      <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
-    </dir>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <description lang="en_GB">ResolveURL and Link Tester</description>
-    <license></license>
-    <language></language>
-    <website></website>
-    <news></news>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart>
-    </assets> 
-  </extension>
-</addon>
-<addon id="repository.jurialmunkey" name="jurialmunkey Alpha Repository" version="3.5" provider-name="jurialmunkey">
-    <extension point="xbmc.addon.repository" name="jurialmunkey Alpha Repository">
-        <dir>
-            <info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/repo/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/repo/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/repo/zips/</datadir>
-        </dir>
-        <dir minversion="19.9.1" maxversion="20.9.0">
-            <info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/nexusrepo/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/nexusrepo/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/nexusrepo/zips/</datadir>
-        </dir>
-        <dir minversion="20.9.1">
-            <info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/</datadir>
-        </dir>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>jurialmunkey Alpha Repository</summary>
-        <description>A repository for alpha releases of jurialmunkey's skins.</description>
-        <disclaimer></disclaimer>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-        </assets>
-    </extension>
 </addon>
 </addons>

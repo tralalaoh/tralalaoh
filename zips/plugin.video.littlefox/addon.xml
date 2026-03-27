@@ -1,39 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<!--
-    Little Fox — Addon Manifest
-    Kodi addon.xml format: https://kodi.wiki/view/Addon.xml
--->
-<addon id="plugin.video.littlefox"
-       name="Little Fox"
-       version="2.5.4"
-       provider-name="Hamza">
+<?xml version='1.0' encoding='utf-8'?>
+<addon id="plugin.video.littlefox" name="Little Fox" version="1.0.2" provider-name="Hamza">
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         DEPENDENCIES
-         All imports are hard requirements; Kodi will refuse to enable the
-         addon if any of these are missing or below the stated version.
-         ═══════════════════════════════════════════════════════════════════ -->
+    
     <requires>
-        <!-- Kodi 19 Matrix+ Python 3 runtime -->
-        <import addon="xbmc.python"                version="3.0.0"/>
-        <!-- URL resolver for hosted video embeds (doodstream, vidspeed, etc.) -->
-        <import addon="script.module.resolveurl"   version="5.1.0"/>
-        <!-- HTTP requests library -->
-        <import addon="script.module.requests"     version="2.31.0"/>
-        <!-- HTML scraping library -->
-        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
+        
+        <import addon="xbmc.python" version="3.0.0" />
+        
+        <import addon="script.module.resolveurl" version="5.1.0" />
+        
+        <import addon="script.module.requests" version="2.31.0" />
+        
+        <import addon="script.module.beautifulsoup4" version="4.11.0" />
     </requires>
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         PLUGIN ENTRY POINT
-         ═══════════════════════════════════════════════════════════════════ -->
+    
     <extension point="xbmc.python.pluginsource" library="player.py">
         <provides>video</provides>
     </extension>
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         METADATA
-         ═══════════════════════════════════════════════════════════════════ -->
+    
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Little Fox — Turkish Series Player</summary>
 
@@ -49,24 +34,13 @@ Features multi-provider search, smart server selection, quality ranking, and aut
         <source>https://github.com/hamza/plugin.video.littlefox</source>
         <forum>https://forum.kodi.tv/</forum>
 
-        <news>v2.5.3 (2026-01-24) - Critical Fixes
-- Fixed Python syntax errors
-- Fixed Kodi 21 addon.xml compatibility
-- Fixed settings.xml warnings
+        <news>v1.0.1 (2026-03-26)
+- NEW: Premium server selection dialog (poster, plot, color-coded badges)
+- NEW: Dedicated logger module
+- NEW: Accent bar: green=1080p, amber=720p/HD, slate=lower quality
 
-v2.5.2 (2026-01-24) - Little Fox Release
-- Rebranded to Little Fox
-- Fixed AIO Metadata compatibility
-
-v2.5.1 (2026-01-23) - IMDb ID Translation
-- IMDb to TMDB ID translator
-- Episode IMDb ID support
-- In-memory caching
-
-v2.5.0 (2026-01-22) - Sub-Resolver Architecture
-- Sub-Resolver Pattern
-- YouTube Piped API resolver
-- Kodi 21 Omega compatibility</news>
+v1.0.0 (2026-01-24)
+- Initial versioned release</news>
 
         <assets>
             <icon>icon.png</icon>

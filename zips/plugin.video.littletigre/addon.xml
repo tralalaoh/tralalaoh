@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.littletigre" name="Little Tigre" version="2.6.4" provider-name="Tralalaoh">
+<?xml version='1.0' encoding='utf-8'?>
+<addon id="plugin.video.littletigre" name="Little Tigre" version="1.0.2" provider-name="Tralalaoh">
     <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.27.0"/>
-        <import addon="script.module.routing" version="0.2.0"/>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.27.0" />
+        <import addon="script.module.routing" version="0.2.0" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="main.py">
         <provides>video</provides>
@@ -14,10 +14,13 @@
         <platform>all</platform>
         <license>GPL-3.0</license>
         <news>
-v2.6.3 (2026-01-23)
-- FIXED: Corrupted settings.py and settings.xml
-- FIXED: Proper logger with Little Tigre branding
+v1.0.1 (2026-03-26)
+- NEW: Bit depth detection (10bit/12bit/8bit) shown alongside codec
+- NEW: Release flag badges: [PROPER], [REPACK], [DUBBED]
+- IMPROVED: Stream metadata detection using word-boundary regexes
 
+v1.0.0 (2026-01-23)
+- Initial versioned release
         </news>
             <assets>
                 <icon>icon.png</icon>

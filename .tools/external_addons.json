@@ -1,0 +1,17 @@
+[
+  {
+    "id": "script.module.resolveurl",
+    "source_addons_xml": "https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml",
+    "source_datadir": "https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/"
+  },
+  {
+    "id": "plugin.video.themoviedb.helper",
+    "source_addons_xml": "https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/addons.xml",
+    "source_datadir": "https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/"
+  },
+  {
+    "id": "script.skinvariables",
+    "source_addons_xml": "https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/addons.xml",
+    "source_datadir": "https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/omega/zips/"
+  }
+]

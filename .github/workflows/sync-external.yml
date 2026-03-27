@@ -1,0 +1,27 @@
+name: Sync External Addons
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # daily at 06:00 UTC
+  workflow_dispatch:        # allow manual trigger from GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync external addons
+        run: python3 .tools/_sync_external.py
+
+      - name: Commit & push if anything changed
+        run: |
+          git config user.name "tralalaoh"
+          git config user.email "upsidedge@gmail.com"
+          git add zips/ addons.xml addons.xml.md5 index.html
+          git diff --cached --quiet && echo "Nothing to commit." || (
+            git commit -m "Auto-sync external addons" && git push
+          )

@@ -1,0 +1,27 @@
+name: Update Repository
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'zips/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run generator
+        run: python3 .tools/_generator.py
+
+      - name: Commit updated repo files
+        run: |
+          git config user.name "tralalaoh"
+          git config user.email "upsidedge@gmail.com"
+          git add addons.xml addons.xml.md5 zips/**/index.html index.html
+          git diff --cached --quiet || git commit -m "Auto-update addons.xml"
+          git push
