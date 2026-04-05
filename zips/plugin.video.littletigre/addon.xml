@@ -1,9 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
-<addon id="plugin.video.littletigre" name="Little Tigre" version="1.0.2" provider-name="Tralalaoh">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.littletigre" name="Little Tigre" version="0.0.1" provider-name="Tralalaoh">
     <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-        <import addon="script.module.requests" version="2.27.0" />
-        <import addon="script.module.routing" version="0.2.0" />
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.27.0"/>
+        <import addon="script.module.routing" version="0.2.0"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="main.py">
         <provides>video</provides>

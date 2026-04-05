@@ -1,24 +1,39 @@
-<?xml version='1.0' encoding='utf-8'?>
-<addon id="plugin.video.littlefox" name="Little Fox" version="1.0.2" provider-name="Hamza">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+    Little Fox — Addon Manifest
+    Kodi addon.xml format: https://kodi.wiki/view/Addon.xml
+-->
+<addon id="plugin.video.littlefox"
+       name="Little Fox"
+       version="0.0.1"
+       provider-name="Hamza">
 
-    
+    <!-- ═══════════════════════════════════════════════════════════════════
+         DEPENDENCIES
+         All imports are hard requirements; Kodi will refuse to enable the
+         addon if any of these are missing or below the stated version.
+         ═══════════════════════════════════════════════════════════════════ -->
     <requires>
-        
-        <import addon="xbmc.python" version="3.0.0" />
-        
-        <import addon="script.module.resolveurl" version="5.1.0" />
-        
-        <import addon="script.module.requests" version="2.31.0" />
-        
-        <import addon="script.module.beautifulsoup4" version="4.11.0" />
+        <!-- Kodi 19 Matrix+ Python 3 runtime -->
+        <import addon="xbmc.python"                version="3.0.0"/>
+        <!-- URL resolver for hosted video embeds (doodstream, vidspeed, etc.) -->
+        <import addon="script.module.resolveurl"   version="5.1.0"/>
+        <!-- HTTP requests library -->
+        <import addon="script.module.requests"     version="2.31.0"/>
+        <!-- HTML scraping library -->
+        <import addon="script.module.beautifulsoup4" version="4.11.0"/>
     </requires>
 
-    
+    <!-- ═══════════════════════════════════════════════════════════════════
+         PLUGIN ENTRY POINT
+         ═══════════════════════════════════════════════════════════════════ -->
     <extension point="xbmc.python.pluginsource" library="player.py">
         <provides>video</provides>
     </extension>
 
-    
+    <!-- ═══════════════════════════════════════════════════════════════════
+         METADATA
+         ═══════════════════════════════════════════════════════════════════ -->
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Little Fox — Turkish Series Player</summary>
 

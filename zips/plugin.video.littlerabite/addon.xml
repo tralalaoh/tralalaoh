@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.littlerabite"
+       name="Little Rabite"
+       version="0.0.1"
+       provider-name="Tralalaoh">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.22.0"/>
+        <import addon="script.module.qrcode" version="0.0.0"/>
+    </requires>
+    
+    <!-- Plugin Extension - Menu/UI -->
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    
+    <!-- Service Extension - Background Monitor -->
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    
+    <!-- Metadata -->
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Universal scrobbling and tracking service for Kodi</summary>
+        <summary lang="en_US">Universal scrobbling and tracking service for Kodi</summary>
+        
+        <description lang="en_GB">Little Rabite is a universal scrobbling and tracking service that automatically syncs your watch history across multiple platforms including Trakt.tv, AniList, and Simkl. Features include:
+- Automatic playback tracking and scrobbling
+- Continue Watching menu with resume points
+- Bidirectional sync with tracking services
+- Offline support with local database
+- Real-time progress updates
+- Support for movies and TV shows</description>
+        
+        <description lang="en_US">Little Rabite is a universal scrobbling and tracking service that automatically syncs your watch history across multiple platforms including Trakt.tv, AniList, and Simkl. Features include:
+- Automatic playback tracking and scrobbling
+- Continue Watching menu with resume points
+- Bidirectional sync with tracking services
+- Offline support with local database
+- Real-time progress updates
+- Support for movies and TV shows</description>
+        
+        <disclaimer lang="en_GB">Requires accounts with supported services (Trakt.tv, AniList, or Simkl). Internet connection required for syncing.</disclaimer>
+        <disclaimer lang="en_US">Requires accounts with supported services (Trakt.tv, AniList, or Simkl). Internet connection required for syncing.</disclaimer>
+        
+        <platform>all</platform>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv/</forum>
+        <website>https://github.com/littlerabite/plugin.video.littlerabite</website>
+        <source>https://github.com/littlerabite/plugin.video.littlerabite</source>
+        <news>
+v1.0.0 (2025-01-24)
+- Initial production release
+- Complete Trakt.tv integration
+- AniList integration with QR code authentication
+- Simkl integration with PIN flow
+- Automatic playback tracking and scrobbling
+- Continue Watching menu with resume points
+- Background syncing service
+- Local database for offline support
+- OAuth authentication for Trakt
+- Real-time progress updates
+
+v0.1.0 (2025-01-20)
+- Beta release
+- Core infrastructure
+- Database and service architecture
+        </news>
+        <assets>
+            <icon>media/icon.png</icon>
+            <fanart>media/fanart.png</fanart>
+            <screenshot>resources/screenshot-01.jpg</screenshot>
+            <screenshot>resources/screenshot-02.jpg</screenshot>
+        </assets>
+    </extension>
+</addon>
