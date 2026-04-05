@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Custom_1193_VideoOSDInfo.xml — OSD Info Bridge Dialog
+    ======================================================
+    A hidden bridge that translates the currently-playing video into a fully
+    enriched TMDb Helper ListItem, then fires Action(Info) to open
+    DialogVideoInfo with rich data (clearlogo, TMDb plot, ratings etc.)
+    instead of a bare Kodi library item.
+
+    Flow:
+      VideoOSD button 70043 → Dialog.Close(videoosd) → ActivateWindow(1193)
+        → button 9001 arms a 1-second alarm → button 9002 checks container 50
+          → loaded   : SetFocus(50) → onfocus: Action(Info) + Dialog.Close(1193,force)
+          → empty    : PreviousMenu (nothing found, close silently)
+          → updating : re-arm polling cycle via 9001 alarm
+
+    For LiveTV / unsupported content Path_VideoOSD_TMDbType returns empty,
+    the $VAR[...,prefix,] syntax suppresses the URI → 0 items → PreviousMenu.
+-->
+<window type="dialog" id="1193">
+	<defaultcontrol always="true">9001</defaultcontrol>
+	<onload>SetProperty(TMDbHelper.WidgetContainer,50)</onload>
+	<onload>SetFocus(9001)</onload>
+	<zorder>3</zorder>
+	<controls>
+
+		<!-- Step 1: initial delay button.
+		     Waits 1 second after window open to let the container start loading,
+		     then hands control to button 9002 for state checking. -->
+		<control type="button" id="9001">
+			<left>-3000</left>
+			<top>-3000</top>
+			<width>1</width>
+			<height>1</height>
+			<texturefocus />
+			<texturenofocus />
+			<onfocus>AlarmClock(OSDInfoBridge,SetFocus(9002),00:01,silent)</onfocus>
+		</control>
+
+		<!-- Step 2: polling / routing button.
+		     Checks container 50 state and routes to the correct action. -->
+		<control type="button" id="9002">
+			<left>-3000</left>
+			<top>-3000</top>
+			<width>1</width>
+			<height>1</height>
+			<texturefocus />
+			<texturenofocus />
+			<!-- Container loaded with item: focus it → panel onfocus fires Action(Info) -->
+			<onfocus condition="!Container(50).IsUpdating + !Integer.IsEqual(Container(50).NumItems,0)">SetFocus(50)</onfocus>
+			<!-- Container finished but empty: nothing found, close bridge -->
+			<onfocus condition="!Container(50).IsUpdating + Integer.IsEqual(Container(50).NumItems,0)">PreviousMenu</onfocus>
+			<!-- Still loading: restart cycle — immediately re-focus 9001 to re-arm the alarm -->
+			<onfocus condition="Container(50).IsUpdating">AlarmClock(OSDInfoRearm,SetFocus(9001),00:00,silent)</onfocus>
+			<!-- Also schedule a direct attempt at container 50 after 1 second -->
+			<onfocus condition="Container(50).IsUpdating">AlarmClock(OSDInfoBridge,SetFocus(50),00:01,silent)</onfocus>
+		</control>
+
+		<!-- Hidden container: fetches exactly one TMDb Helper details item.
+		     URI: plugin://plugin.video.themoviedb.helper/?info=details&tmdb_type=<type>&<query>
+		     The $VAR[Path_VideoOSD_TMDbType,prefix,] pattern suppresses the entire URI when
+		     type is empty (LiveTV / music / unsupported), so 0 items load → PreviousMenu. -->
+		<control type="panel" id="50">
+			<left>-3000</left>
+			<top>-3000</top>
+			<width>1</width>
+			<height>1</height>
+			<content limit="1">$VAR[Path_VideoOSD_TMDbType,plugin://plugin.video.themoviedb.helper/?info=details&amp;tmdb_type=,]$VAR[Path_VideoOSD_TMDbQuery]</content>
+			<!-- Once focused (by button 9002), open info dialog then close this bridge -->
+			<onfocus>Action(Info)</onfocus>
+			<onfocus>Dialog.Close(1193,force)</onfocus>
+		</control>
+
+	</controls>
+</window>

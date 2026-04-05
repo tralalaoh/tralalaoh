@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+    <include name="MusicSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="255" />
+                <param name="id" value="48061" />
+                <param name="label" value="Recently Played" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.music" />
+                <param name="path" value="musicdb://recentlyplayedalbums" />
+                <param name="onleft" value="48066" />
+                <param name="onright" value="48062" />
+                <param name="ondown" value="49100" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.music.tab)) | String.IsEqual(Window(Home).Property(spotlight.music.tab),1)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="239" />
+                <param name="id" value="48062" />
+                <param name="label" value="Recently Added" />
+                <param name="tab_num" value="2" />
+                <param name="property" value="spotlight.music" />
+                <param name="path" value="musicdb://recentlyaddedalbums/" />
+                <param name="onleft" value="48061" />
+                <param name="onright" value="48063" />
+                <param name="ondown" value="49100" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.music.tab),2)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="223" />
+                <param name="id" value="48063" />
+                <param name="label" value="Random Albums" />
+                <param name="tab_num" value="3" />
+                <param name="property" value="spotlight.music" />
+                <param name="path" value="special://skin/playlists/random_albums.xsp" />
+                <param name="onleft" value="48062" />
+                <param name="onright" value="48064" />
+                <param name="ondown" value="49100" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.music.tab),3)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="239" />
+                <param name="id" value="48064" />
+                <param name="label" value="Random Artists" />
+                <param name="tab_num" value="4" />
+                <param name="property" value="spotlight.music" />
+                <param name="path" value="special://skin/playlists/random_artists.xsp" />
+                <param name="onleft" value="48063" />
+                <param name="onright" value="48065" />
+                <param name="ondown" value="49100" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.music.tab),4)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="143" />
+                <param name="id" value="48065" />
+                <param name="label" value="Unplayed" />
+                <param name="tab_num" value="5" />
+                <param name="property" value="spotlight.music" />
+                <param name="path" value="special://skin/playlists/unplayed_albums.xsp" />
+                <param name="onleft" value="48064" />
+                <param name="onright" value="48066" />
+                <param name="ondown" value="49100" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.music.tab),5)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="191" />
+                <param name="id" value="48066" />
+                <param name="label" value="Most Played" />
+                <param name="tab_num" value="6" />
+                <param name="property" value="spotlight.music" />
+                <param name="path" value="special://skin/playlists/mostplayed_albums.xsp" />
+                <param name="onleft" value="48065" />
+                <param name="onright" value="48061" />
+                <param name="ondown" value="49100" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.music.tab),6)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="AddonsSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="223" />
+                <param name="id" value="47061" />
+                <param name="label" value="Video Add-ons" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.addons" />
+                <param name="path" value="addons://sources/video/" />
+                <param name="onleft" value="47066" />
+                <param name="onright" value="47062" />
+                <param name="ondown" value="49200" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.addons.tab)) | String.IsEqual(Window(Home).Property(spotlight.addons.tab),1)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="223" />
+                <param name="id" value="47062" />
+                <param name="label" value="Audio Add-ons" />
+                <param name="tab_num" value="2" />
+                <param name="property" value="spotlight.addons" />
+                <param name="path" value="addons://sources/audio/" />
+                <param name="onleft" value="47061" />
+                <param name="onright" value="47063" />
+                <param name="ondown" value="49200" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.addons.tab),2)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="143" />
+                <param name="id" value="47063" />
+                <param name="label" value="Programs" />
+                <param name="tab_num" value="3" />
+                <param name="property" value="spotlight.addons" />
+                <param name="path" value="addons://sources/executable/" />
+                <param name="onleft" value="47062" />
+                <param name="onright" value="47064" />
+                <param name="ondown" value="49200" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.addons.tab),3)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="223" />
+                <param name="id" value="47064" />
+                <param name="label" value="Image Add-ons" />
+                <param name="tab_num" value="4" />
+                <param name="property" value="spotlight.addons" />
+                <param name="path" value="addons://sources/image/" />
+                <param name="onleft" value="47063" />
+                <param name="onright" value="47065" />
+                <param name="ondown" value="49200" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.addons.tab),4)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="207" />
+                <param name="id" value="47065" />
+                <param name="label" value="Game Add-ons" />
+                <param name="tab_num" value="5" />
+                <param name="property" value="spotlight.addons" />
+                <param name="path" value="addons://sources/game/" />
+                <param name="onleft" value="47064" />
+                <param name="onright" value="47066" />
+                <param name="ondown" value="49200" />
+                <param name="indicator_visible" value="System.GetBool(gamesgeneral.enable)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="191" />
+                <param name="id" value="47066" />
+                <param name="label" value="All Add-ons" />
+                <param name="tab_num" value="6" />
+                <param name="property" value="spotlight.addons" />
+                <param name="path" value="addons://" />
+                <param name="onleft" value="47065" />
+                <param name="onright" value="47061" />
+                <param name="ondown" value="49200" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.addons.tab),6)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="VideosSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="223" />
+                <param name="id" value="46061" />
+                <param name="label" value="Video Library" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.videos" />
+                <param name="path" value="library://video/" />
+                <param name="onleft" value="46063" />
+                <param name="onright" value="46062" />
+                <param name="ondown" value="49300" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.videos.tab)) | String.IsEqual(Window(Home).Property(spotlight.videos.tab),1)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="127" />
+                <param name="id" value="46062" />
+                <param name="label" value="Sources" />
+                <param name="tab_num" value="2" />
+                <param name="property" value="spotlight.videos" />
+                <param name="path" value="sources://video/" />
+                <param name="onleft" value="46061" />
+                <param name="onright" value="46063" />
+                <param name="ondown" value="49300" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.videos.tab),2)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="159" />
+                <param name="id" value="46063" />
+                <param name="label" value="Playlists" />
+                <param name="tab_num" value="3" />
+                <param name="property" value="spotlight.videos" />
+                <param name="path" value="special://videoplaylists/" />
+                <param name="onleft" value="46062" />
+                <param name="onright" value="46061" />
+                <param name="ondown" value="49300" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.videos.tab),3)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="LiveTVSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="143" />
+                <param name="id" value="45061" />
+                <param name="label" value="Channels" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.livetv" />
+                <param name="path" value="pvr://channels/tv/*?view=lastplayed" />
+                <param name="onleft" value="45064" />
+                <param name="onright" value="45062" />
+                <param name="ondown" value="49400" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.livetv.tab)) | String.IsEqual(Window(Home).Property(spotlight.livetv.tab),1)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="175" />
+                <param name="id" value="45062" />
+                <param name="label" value="Recordings" />
+                <param name="tab_num" value="2" />
+                <param name="property" value="spotlight.livetv" />
+                <param name="path" value="pvr://recordings/tv/active?view=flat" />
+                <param name="onleft" value="45061" />
+                <param name="onright" value="45063" />
+                <param name="ondown" value="49400" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.livetv.tab),2)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="111" />
+                <param name="id" value="45063" />
+                <param name="label" value="Timers" />
+                <param name="tab_num" value="3" />
+                <param name="property" value="spotlight.livetv" />
+                <param name="path" value="pvr://timers/tv/timers/?view=hidedisabled" />
+                <param name="onleft" value="45062" />
+                <param name="onright" value="45064" />
+                <param name="ondown" value="49400" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.livetv.tab),3)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="95" />
+                <param name="id" value="45064" />
+                <param name="label" value="Guide" />
+                <param name="tab_num" value="4" />
+                <param name="property" value="spotlight.livetv" />
+                <param name="path" value="pvr://channels/tv" />
+                <param name="onleft" value="45063" />
+                <param name="onright" value="45061" />
+                <param name="ondown" value="49400" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.livetv.tab),4)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="RadioSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="143" />
+                <param name="id" value="44061" />
+                <param name="label" value="Channels" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.radio" />
+                <param name="path" value="pvr://channels/radio/*?view=lastplayed" />
+                <param name="onleft" value="44063" />
+                <param name="onright" value="44062" />
+                <param name="ondown" value="49500" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.radio.tab)) | String.IsEqual(Window(Home).Property(spotlight.radio.tab),1)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="175" />
+                <param name="id" value="44062" />
+                <param name="label" value="Recordings" />
+                <param name="tab_num" value="2" />
+                <param name="property" value="spotlight.radio" />
+                <param name="path" value="pvr://recordings/radio/active?view=flat" />
+                <param name="onleft" value="44061" />
+                <param name="onright" value="44063" />
+                <param name="ondown" value="49500" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.radio.tab),2)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="95" />
+                <param name="id" value="44063" />
+                <param name="label" value="Guide" />
+                <param name="tab_num" value="3" />
+                <param name="property" value="spotlight.radio" />
+                <param name="path" value="pvr://channels/radio" />
+                <param name="onleft" value="44062" />
+                <param name="onright" value="44061" />
+                <param name="ondown" value="49500" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.radio.tab),3)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="PicturesSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="127" />
+                <param name="id" value="43061" />
+                <param name="label" value="Sources" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.pictures" />
+                <param name="path" value="sources://pictures/" />
+                <param name="onleft" value="43061" />
+                <param name="onright" value="43061" />
+                <param name="ondown" value="49600" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.pictures.tab)) | String.IsEqual(Window(Home).Property(spotlight.pictures.tab),1)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="MusicVideosSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="239" />
+                <param name="id" value="42061" />
+                <param name="label" value="Recently Added" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.musicvideos" />
+                <param name="path" value="videodb://recentlyaddedmusicvideos/" />
+                <param name="onleft" value="42065" />
+                <param name="onright" value="42062" />
+                <param name="ondown" value="49700" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.musicvideos.tab)) | String.IsEqual(Window(Home).Property(spotlight.musicvideos.tab),1)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="159" />
+                <param name="id" value="42062" />
+                <param name="label" value="Unwatched" />
+                <param name="tab_num" value="2" />
+                <param name="property" value="spotlight.musicvideos" />
+                <param name="path" value="special://skin/playlists/unwatched_musicvideos.xsp" />
+                <param name="onleft" value="42061" />
+                <param name="onright" value="42063" />
+                <param name="ondown" value="49700" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.musicvideos.tab),2)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="111" />
+                <param name="id" value="42063" />
+                <param name="label" value="Random" />
+                <param name="tab_num" value="3" />
+                <param name="property" value="spotlight.musicvideos" />
+                <param name="path" value="special://skin/playlists/random_musicvideos.xsp" />
+                <param name="onleft" value="42062" />
+                <param name="onright" value="42064" />
+                <param name="ondown" value="49700" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.musicvideos.tab),3)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="239" />
+                <param name="id" value="42064" />
+                <param name="label" value="Random Artists" />
+                <param name="tab_num" value="4" />
+                <param name="property" value="spotlight.musicvideos" />
+                <param name="path" value="special://skin/playlists/random_musicvideo_artists.xsp" />
+                <param name="onleft" value="42063" />
+                <param name="onright" value="42065" />
+                <param name="ondown" value="49700" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.musicvideos.tab),4)" />
+            </include>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="80" />
+                <param name="id" value="42065" />
+                <param name="label" value="All" />
+                <param name="tab_num" value="5" />
+                <param name="property" value="spotlight.musicvideos" />
+                <param name="path" value="videodb://musicvideos/titles/" />
+                <param name="onleft" value="42064" />
+                <param name="onright" value="42061" />
+                <param name="ondown" value="49700" />
+                <param name="indicator_visible" value="String.IsEqual(Window(Home).Property(spotlight.musicvideos.tab),5)" />
+            </include>
+        </control>
+    </include>
+
+    <include name="GamesSpotlightTabs">
+        <control type="grouplist">
+            <scrolltime tween="cubic" easing="out">400</scrolltime>
+            <scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+            <left>75</left>
+            <top>80</top>
+            <height>50</height>
+            <width>1740</width>
+            <orientation>horizontal</orientation>
+            <itemgap>20</itemgap>
+            <include content="SpotlightSimpleTab">
+                <param name="width" value="207" />
+                <param name="id" value="41061" />
+                <param name="label" value="Game Add-ons" />
+                <param name="tab_num" value="1" />
+                <param name="property" value="spotlight.games" />
+                <param name="path" value="addons://sources/game/" />
+                <param name="onleft" value="41061" />
+                <param name="onright" value="41061" />
+                <param name="ondown" value="49800" />
+                <param name="indicator_visible" value="String.IsEmpty(Window(Home).Property(spotlight.games.tab)) | String.IsEqual(Window(Home).Property(spotlight.games.tab),1)" />
+            </include>
+        </control>
+    </include>
+
+</includes>

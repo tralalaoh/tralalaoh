@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol>9000</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<controls>
+		<include>DefaultBackground</include>
+
+		<!-- Fanart overlay -->
+		<control type="multiimage">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<aspectratio>scale</aspectratio>
+			<animation effect="fade" start="0" end="100" time="400" reversible="true" condition="!Window.Previous(SettingsCategory.xml)">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300" reversible="true" condition="!Window.Next(SettingsCategory.xml)">WindowClose</animation>
+			<animation effect="fade" time="400">VisibleChange</animation>
+			<imagepath colordiffuse="35FFFFFF">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+		</control>
+
+		<!-- ============================================================ -->
+		<!-- SETTINGS PANEL — 1400x840, 2-column grid                     -->
+		<!-- ============================================================ -->
+		<control type="group">
+			<centerleft>50%</centerleft>
+			<centertop>50%</centertop>
+			<width>1400</width>
+			<height>840</height>
+
+			<!-- Panel background -->
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>1400</width>
+				<height>840</height>
+				<texture colordiffuse="surface">masks/settingspanel.png</texture>
+			</control>
+
+			<!-- Header icon -->
+			<control type="image">
+				<left>24</left>
+				<top>28</top>
+				<width>44</width>
+				<height>44</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="accent_color">icons/settings.png</texture>
+			</control>
+
+			<!-- Header title -->
+			<control type="label">
+				<left>82</left>
+				<top>0</top>
+				<right>0</right>
+				<height>100</height>
+				<aligny>center</aligny>
+				<font>font32_title</font>
+				<textcolor>FFFFFFFF</textcolor>
+				<label>Settings</label>
+			</control>
+
+			<!-- Header separator -->
+			<control type="image">
+				<left>16</left>
+				<top>100</top>
+				<right>16</right>
+				<height>1</height>
+				<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+			</control>
+
+			<!-- ======================================================== -->
+			<!-- ITEM GRID — 2 columns x 700px, horizontal flow, 100px rows -->
+			<!-- ======================================================== -->
+			<control type="panel" id="9000">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>0</left>
+				<top>107</top>
+				<width>1400</width>
+				<bottom>20</bottom>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<orientation>horizontal</orientation>
+				<usecontrolcoords>true</usecontrolcoords>
+
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout height="100" width="700">
+					<control type="image">
+						<left>24</left>
+						<top>0</top>
+						<width>52</width>
+						<height>100</height>
+						<aspectratio aligny="center">keep</aspectratio>
+						<texture colordiffuse="FFFFFFFF">$INFO[ListItem.Icon]</texture>
+					</control>
+					<control type="label">
+						<left>90</left>
+						<top>0</top>
+						<right>20</right>
+						<height>100</height>
+						<aligny>center</aligny>
+						<font>font_settings_item</font>
+						<textcolor>unfocused_text</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</itemlayout>
+
+				<focusedlayout height="100" width="700">
+					<control type="image">
+						<left>24</left>
+						<top>0</top>
+						<width>52</width>
+						<height>100</height>
+						<aspectratio aligny="center">keep</aspectratio>
+						<texture colordiffuse="accent_color">$INFO[ListItem.Icon]</texture>
+					</control>
+					<control type="label">
+						<left>90</left>
+						<top>0</top>
+						<right>20</right>
+						<height>100</height>
+						<aligny>center</aligny>
+						<font>font_settings_item</font>
+						<textcolor>accent_color</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</focusedlayout>
+
+				<content>
+					<item>
+						<label>Skin settings</label>
+						<onclick>ActivateWindow(skinsettings)</onclick>
+						<icon>icons/settings/skin.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[10003]</label>
+						<onclick>ActivateWindow(filemanager)</onclick>
+						<icon>icons/settings/filemanager.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[24001]</label>
+						<onclick>ActivateWindow(addonbrowser)</onclick>
+						<icon>icons/settings/addons.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[138]</label>
+						<onclick>ActivateWindow(systeminfo)</onclick>
+						<icon>icons/settings/sysinfo.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14200]</label>
+						<onclick>ActivateWindow(PlayerSettings)</onclick>
+						<icon>icons/settings/player.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14211]</label>
+						<onclick>ActivateWindow(MediaSettings)</onclick>
+						<icon>icons/settings/media.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14204]</label>
+						<onclick>ActivateWindow(PVRSettings)</onclick>
+						<icon>icons/settings/livetv.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14036]</label>
+						<onclick>ActivateWindow(ServiceSettings)</onclick>
+						<icon>icons/settings/network.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[15016]</label>
+						<onclick>ActivateWindow(GameSettings)</onclick>
+						<icon>icons/settings/games.png</icon>
+						<visible>System.GetBool(gamesgeneral.enable)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[14206]</label>
+						<onclick>ActivateWindow(InterfaceSettings)</onclick>
+						<icon>icons/settings/interface.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[13200]</label>
+						<onclick>ActivateWindow(Profiles)</onclick>
+						<icon>icons/settings/profiles.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[13000]</label>
+						<onclick>ActivateWindow(SystemSettings)</onclick>
+						<icon>icons/settings/system.png</icon>
+					</item>
+					<item>
+						<label>LibreELEC</label>
+						<onclick>RunAddon(service.libreelec.settings)</onclick>
+						<icon>icons/settings/libreelec.png</icon>
+						<visible>System.AddonIsEnabled(service.libreelec.settings)</visible>
+					</item>
+				</content>
+			</control>
+
+		</control>
+
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="Settings" />
+		</include>
+		<include>BottomBar</include>
+	</controls>
+</window>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This file must have a <window> root because Kodi auto-loads all
+    Custom_*.xml files as custom window definitions.
+
+    The actual Changelog and SetupGuide include content lives in
+    Includes_ExtraInfoContent.xml (proper <includes> root) which is
+    loaded globally via Includes.xml.
+-->
+<window id="1117">
+    <controls />
+</window>

@@ -1,0 +1,1230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol>9000</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="multiimage">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<aspectratio>scale</aspectratio>
+			<fadetime>600</fadetime>
+			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+			<animation effect="fade" time="400">VisibleChange</animation>
+			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+		</control>
+		<control type="group" id="10000">
+			<left>470</left>
+			<include>OpenClose_Right</include>
+			<!-- Dialog gradient panel background (with gap from sidebar) -->
+			<control type="image">
+				<left>20</left>
+				<top>122</top>
+				<right>20</right>
+				<bottom>128</bottom>
+				<texture diffuse="masks/dialog-bg-large.png">dialogs/dialog-gradient.png</texture>
+			</control>
+			<control type="grouplist" id="610">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>610</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>610</ondown>
+				<visible>Container(9000).HasFocus(1)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="MAIN MENU ITEMS"/>
+				</include>
+	<!-- HOME SETUP -->
+				<control type="button" id="6243">
+					<label>Quick set up[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=setup_default_home)</onclick>
+				</control>
+				<control type="button" id="6244">
+					<label>Reset home[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=reset_home)</onclick>
+				</control>
+				<control type="button" id="624">
+					<label>Remake menus and widgets[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=remake_all_cpaths)</onclick>
+				</control>
+				<!-- CUSTOM 1 / HOME (permanent) -->
+				<control type="button" id="6260">
+					<label>Home - Set main menu path[CR][COLOR grey][LIGHT][UPPERCASE]path[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_main_menu_path&amp;cpath_setting=custom1.main_menu)</onclick>
+				</control>
+				<control type="button" id="6261">
+					<label>Home - Set widgets[CR][COLOR grey][LIGHT][UPPERCASE]path[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_widgets&amp;cpath_setting=custom1.widget)</onclick>
+				</control>
+				<control type="button" id="6901">
+					<label>Home - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.custom1.icon)</onclick>
+				</control>
+				<!-- MOVIES -->
+				<control type="radiobutton" id="6240">
+					<label>$INFO[Skin.String(MenuMovieLabel)]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoMoviesButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoMoviesButton)</onclick>
+				</control>
+				<control type="button" id="6241">
+					<label>   - Set main menu path[CR][COLOR grey][LIGHT][UPPERCASE]path[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_main_menu_path&amp;cpath_setting=movie.main_menu)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoMoviesButton)</visible>
+				</control>
+				<control type="button" id="6242">
+					<label>   - Set widgets[CR][COLOR grey][LIGHT][UPPERCASE]configure[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_widgets&amp;cpath_setting=movie.widget)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoMoviesButton)</visible>
+				</control>
+				<control type="button" id="6902">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.movies.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoMoviesButton)</visible>
+				</control>
+				<!-- TV SHOWS -->
+				<control type="radiobutton" id="625">
+					<label>$INFO[Skin.String(MenuTVShowLabel)]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoTVShowsButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoTVShowsButton)</onclick>
+				</control>
+				<control type="button" id="6250">
+					<label>   - Set main menu path[CR][COLOR grey][LIGHT][UPPERCASE]path[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_main_menu_path&amp;cpath_setting=tvshow.main_menu)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoTVShowsButton)</visible>
+				</control>
+				<control type="button" id="6251">
+					<label>   - Set widgets[CR][COLOR grey][LIGHT][UPPERCASE]configure[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_widgets&amp;cpath_setting=tvshow.widget)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoTVShowsButton)</visible>
+				</control>
+				<control type="button" id="6903">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.tvshows.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoTVShowsButton)</visible>
+				</control>
+				<!-- CUSTOM 2 -->
+				<control type="radiobutton" id="627">
+					<label>$INFO[Skin.String(MenuCustom2Label)]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoCustom2Button)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoCustom2Button)</onclick>
+				</control>
+				<control type="button" id="6270">
+					<label>   - Set main menu path[CR][COLOR grey][LIGHT][UPPERCASE]path[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_main_menu_path&amp;cpath_setting=custom2.main_menu)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoCustom2Button)</visible>
+				</control>
+				<control type="button" id="6271">
+					<label>   - Set widgets[CR][COLOR grey][LIGHT][UPPERCASE]configure[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_widgets&amp;cpath_setting=custom2.widget)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoCustom2Button)</visible>
+				</control>
+				<control type="button" id="6904">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.custom2.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoCustom2Button)</visible>
+				</control>
+				<!-- CUSTOM 3 -->
+				<control type="radiobutton" id="628">
+					<label>$INFO[Skin.String(MenuCustom3Label)]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoCustom3Button)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoCustom3Button)</onclick>
+				</control>
+				<control type="button" id="6280">
+					<label>   - Set main menu path[CR][COLOR grey][LIGHT][UPPERCASE]path[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_main_menu_path&amp;cpath_setting=custom3.main_menu)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoCustom3Button)</visible>
+				</control>
+				<control type="button" id="6281">
+					<label>   - Set widgets[CR][COLOR grey][LIGHT][UPPERCASE]configure[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=manage_widgets&amp;cpath_setting=custom3.widget)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoCustom3Button)</visible>
+				</control>
+				<control type="button" id="6905">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.custom3.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoCustom3Button)</visible>
+				</control>
+				<!-- MUSIC -->
+				<control type="radiobutton" id="6252">
+					<label>$LOCALIZE[31008]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(home_no_categories_widget)</selected>
+					<onclick>Skin.ToggleSetting(home_no_categories_widget)</onclick>
+				</control>
+				<control type="radiobutton" id="6272">
+					<label>$LOCALIZE[2]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoMusicButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoMusicButton)</onclick>
+				</control>
+				<control type="button" id="6906">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.music.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoMusicButton)</visible>
+				</control>
+				<!-- MUSIC VIDEOS -->
+				<control type="radiobutton" id="6131">
+					<label>$LOCALIZE[20389]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoMusicVideoButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoMusicVideoButton)</onclick>
+				</control>
+				<control type="button" id="6907">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.musicvideos.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoMusicVideoButton)</visible>
+				</control>
+				<!-- PVR -->
+				<control type="radiobutton" id="6262">
+					<label>$LOCALIZE[19020]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoTVButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoTVButton)</onclick>
+				</control>
+				<control type="button" id="6908">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.livetv.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoTVButton)</visible>
+				</control>
+				<!-- radio -->
+				<control type="radiobutton" id="619">
+					<label>$LOCALIZE[19021]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoRadioButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoRadioButton)</onclick>
+				</control>
+				<control type="button" id="6909">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.radio.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoRadioButton)</visible>
+				</control>
+				<!-- addons -->
+				<control type="radiobutton" id="614">
+					<label>$LOCALIZE[24001]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoProgramsButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoProgramsButton)</onclick>
+				</control>
+				<control type="button" id="6910">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.addons.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoProgramsButton)</visible>
+				</control>
+				<!-- pictures -->
+				<control type="radiobutton" id="615">
+					<label>$LOCALIZE[1]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoPicturesButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoPicturesButton)</onclick>
+				</control>
+				<control type="button" id="6911">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.pictures.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoPicturesButton)</visible>
+				</control>
+				<!-- videos -->
+				<control type="radiobutton" id="616">
+					<label>$LOCALIZE[3]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoVideosButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoVideosButton)</onclick>
+				</control>
+				<control type="button" id="6912">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.videos.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoVideosButton)</visible>
+				</control>
+				<!-- games -->
+				<control type="radiobutton" id="620">
+					<label>$LOCALIZE[15016]</label>
+					<visible>System.GetBool(gamesgeneral.enable)</visible>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoGamesButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoGamesButton)</onclick>
+				</control>
+				<control type="button" id="6913">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<visible>System.GetBool(gamesgeneral.enable) + !Skin.HasSetting(HomeMenuNoGamesButton)</visible>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.games.icon)</onclick>
+				</control>
+				<!-- favorites -->
+				<control type="radiobutton" id="6160">
+					<label>$LOCALIZE[10134]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoFavButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoFavButton)</onclick>
+				</control>
+				<!-- weather -->
+				<control type="radiobutton" id="617">
+					<label>$LOCALIZE[8]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoWeatherButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoWeatherButton)</onclick>
+				</control>
+				<control type="button" id="6914">
+					<label>   - Set icon[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=pick_menu_icon&amp;setting=menu.weather.icon)</onclick>
+					<visible>!Skin.HasSetting(HomeMenuNoWeatherButton)</visible>
+				</control>
+			</control>
+
+			<control type="grouplist" id="637">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>637</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>637</ondown>
+				<visible>Container(9000).HasFocus(2)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="OPTIONS"/>
+				</include>
+				<!-- POWER BUTTON BEHAVIOR -->
+				<control type="button" id="63701">
+					<label>Default power button behavior[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$VAR[OneClickCloseVar]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.ToggleSetting(OneClickClose)</onclick>
+					<selected>Skin.HasSetting(OneClickClose)</selected>
+				</control>
+				<!-- ALTERNATE INFOPANEL -->
+				<control type="radiobutton" id="63702">
+					<label>Enable alternate InfoPanel[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<selected>Skin.HasSetting(Enable.AlternateInfo)</selected>
+					<onclick>Skin.ToggleSetting(Enable.AlternateInfo)</onclick>
+				</control>
+				<!-- RAINDROP BACKGROUND -->
+				<control type="radiobutton" id="63703">
+					<label>Show raindrop background[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(HideRainDrops)</onclick>
+					<selected>Skin.HasSetting(HideRainDrops)</selected>
+				</control>
+				<!-- STACKED WIDGET DELAY -->
+				<control type="button" id="63704">
+					<label>Set stacked widget load delay in milliseconds (1000ms = 1 second)[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$INFO[Skin.String(category_widget_delay),, milliseconds]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.SetNumeric(category_widget_delay)</onclick>
+				</control>
+				<!-- COUNTDOWN TIMER -->
+				<control type="radiobutton" id="63705">
+					<label>Show countdown timer for stacked widget load delay[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<selected>Skin.HasSetting(category_widget_display_delay)</selected>
+					<onclick>Skin.ToggleSetting(category_widget_display_delay)</onclick>
+				</control>
+				<!-- FOCUS ANIMATIONS -->
+				<control type="radiobutton" id="63706">
+					<label>Enable focus animations[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(NoFocusAnimations)</selected>
+					<onclick>Skin.ToggleSetting(NoFocusAnimations)</onclick>
+				</control>
+				<!-- ICON SILHOUETTES -->
+				<control type="radiobutton" id="63707">
+					<label>Enable icon silhouettes for category widgets[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(NoIconSilhouettes)</selected>
+					<onclick>Skin.ToggleSetting(NoIconSilhouettes)</onclick>
+				</control>
+				<!-- STUDIO LOGOS -->
+				<control type="radiobutton" id="63708">
+					<label>Disable color studio logos[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick condition="!System.HasAddon(resource.images.studios.coloured)">InstallAddon(resource.images.studios.coloured)</onclick>
+					<onclick>Skin.ToggleSetting(Disable.ColorStudio)</onclick>
+					<selected>!Skin.HasSetting(Disable.ColorStudio)</selected>
+				</control>
+			</control>
+
+			<control type="grouplist" id="647">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>647</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>647</ondown>
+				<visible>Container(9000).HasFocus(3)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="SEARCH"/>
+				</include>
+				<!-- SEARCH OPTIONS -->
+				<control type="radiobutton" id="64701">
+					<label>Enable search results window[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(NoSearchResultsWindow)</selected>
+					<onclick>Skin.ToggleSetting(NoSearchResultsWindow)</onclick>
+				</control>
+				<control type="button" id="64702">
+					<label>Default home screen search icon behavior[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$VAR[DefaultSearchWindowBehaviorVar]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.ToggleSetting(DefaultSearchWindowBehavior)</onclick>
+					<selected>Skin.HasSetting(DefaultSearchWindowBehavior)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="radiobutton" id="64703">
+					<label>   - $LOCALIZE[342][CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(HideMovieResults)</onclick>
+					<selected>!Skin.HasSetting(HideMovieResults)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="radiobutton" id="64704">
+					<label>   - TV Shows[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<!-- <label>   - $LOCALIZE[20343]</label> -->
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(HideTVShowResults)</onclick>
+					<selected>!Skin.HasSetting(HideTVShowResults)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="radiobutton" id="64705">
+					<label>   - Collections[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(HideCollectionsResults)</onclick>
+					<selected>!Skin.HasSetting(HideCollectionsResults)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="radiobutton" id="64706">
+					<label>   - Actors/Actresses[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(HidePeopleResults)</onclick>
+					<selected>!Skin.HasSetting(HidePeopleResults)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="radiobutton" id="64709">
+					<label>   - Keywords[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(HideMovieKeywordResults)</onclick>
+					<selected>!Skin.HasSetting(HideMovieKeywordResults)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="radiobutton" id="64716">
+					<label>   - AI Recommendations (requires Gemini API key)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(ShowGeminiResults)</onclick>
+					<selected>Skin.HasSetting(ShowGeminiResults)</selected>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+				<control type="button" id="64714">
+					<label>Clear search history[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=remove_all_spaths)</onclick>
+					<visible>!Skin.HasSetting(NoSearchResultsWindow)</visible>
+				</control>
+
+			</control>
+
+			<control type="grouplist" id="648">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>648</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>648</ondown>
+				<visible>Container(9000).HasFocus(4)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="RATINGS &amp; TRAILERS"/>
+				</include>
+				<!-- RATINGS -->
+				<control type="radiobutton" id="64801">
+					<label>Enable one-click trailers (long press play/pause button or 't' key on keyboard)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Enable.OneClickTrailers)</onclick>
+					<selected>Skin.HasSetting(Enable.OneClickTrailers)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64802">
+					<label>Enable ratings for homescreen InfoPanel[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.RatingsINF)</onclick>
+					<selected>!Skin.HasSetting(Disable.RatingsINF)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64803">
+					<label>Enable ratings for widget labels[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.WidgetLabelRatings)</onclick>
+					<selected>!Skin.HasSetting(Disable.WidgetLabelRatings)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64804">
+					<label>    - Metacritic[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.MetacriticRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.MetacriticRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64805">
+					<label>    - Rotten Tomatoes (Critic)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.RTCRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.RTCRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64806">
+					<label>    - Rotten Tomatoes (Audience)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.RTARating)</onclick>
+					<selected>!Skin.HasSetting(Disable.RTARating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64807">
+					<label>    - IMDb (Main)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.IMDbRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.IMDbRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64808">
+					<label>    - IMDb (Popular)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.IMDbPopularRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.IMDbPopularRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64809">
+					<label>    - TMDb[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.TMDbRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.TMDbRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key)) | !String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64812">
+					<label>    - IMDb vote count (OMDb)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.OmdbVotes)</onclick>
+					<selected>!Skin.HasSetting(Disable.OmdbVotes)</selected>
+					<visible>!String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64814">
+					<label>    - Trakt[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.TraktRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.TraktRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64815">
+					<label>    - Letterboxd[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.LetterboxdRating)</onclick>
+					<selected>!Skin.HasSetting(Disable.LetterboxdRating)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key))</visible>
+				</control>
+				<control type="radiobutton" id="64816">
+					<label>    - Awards (wins)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(Disable.AwardWins)</onclick>
+					<selected>!Skin.HasSetting(Disable.AwardWins)</selected>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key))</visible>
+				</control>
+				<control type="button" id="64810">
+					<label>Clear MDbList API Key[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.SetString(mdblist_api_key,)</onclick>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key))</visible>
+				</control>
+				<control type="button" id="64811">
+					<label>Clear ratings cache[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.littleduck.helper,mode=delete_all_ratings)</onclick>
+					<visible>!String.IsEmpty(Skin.String(mdblist_api_key))</visible>
+				</control>
+				<control type="button" id="64813">
+					<label>Clear OMDb API Key[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.SetString(omdb_api_key,)</onclick>
+					<visible>!String.IsEmpty(Skin.String(omdb_api_key))</visible>
+				</control>
+			</control>
+
+			<control type="grouplist" id="700">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>700</onup>
+				<ondown>700</ondown>
+				<visible>Container(9000).HasFocus(5)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="GENERAL"/>
+				</include>
+				<control type="radiobutton" id="702">
+					<label>$LOCALIZE[31095]</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(no_slide_animations)</selected>
+					<onclick>Skin.ToggleSetting(no_slide_animations)</onclick>
+				</control>
+				<control type="radiobutton" id="703">
+					<label>$LOCALIZE[20189]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(autoscroll)</onclick>
+					<selected>Skin.HasSetting(autoscroll)</selected>
+				</control>
+				<control type="radiobutton" id="704">
+					<label>$LOCALIZE[31158]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(touchmode)</onclick>
+					<selected>Skin.HasSetting(touchmode)</selected>
+				</control>
+				<control type="radiobutton" id="705">
+					<label>$LOCALIZE[31093]</label>
+					<include>DefaultSettingButton</include>
+					<onclick condition="!String.IsEmpty(Weather.Plugin)">Skin.ToggleSetting(show_weatherinfo)</onclick>
+					<onclick condition="String.IsEmpty(Weather.Plugin)">ActivateWindow(servicesettings,weather)</onclick>
+					<selected>Skin.HasSetting(show_weatherinfo) + !String.IsEmpty(Weather.Plugin)</selected>
+				</control>
+				<control type="radiobutton" id="706">
+					<label>$LOCALIZE[31160]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(hide_mediaflags)</onclick>
+					<selected>!Skin.HasSetting(hide_mediaflags)</selected>
+				</control>
+				<control type="button" id="708">
+					<label>$LOCALIZE[31024]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.SelectBool(31024, 38018|circle_userrating, 563|circle_rating, 16018|circle_none)</onclick>
+					<label2>$VAR[RatingSettingLabel2Var]</label2>
+				</control>
+				<control type="button" id="709">
+					<label>$LOCALIZE[31164]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.SelectBool(31164, 31165|show_profilename, 31166|show_profileavatar, 16018|show_none)</onclick>
+					<label2>$VAR[ProfileIdentificationLabel2Var]</label2>
+				</control>
+				<!-- Sub-section: Views -->
+				<control type="label">
+					<height>45</height>
+					<right>25</right>
+					<font>font_settings_header</font>
+					<label>VIEWS</label>
+					<textcolor>grey</textcolor>
+					<aligny>center</aligny>
+					<textoffsetx>5</textoffsetx>
+				</control>
+				<include>SettingsDivider</include>
+				<control type="button" id="710">
+					<label>Configure default view per content type[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>RunScript(script.skinvariables,action=buildviews,configure)</onclick>
+				</control>
+			</control>
+
+			<control type="grouplist" id="600">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>600</onup>
+				<ondown>600</ondown>
+				<visible>Container(9000).HasFocus(6)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="ARTWORK"/>
+				</include>
+				<control type="radiobutton" id="603">
+					<label>$LOCALIZE[31002]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(no_fanart)</onclick>
+					<selected>!Skin.HasSetting(no_fanart)</selected>
+				</control>
+				<control type="button" id="604">
+					<label>Default background[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$VAR[CustomBgNameVar]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick condition="!String.IsEqual(Skin.String(CustomBackground),blueblur) + !String.IsEqual(Skin.String(CustomBackground),motionblur) + !String.IsEqual(Skin.String(CustomBackground),black)">Skin.SetString(CustomBackground,blueblur)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(CustomBackground),blueblur)">Skin.SetString(CustomBackground,motionblur)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(CustomBackground),motionblur)">Skin.SetString(CustomBackground,black)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(CustomBackground),black)">Skin.SetString(CustomBackground,redblur)</onclick>
+				</control>
+				<control type="button" id="606">
+					<label>Choose background brightness[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$INFO[Skin.String(DefaultBackgroundBrightness)]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick condition="!String.IsEqual(Skin.String(DefaultBackgroundBrightness),High) + !String.IsEqual(Skin.String(DefaultBackgroundBrightness),Medium) + !String.IsEqual(Skin.String(DefaultBackgroundBrightness),Low) + !String.IsEqual(Skin.String(DefaultBackgroundBrightness),Highest)">Skin.SetString(DefaultBackgroundBrightness,High)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultBackgroundBrightness),High)">Skin.SetString(DefaultBackgroundBrightness,Medium)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultBackgroundBrightness),Medium)">Skin.SetString(DefaultBackgroundBrightness,Low)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultBackgroundBrightness),Low)">Skin.SetString(DefaultBackgroundBrightness,Highest)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultBackgroundBrightness),Highest)">Skin.SetString(DefaultBackgroundBrightness,High)</onclick>
+				</control>
+				<control type="button" id="607">
+					<label>Choose fanart brightness[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$INFO[Skin.String(DefaultFanartBrightness)]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick condition="String.IsEqual(Skin.String(DefaultFanartBrightness),High)">Skin.SetString(DefaultFanartBrightness,Medium)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultFanartBrightness),Medium)">Skin.SetString(DefaultFanartBrightness,Low)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultFanartBrightness),Low)">Skin.SetString(DefaultFanartBrightness,Highest)</onclick>
+					<onclick condition="String.IsEqual(Skin.String(DefaultFanartBrightness),Highest)">Skin.SetString(DefaultFanartBrightness,High)</onclick>
+				</control>
+				<control type="button" id="608">
+					<label>$LOCALIZE[31131]</label>
+					<label2>$INFO[Skin.String(HomeFanart.name)]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick condition="System.AddonIsEnabled(script.image.resource.select)">RunScript(script.image.resource.select,property=HomeFanart&amp;type=resource.images.skinbackgrounds)</onclick>
+					<onclick condition="System.HasAddon(script.image.resource.select) + !System.AddonIsEnabled(script.image.resource.select)">EnableAddon(script.image.resource.select)</onclick>
+					<onclick condition="!System.HasAddon(script.image.resource.select)">InstallAddon(script.image.resource.select)</onclick>
+					<enable>!Skin.HasSetting(no_fanart)</enable>
+				</control>
+				<control type="button" id="609">
+					<label>$LOCALIZE[31062]</label>
+					<label2>$INFO[Skin.String(WeatherFanart.name)]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick condition="System.AddonIsEnabled(script.image.resource.select)">RunScript(script.image.resource.select,property=WeatherFanart&amp;type=resource.images.weatherfanart)</onclick>
+					<onclick condition="System.HasAddon(script.image.resource.select) + !System.AddonIsEnabled(script.image.resource.select)">EnableAddon(script.image.resource.select)</onclick>
+					<onclick condition="!System.HasAddon(script.image.resource.select)">InstallAddon(script.image.resource.select)</onclick>
+					<enable>!Skin.HasSetting(no_fanart)</enable>
+				</control>
+				<control type="button" id="6066">
+					<label>$LOCALIZE[31149]</label>
+					<label2>$INFO[Skin.String(MovieGenreFanart.Name)]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick condition="System.AddonIsEnabled(script.image.resource.select)">RunScript(script.image.resource.select,property=MovieGenreFanart&amp;type=resource.images.moviegenrefanart)</onclick>
+					<onclick condition="System.HasAddon(script.image.resource.select) + !System.AddonIsEnabled(script.image.resource.select)">EnableAddon(script.image.resource.select)</onclick>
+					<onclick condition="!System.HasAddon(script.image.resource.select)">InstallAddon(script.image.resource.select)</onclick>
+				</control>
+				<control type="radiobutton" id="6067">
+					<label>$LOCALIZE[31168]</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(show_musicvideoposter)</onclick>
+					<selected>Skin.HasSetting(show_musicvideoposter)</selected>
+				</control>
+			</control>
+			
+			<control type="grouplist" id="622">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>622</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>622</ondown>
+				<visible>Container(9000).HasFocus(7)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="ON SCREEN DISPLAY"/>
+				</include>
+				<control type="radiobutton" id="6220">
+					<label>$LOCALIZE[31172]</label>
+					<include>DefaultSettingButton</include>
+					<selected>Skin.HasSetting(OSDAutoClose)</selected>
+					<onclick>Skin.ToggleSetting(OSDAutoClose)</onclick>
+				</control>
+				<control type="button" id="6221">
+					<label>- $LOCALIZE[31173][CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>$VAR[SkinSettingOSDAutoCloseTime]</label2>
+					<include>DefaultSettingButtonAction</include>
+					<onclick>Skin.SetNumeric(OSDAutoCloseTime)</onclick>
+					<enable>Skin.HasSetting(OSDAutoClose)</enable>
+				</control>
+			</control>
+
+			<!-- EXTRA INFO -->
+		<!-- API KEYS SECTION -->
+		<control type="grouplist" id="649">
+			<top>133</top>
+			<left>25</left>
+			<right>0</right>
+			<bottom>140</bottom>
+			<itemgap>8</itemgap>
+			<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+			<onleft>9000</onleft>
+			<onright>60</onright>
+			<onup>649</onup>
+			<pagecontrol>60</pagecontrol>
+			<ondown>649</ondown>
+			<visible>Container(9000).HasFocus(9)</visible>
+			<include content="SettingsSectionHeader">
+				<param name="label" value="API KEYS"/>
+			</include>
+			<!-- Section Sub-Header -->
+			<control type="label">
+				<description>API Keys Header</description>
+				<width>1100</width>
+				<height>60</height>
+				<font>font_settings_header</font>
+				<label>Configure API Keys</label>
+				<textcolor>button_focus</textcolor>
+			</control>
+			<!-- TMDb API Key Button -->
+			<control type="button" id="6491">
+				<description>Set TMDb API Key</description>
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButtonAction</include>
+				<label>TMDb API Key[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<label2>$INFO[Skin.String(tmdb_api_key)]</label2>
+				<onclick>RunScript(script.littleduck.helper,mode=set_tmdb_key)</onclick>
+			</control>
+			<!-- TVDb API Key Button -->
+			<control type="button" id="6492">
+				<description>Set TVDb API Key</description>
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButtonAction</include>
+				<label>TVDb API Key[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<label2>$INFO[Skin.String(tvdb_api_key)]</label2>
+				<onclick>RunScript(script.littleduck.helper,mode=set_tvdb_key)</onclick>
+			</control>
+			<!-- RPDB API Key Button -->
+			<control type="button" id="6493">
+				<description>Set RPDB API Key</description>
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButtonAction</include>
+				<label>RPDB (Top Poster) API Key[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<label2>$INFO[Skin.String(rpdb_api_key)]</label2>
+				<onclick>RunScript(script.littleduck.helper,mode=set_rpdb_key)</onclick>
+			</control>
+			<!-- MDbList API Key Button -->
+			<control type="button" id="6494">
+				<description>Set MDbList API Key</description>
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButtonAction</include>
+				<label>MDbList API Key[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<label2>$INFO[Skin.String(mdblist_api_key)]</label2>
+				<onclick>RunScript(script.littleduck.helper,mode=set_mdblist_key)</onclick>
+			</control>
+			<!-- OMDb API Key Button -->
+			<control type="button" id="6495">
+				<description>Set OMDb API Key</description>
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButtonAction</include>
+				<label>OMDb API Key (ratings fallback + vote counts)[CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<label2>$INFO[Skin.String(omdb_api_key)]</label2>
+				<onclick>RunScript(script.littleduck.helper,mode=set_omdb_key)</onclick>
+			</control>
+			<!-- Informational Label -->
+			<control type="label">
+				<description>Info Text</description>
+				<width>1100</width>
+				<height>60</height>
+				<font>font_settings_header</font>
+				<label>TMDb API key enables automatic ID conversion for better ratings accuracy.</label>
+				<textcolor>grey</textcolor>
+			</control>
+		</control>
+
+		<!-- APPEARANCE SECTION -->
+		<control type="grouplist" id="611">
+			<top>133</top>
+			<left>25</left>
+			<right>0</right>
+			<bottom>140</bottom>
+			<itemgap>8</itemgap>
+			<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+			<onleft>9000</onleft>
+			<onright>60</onright>
+			<onup>611</onup>
+			<pagecontrol>60</pagecontrol>
+			<ondown>611</ondown>
+			<visible>Container(9000).HasFocus(10)</visible>
+			<include content="SettingsSectionHeader">
+				<param name="label" value="APPEARANCE"/>
+			</include>
+				<!-- DEBUG VIEW OVERLAY TOGGLE -->
+				<control type="radiobutton" id="6199">
+					<width>1100</width>
+					<height>80</height>
+					<include>DefaultSettingButton</include>
+					<label>[COLOR FFFF6600][B]DEBUG[/B][/COLOR] Show view debug overlay (MyVideoNav)[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<label2>Shows ViewMode, Content, Plugin, Control visibility on screen</label2>
+					<selected>Skin.HasSetting(debug_views)</selected>
+					<onclick>Skin.ToggleSetting(debug_views)</onclick>
+				</control>
+			<!-- Sub-Header -->
+			<control type="label">
+				<width>1100</width>
+				<height>60</height>
+				<font>font_settings_header</font>
+				<label>Skin Theme</label>
+				<textcolor>button_focus</textcolor>
+			</control>
+			<!-- Default Theme -->
+			<control type="radiobutton" id="6110">
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButton</include>
+				<label>Default[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<selected>String.IsEmpty(Skin.Theme())</selected>
+				<onclick>Skin.SetTheme()</onclick>
+			</control>
+			<!-- Curial Theme -->
+			<control type="radiobutton" id="6111">
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButton</include>
+				<label>Curial[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<selected>String.IsEqual(Skin.Theme(),curial)</selected>
+				<onclick>Skin.SetTheme(curial)</onclick>
+			</control>
+			<!-- Flat Theme -->
+			<control type="radiobutton" id="6112">
+				<width>1100</width>
+				<height>80</height>
+				<include>DefaultSettingButton</include>
+				<label>Flat[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+				<selected>String.IsEqual(Skin.Theme(),flat)</selected>
+				<onclick>Skin.SetTheme(flat)</onclick>
+			</control>
+		</control>
+
+			<control type="grouplist" id="623">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>623</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>623</ondown>
+				<visible>Container(9000).HasFocus(8)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="EXTRA INFO"/>
+				</include>
+				<control type="button" id="6230">
+					<include>DefaultSettingButtonAction</include>
+					<label>[B]CHANGELOG: $INFO[System.AddonTitle(skin.littleduck)][/B][CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<onclick>SetProperty(Changelog,True)</onclick>
+					<onclick>SetProperty(TextViewerHeader,[B]CHANGELOG: $INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)][/B],Home)</onclick>
+					<onclick>ActivateWindow(1119)</onclick>
+				</control>
+				<control type="button" id="6231">
+					<include>DefaultSettingButtonAction</include>
+					<label>[B]Setup Guide[/B][CR][COLOR grey][LIGHT][UPPERCASE]action[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<onclick>SetProperty(SetupGuide,True)</onclick>
+					<onclick>SetProperty(TextViewerHeader,[B]Setup Guide[/B],Home)</onclick>
+					<onclick>ActivateWindow(1118)</onclick>
+				</control>
+			</control>
+
+			<!-- POWER MENU SECTION -->
+			<control type="grouplist" id="660">
+				<top>133</top>
+				<left>25</left>
+				<right>0</right>
+				<bottom>140</bottom>
+				<itemgap>8</itemgap>
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<onleft>9000</onleft>
+				<onright>60</onright>
+				<onup>660</onup>
+				<pagecontrol>60</pagecontrol>
+				<ondown>660</ondown>
+				<visible>Container(9000).HasFocus(11)</visible>
+				<include content="SettingsSectionHeader">
+					<param name="label" value="POWER MENU"/>
+				</include>
+				<control type="radiobutton" id="6601">
+					<include>DefaultSettingButton</include>
+					<label>Favourites[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>!Skin.HasSetting(PowerMenuHideFavourites)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuHideFavourites)</onclick>
+				</control>
+				<control type="radiobutton" id="6602">
+					<include>DefaultSettingButton</include>
+					<label>Add-ons[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>!Skin.HasSetting(PowerMenuHideAddons)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuHideAddons)</onclick>
+				</control>
+				<control type="radiobutton" id="6603">
+					<include>DefaultSettingButton</include>
+					<label>Reload skin[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>!Skin.HasSetting(PowerMenuHideReloadSkin)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuHideReloadSkin)</onclick>
+				</control>
+				<control type="radiobutton" id="6604">
+					<include>DefaultSettingButton</include>
+					<label>Quit / Exit[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>!Skin.HasSetting(PowerMenuHideQuit)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuHideQuit)</onclick>
+				</control>
+				<control type="radiobutton" id="6610">
+					<include>DefaultSettingButton</include>
+					<label>Search[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuSearch)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuSearch)</onclick>
+				</control>
+				<control type="radiobutton" id="6611">
+					<include>DefaultSettingButton</include>
+					<label>File manager[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuFileManager)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuFileManager)</onclick>
+				</control>
+				<control type="radiobutton" id="6612">
+					<include>DefaultSettingButton</include>
+					<label>Switch user[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuSwitchUser)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuSwitchUser)</onclick>
+				</control>
+				<control type="radiobutton" id="6613">
+					<include>DefaultSettingButton</include>
+					<label>Power down[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuPowerDown)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuPowerDown)</onclick>
+				</control>
+				<control type="radiobutton" id="6614">
+					<include>DefaultSettingButton</include>
+					<label>Suspend[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuSuspend)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuSuspend)</onclick>
+				</control>
+				<control type="radiobutton" id="6615">
+					<include>DefaultSettingButton</include>
+					<label>Hibernate[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuHibernate)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuHibernate)</onclick>
+				</control>
+				<control type="radiobutton" id="6616">
+					<include>DefaultSettingButton</include>
+					<label>Reboot[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuReboot)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuReboot)</onclick>
+				</control>
+				<control type="radiobutton" id="6617">
+					<include>DefaultSettingButton</include>
+					<label>Shutdown timer[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuShutdownTimer)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuShutdownTimer)</onclick>
+				</control>
+				<control type="radiobutton" id="6618">
+					<include>DefaultSettingButton</include>
+					<label>Master lock mode[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuMasterMode)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuMasterMode)</onclick>
+				</control>
+				<control type="radiobutton" id="6619">
+					<include>DefaultSettingButton</include>
+					<label>Idle shutdown inhibit[CR][COLOR grey][LIGHT][UPPERCASE]toggle[/UPPERCASE][/LIGHT][/COLOR]</label>
+					<selected>Skin.HasSetting(PowerMenuIdleShutdown)</selected>
+					<onclick>Skin.ToggleSetting(PowerMenuIdleShutdown)</onclick>
+				</control>
+			</control>
+		</control>
+		<control type="group">
+			<depth>DepthContentPanel</depth>
+			<left>0</left>
+			<include>OpenClose_Left</include>
+			<include content="ContentPanel">
+				<param name="width" value="530" />
+			</include>
+			<control type="list" id="9000">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<description>button area</description>
+				<left>0</left>
+				<top>130</top>
+				<width>472</width>
+				<height>720</height>
+				<onleft>10000</onleft>
+				<onright>10000</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout height="90" width="472">
+					<control type="label">
+						<left>25</left>
+						<width>432</width>
+						<height>90</height>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>unfocused_text</textcolor>
+						<font>font_settings_item</font>
+						<aligny>center</aligny>
+					</control>
+				</itemlayout>
+				<focusedlayout height="90" width="472">
+					<!-- White pill focus background -->
+					<control type="image">
+						<left>10</left>
+						<top>8</top>
+						<width>452</width>
+						<height>74</height>
+						<texture border="12" colordiffuse="FFFFFFFF">masks/focus_pill.png</texture>
+						<animation effect="fade" start="100" end="50" time="40" condition="!Control.HasFocus(9000)">Conditional</animation>
+					</control>
+					<control type="label">
+						<left>25</left>
+						<width>432</width>
+						<height>90</height>
+						<font>font_settings_item</font>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>focused_text</textcolor>
+					</control>
+				</focusedlayout>
+				<content>
+					<item id="1">
+						<label>$LOCALIZE[31061]</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="5">
+						<label>$LOCALIZE[128]</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="2">
+						<label>Options</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="4">
+						<label>Ratings/Trailers</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="3">
+						<label>Search</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="6">
+						<label>$LOCALIZE[31159]</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="7">
+						<label>$LOCALIZE[31170]</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="8">
+						<label>Extra info</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="9">
+						<label>API Keys</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="10">
+						<label>Appearance</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="11">
+						<label>Power Menu</label>
+						<onclick>noop</onclick>
+					</item>
+				</content>
+			</control>
+			<!-- Skin name — bottom right of sidebar -->
+			<control type="label">
+				<right>20</right>
+				<bottom>30</bottom>
+				<width>440</width>
+				<height>40</height>
+				<font>font_settings_header</font>
+				<label>$INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)]</label>
+				<textcolor>grey</textcolor>
+				<align>right</align>
+				<aligny>center</aligny>
+			</control>
+		</control>
+		<control type="group">
+			<right>0</right>
+			<top>133</top>
+			<bottom>137</bottom>
+			<width>60</width>
+			<control type="scrollbar" id="60">
+				<right>0</right>
+				<top>0</top>
+				<bottom>0</bottom>
+				<width>12</width>
+				<orientation>vertical</orientation>
+				<texturesliderbackground />
+				<animation effect="slide" end="6,0" time="300" tween="sine" easing="inout" condition="!Control.HasFocus(60)">conditional</animation>
+				<onleft>610</onleft>
+				<onright>610</onright>
+				<animation effect="fade" start="0" end="100" time="200" delay="300">Visible</animation>
+				<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+				<animation effect="fade" start="0" end="100" delay="300" time="320">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
+				<hitrect x="0" y="0" w="60" h="100%" />
+				<visible>Control.IsVisible(610)</visible>
+			</control>
+		</control>
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="$LOCALIZE[20077]" />
+		</include>
+		<include>BottomBar</include>
+		<control type="textbox" id="6">
+			<include>OpenClose_Right</include>
+			<description>description area</description>
+			<left>510</left>
+			<bottom>27</bottom>
+			<width>1350</width>
+			<height>100</height>
+			<font>font_settings_header</font>
+			<align>justify</align>
+			<textcolor>unfocused_text</textcolor>
+			<label>$VAR[SkinSettingsHelpTextVar]</label>
+			<autoscroll time="3000" delay="5000" repeat="5000">true</autoscroll>
+		</control>
+	</controls>
+</window>
+
+
+

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol always="true">95</defaultcontrol>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="multiimage">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<aspectratio>scale</aspectratio>
+			<fadetime>600</fadetime>
+			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+			<animation effect="fade" time="400">VisibleChange</animation>
+			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+		</control>
+
+		<!-- Dialog gradient panel covering the right content area -->
+		<control type="image">
+			<left>415</left>
+			<top>122</top>
+			<right>20</right>
+			<bottom>128</bottom>
+			<texture diffuse="masks/dialog-bg-large.png">dialogs/dialog-gradient.png</texture>
+		</control>
+
+		<!-- Top content group — dynamic info labels + textbox -->
+		<control type="group">
+			<left>40</left>
+			<top>133</top>
+			<include>OpenClose_Right</include>
+			<!-- Section sub-header separator -->
+			<control type="image">
+				<left>395</left>
+				<top>55</top>
+				<right>25</right>
+				<height>1</height>
+				<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+			</control>
+			<!-- Dynamic info labels (Kodi fills ids 2-12 based on selected tab) -->
+			<control type="grouplist">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>420</left>
+				<top>65</top>
+				<height>530</height>
+				<orientation>vertical</orientation>
+				<control type="label" id="2">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="3">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="4">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="5">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="6">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="7">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="8">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="9">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="10">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="11">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+				<control type="label" id="12">
+					<height>50</height>
+					<width>1400</width>
+					<font>font12</font>
+					<textcolor>unfocused_text</textcolor>
+				</control>
+			</control>
+			<!-- Textbox for privacy/other long-form content -->
+			<control type="textbox" id="30">
+				<left>420</left>
+				<right>50</right>
+				<top>65</top>
+				<bottom>347</bottom>
+				<pagecontrol>60</pagecontrol>
+				<font>font12</font>
+				<textcolor>unfocused_text</textcolor>
+				<autoscroll delay="5000" repeat="7500" time="5000">!Control.HasFocus(60)</autoscroll>
+			</control>
+			<control type="scrollbar" id="60">
+				<right>0</right>
+				<top>65</top>
+				<width>12</width>
+				<bottom>347</bottom>
+				<orientation>vertical</orientation>
+				<texturesliderbackground />
+				<animation effect="slide" end="6,0" time="300" tween="sine" easing="inout" condition="!Control.HasFocus(60)">conditional</animation>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<visible>Control.IsVisible(30)</visible>
+				<animation effect="fade" start="0" end="100" time="200" delay="300">Visible</animation>
+				<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+				<animation effect="fade" start="0" end="100" delay="300" time="320">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
+			</control>
+		</control>
+
+		<!-- Left sidebar -->
+		<control type="group">
+			<left>0</left>
+			<top>0</top>
+			<depth>DepthContentPanel</depth>
+			<include>OpenClose_Left</include>
+			<include content="ContentPanel">
+				<param name="width" value="480" />
+			</include>
+			<control type="grouplist" id="9000">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>0</left>
+				<top>130</top>
+				<width>415</width>
+				<height>720</height>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<onright>60</onright>
+				<control type="button" id="95">
+					<description>Button Summary Values</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[20037]</label>
+				</control>
+				<control type="button" id="94">
+					<description>Button Storage</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[13277]</label>
+				</control>
+				<control type="button" id="96">
+					<description>Button Network</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[13279]</label>
+				</control>
+				<control type="button" id="97">
+					<description>Button Video</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[13280]</label>
+				</control>
+				<control type="button" id="98">
+					<description>Button Hardware</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[13281]</label>
+				</control>
+				<control type="button" id="99">
+					<description>Button PVR</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[19191]</label>
+				</control>
+				<control type="button" id="100">
+					<description>Button Privacy policy</description>
+					<include content="DefaultSystemSettingsButton">
+						<param name="height" value="90" />
+					</include>
+					<width>415</width>
+					<label>$LOCALIZE[12389]</label>
+				</control>
+			</control>
+			<!-- Skin name — bottom right of sidebar -->
+			<control type="label">
+				<right>20</right>
+				<bottom>30</bottom>
+				<width>390</width>
+				<height>40</height>
+				<font>font_settings_header</font>
+				<label>$INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)]</label>
+				<textcolor>grey</textcolor>
+				<align>right</align>
+				<aligny>center</aligny>
+			</control>
+		</control>
+
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="$LOCALIZE[130]" />
+		</include>
+		<include>BottomBar</include>
+
+		<!-- Bottom section — memory, CPU, build info -->
+		<control type="group">
+			<bottom>0</bottom>
+			<left>40</left>
+			<height>370</height>
+			<include>OpenClose_Right</include>
+			<!-- Thin separator above bottom section -->
+			<control type="image">
+				<left>395</left>
+				<top>0</top>
+				<right>25</right>
+				<height>1</height>
+				<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+			</control>
+			<control type="grouplist">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>420</left>
+				<top>15</top>
+				<orientation>vertical</orientation>
+				<itemgap>4</itemgap>
+				<!-- Memory -->
+				<control type="label">
+					<description>Memory label</description>
+					<width>auto</width>
+					<height>35</height>
+					<label>$LOCALIZE[31030]: $INFO[system.memory(used)] / $INFO[system.memory(total)] - $INFO[system.memory(used.percent)]</label>
+					<font>font_settings_header</font>
+					<textcolor>grey</textcolor>
+				</control>
+				<control type="progress">
+					<description>Memory bar</description>
+					<width>730</width>
+					<height>6</height>
+					<info>system.memory(used)</info>
+					<colordiffuse>accent_color</colordiffuse>
+				</control>
+				<!-- CPU -->
+				<control type="label">
+					<description>CPU label</description>
+					<width>auto</width>
+					<height>35</height>
+					<label>$LOCALIZE[13271] $INFO[System.CPUUsage]</label>
+					<font>font_settings_header</font>
+					<textcolor>grey</textcolor>
+					<visible>System.SupportsCPUUsage</visible>
+				</control>
+				<control type="progress">
+					<description>CPU bar</description>
+					<width>730</width>
+					<height>6</height>
+					<info>System.CPUUsage</info>
+					<visible>System.SupportsCPUUsage</visible>
+					<colordiffuse>accent_color</colordiffuse>
+				</control>
+			</control>
+			<!-- Build info row -->
+			<control type="group">
+				<animation effect="slide" end="0,-55" time="0" condition="!System.SupportsCPUUsage">Conditional</animation>
+				<control type="grouplist">
+					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+					<description>Build version row</description>
+					<itemgap>12</itemgap>
+					<top>155</top>
+					<left>420</left>
+					<width>820</width>
+					<orientation>horizontal</orientation>
+					<control type="label">
+						<width>auto</width>
+						<height>35</height>
+						<font>font_settings_header</font>
+						<textcolor>grey</textcolor>
+						<label>$LOCALIZE[31031]:</label>
+					</control>
+					<control type="label">
+						<width>auto</width>
+						<height>35</height>
+						<font>font_settings_header</font>
+						<textcolor>unfocused_text</textcolor>
+						<label>$INFO[System.BuildVersionShort]$INFO[System.BuildVersionCode, (,)]</label>
+					</control>
+					<control type="label">
+						<width>auto</width>
+						<height>35</height>
+						<font>font_settings_header</font>
+						<textcolor>grey</textcolor>
+						<label>Git:</label>
+					</control>
+					<control type="label">
+						<width>auto</width>
+						<height>35</height>
+						<font>font_settings_header</font>
+						<textcolor>unfocused_text</textcolor>
+						<label>$INFO[System.BuildVersionGit]</label>
+					</control>
+					<control type="label">
+						<width>auto</width>
+						<height>35</height>
+						<font>font_settings_header</font>
+						<textcolor>grey</textcolor>
+						<label>$LOCALIZE[174]</label>
+					</control>
+					<control type="label" id="53">
+						<width>auto</width>
+						<height>35</height>
+						<font>font_settings_header</font>
+						<textcolor>unfocused_text</textcolor>
+					</control>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

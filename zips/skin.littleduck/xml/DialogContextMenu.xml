@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol>996</defaultcontrol>
+	<controls>
+
+		<!-- ============================================================ -->
+		<!-- BACKDROP: subtle dark overlay, artwork shows through         -->
+		<!-- ============================================================ -->
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<right>0</right>
+			<bottom>0</bottom>
+			<texture colordiffuse="50000000">colors/black.png</texture>
+			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+		</control>
+		<control type="button">
+			<left>0</left>
+			<top>0</top>
+			<right>520</right>
+			<bottom>0</bottom>
+			<texturefocus />
+			<texturenofocus />
+			<onclick>Action(close)</onclick>
+		</control>
+
+		<!-- ============================================================ -->
+		<!-- PANEL: floating card with rounded corners, right-side        -->
+		<!-- layout: [64px sidebar][1px sep][435px items]                 -->
+		<!-- ============================================================ -->
+		<control type="group">
+			<right>20</right>
+			<top>60</top>
+			<width>500</width>
+			<bottom>60</bottom>
+			<animation effect="slide" start="520,0" end="0,0" tween="cubic" easing="out" time="320">WindowOpen</animation>
+			<animation effect="slide" start="0,0" end="520,0" tween="cubic" easing="in" time="220">WindowClose</animation>
+			<animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="180">WindowClose</animation>
+
+			<!-- Panel background -->
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<bottom>0</bottom>
+				<texture colordiffuse="surface">masks/dialog-bg-squareish.png</texture>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- HEADER (88px) — spans full panel width                       -->
+			<!-- ============================================================ -->
+			<control type="group">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<height>88</height>
+
+				<!-- Menu icon -->
+				<control type="image">
+					<left>20</left>
+					<top>24</top>
+					<width>40</width>
+					<height>40</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="FFFFFFFF">icons/menu.png</texture>
+				</control>
+
+				<!-- "Options" title -->
+				<control type="label">
+					<left>76</left>
+					<top>0</top>
+					<right>88</right>
+					<height>88</height>
+					<aligny>center</aligny>
+					<font>font32_title</font>
+					<textcolor>FFFFFFFF</textcolor>
+					<shadowcolor>text_shadow</shadowcolor>
+					<label>Options</label>
+				</control>
+
+				<!-- Close button (top-right) -->
+				<control type="button">
+					<right>0</right>
+					<top>0</top>
+					<width>88</width>
+					<height>88</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>40FFFFFF</textcolor>
+					<focusedcolor>FFFFFFFF</focusedcolor>
+					<texturefocus colordiffuse="10FFFFFF">colors/white.png</texturefocus>
+					<texturenofocus />
+					<onclick>Action(close)</onclick>
+					<label>[B]x[/B]</label>
+				</control>
+
+				<!-- Header separator (inset from edges) -->
+				<control type="image">
+					<left>16</left>
+					<bottom>0</bottom>
+					<right>16</right>
+					<height>1</height>
+					<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+				</control>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- SIDEBAR BUTTONS (below header, left of separator)            -->
+			<!-- ============================================================ -->
+
+			<!-- Info button (id=2001) -->
+			<control type="group">
+				<left>0</left>
+				<top>88</top>
+				<width>64</width>
+				<height>88</height>
+				<control type="button" id="2001">
+					<left>0</left>
+					<top>0</top>
+					<width>64</width>
+					<height>88</height>
+					<label></label>
+					<texturefocus colordiffuse="15FCC200">colors/white.png</texturefocus>
+					<texturenofocus />
+					<onclick>Action(Info)</onclick>
+					<onright>996</onright>
+					<onup>2003</onup>
+					<ondown>2002</ondown>
+				</control>
+				<!-- Icon focused (gold) -->
+				<control type="image">
+					<left>14</left>
+					<top>22</top>
+					<width>36</width>
+					<height>36</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="accent_color">icons/infodialogs/info.png</texture>
+					<visible>Control.HasFocus(2001)</visible>
+				</control>
+				<!-- Icon unfocused (dim) -->
+				<control type="image">
+					<left>14</left>
+					<top>22</top>
+					<width>36</width>
+					<height>36</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="45FFFFFF">icons/infodialogs/info.png</texture>
+					<visible>!Control.HasFocus(2001)</visible>
+				</control>
+				<!-- Label on focus -->
+				<control type="label">
+					<left>0</left>
+					<bottom>6</bottom>
+					<width>64</width>
+					<height>14</height>
+					<align>center</align>
+					<font>font10</font>
+					<textcolor>accent_color</textcolor>
+					<label>Info</label>
+					<visible>Control.HasFocus(2001)</visible>
+				</control>
+				<!-- Row separator -->
+				<control type="image">
+					<left>10</left>
+					<bottom>0</bottom>
+					<width>44</width>
+					<height>1</height>
+					<texture colordiffuse="12FFFFFF">colors/white.png</texture>
+				</control>
+			</control>
+
+			<!-- Trakt button (id=2002) -->
+			<control type="group">
+				<left>0</left>
+				<top>176</top>
+				<width>64</width>
+				<height>88</height>
+				<control type="button" id="2002">
+					<left>0</left>
+					<top>0</top>
+					<width>64</width>
+					<height>88</height>
+					<label></label>
+					<texturefocus colordiffuse="15FCC200">colors/white.png</texturefocus>
+					<texturenofocus />
+					<onclick>RunScript(plugin.video.themoviedb.helper,sync_trakt,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])</onclick>
+					<onright>996</onright>
+					<onup>2001</onup>
+					<ondown>2003</ondown>
+				</control>
+				<!-- Icon focused -->
+				<control type="image">
+					<left>14</left>
+					<top>18</top>
+					<width>36</width>
+					<height>36</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="accent_color">icons/trakt-icon-white.png</texture>
+					<visible>Control.HasFocus(2002)</visible>
+				</control>
+				<!-- Icon unfocused -->
+				<control type="image">
+					<left>14</left>
+					<top>18</top>
+					<width>36</width>
+					<height>36</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="45FFFFFF">icons/trakt-icon-white.png</texture>
+					<visible>!Control.HasFocus(2002)</visible>
+				</control>
+				<!-- Label on focus -->
+				<control type="label">
+					<left>0</left>
+					<bottom>6</bottom>
+					<width>64</width>
+					<height>14</height>
+					<align>center</align>
+					<font>font10</font>
+					<textcolor>accent_color</textcolor>
+					<label>Trakt</label>
+					<visible>Control.HasFocus(2002)</visible>
+				</control>
+				<!-- Row separator -->
+				<control type="image">
+					<left>10</left>
+					<bottom>0</bottom>
+					<width>44</width>
+					<height>1</height>
+					<texture colordiffuse="12FFFFFF">colors/white.png</texture>
+				</control>
+			</control>
+
+			<!-- Add to Favourite button (id=2003) -->
+			<control type="group">
+				<left>0</left>
+				<top>264</top>
+				<width>64</width>
+				<height>88</height>
+				<control type="button" id="2003">
+					<left>0</left>
+					<top>0</top>
+					<width>64</width>
+					<height>88</height>
+					<label></label>
+					<texturefocus colordiffuse="15FCC200">colors/white.png</texturefocus>
+					<texturenofocus />
+					<onclick>Action(AddFavourite)</onclick>
+					<onright>996</onright>
+					<onup>2002</onup>
+					<ondown>2001</ondown>
+				</control>
+				<!-- Icon focused -->
+				<control type="image">
+					<left>14</left>
+					<top>18</top>
+					<width>36</width>
+					<height>36</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="accent_color">icons/sidemenu/favorite-custom.png</texture>
+					<visible>Control.HasFocus(2003)</visible>
+				</control>
+				<!-- Icon unfocused -->
+				<control type="image">
+					<left>14</left>
+					<top>18</top>
+					<width>36</width>
+					<height>36</height>
+					<aspectratio>keep</aspectratio>
+					<texture colordiffuse="45FFFFFF">icons/sidemenu/favorite-custom.png</texture>
+					<visible>!Control.HasFocus(2003)</visible>
+				</control>
+				<!-- Label on focus -->
+				<control type="label">
+					<left>0</left>
+					<bottom>6</bottom>
+					<width>64</width>
+					<height>14</height>
+					<align>center</align>
+					<font>font10</font>
+					<textcolor>accent_color</textcolor>
+					<label>Fav</label>
+					<visible>Control.HasFocus(2003)</visible>
+				</control>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- ITEM LIST (right of sidebar)                                 -->
+			<!-- ============================================================ -->
+			<control type="grouplist" id="996">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>64</left>
+				<top>88</top>
+				<right>0</right>
+				<bottom>0</bottom>
+				<onleft>2001</onleft>
+				<usecontrolcoords>true</usecontrolcoords>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- ITEM TEMPLATE                                                 -->
+			<!-- ============================================================ -->
+			<control type="button" id="1000">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<height>68</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<textoffsetx>18</textoffsetx>
+				<font>font28</font>
+				<textcolor>unfocused_text</textcolor>
+				<focusedcolor>FFFFFFFF</focusedcolor>
+				<shadowcolor>text_shadow</shadowcolor>
+				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+				<texturenofocus colordiffuse="08FFFFFF">colors/white.png</texturenofocus>
+				<label2>[COLOR 30FFFFFF]>[/COLOR]</label2>
+				<textcolor2>30FFFFFF</textcolor2>
+				<focusedcolor2>accent_color</focusedcolor2>
+			</control>
+
+		</control>
+
+	</controls>
+</window>

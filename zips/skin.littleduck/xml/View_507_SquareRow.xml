@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<!--
+		View 507 — Square Row
+		Horizontal row of square addon/icon cards. Adapted from Arctic Fuse "Row Square".
+		Works for: addons, plugins, programs, any icon content.
+		- Single horizontal scrolling row, vertically centered on screen
+		- Square cards with addons.png diffuse mask (rounded corners)
+		- Gold focus border + FocusBounce, label below card in accent color when focused
+		Card layout defined in Includes_CardLayouts.xml: SquareRowCard
+	-->
+	<include name="View_507_SquareRow">
+		<control type="group">
+			<visible>Control.IsVisible(507)</visible>
+			<include>OpenClose_Right</include>
+			<include>Visible_Right</include>
+
+			<!-- ============================================================ -->
+			<!-- FANART BACKGROUND — focused item fanart, full screen         -->
+			<!-- ============================================================ -->
+			<include content="FanartDiffuseBackground">
+				<param name="fanart" value="$INFO[Container(507).ListItem.Art(fanart)]" />
+				<param name="fadetime" value="600" />
+			</include>
+
+			<!-- Left vignette -->
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>100%</width>
+				<height>100%</height>
+				<aspectratio>stretch</aspectratio>
+				<texture>overlays/fanart_overlay.png</texture>
+			</control>
+
+			<!-- Bottom gradient -->
+			<control type="image">
+				<left>0</left>
+				<top>380</top>
+				<width>100%</width>
+				<height>700</height>
+				<aspectratio>stretch</aspectratio>
+				<texture>overlays/gradient-bottom.png</texture>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- INFO HEADER — SpotlightViewHero (parameterized include)      -->
+			<!-- container_id=507, no episode mode (episode_container_id=0)   -->
+			<!-- ============================================================ -->
+			<include content="SpotlightViewHero">
+	<param name="clearlogo_texture" value="$INFO[Container(507).ListItem.Art(clearlogo)]"/>
+	<param name="clearlogo_visible" value="!String.IsEmpty(Container(507).ListItem.Art(clearlogo))"/>
+	<param name="title_label"       value="$INFO[Container(507).ListItem.Label]"/>
+	<param name="title_visible"     value="String.IsEmpty(Container(507).ListItem.Art(clearlogo))"/>
+	<param name="infoline_label"    value="$INFO[Container(507).ListItem.Rating,[COLOR accent_color]★ ,[/COLOR]]$INFO[Container(507).ListItem.Year, [COLOR unfocused_text]|[/COLOR] ]$INFO[Container(507).ListItem.MPAA, [COLOR unfocused_text]|[/COLOR] ]$INFO[Container(507).ListItem.Duration(h), [COLOR unfocused_text]|[/COLOR] , h]$INFO[Container(507).ListItem.Duration(mm),,m]$INFO[Container(507).ListItem.EndTime, [COLOR unfocused_text]|[/COLOR] Ends ]"/>
+	<param name="plot_label"        value="$INFO[Container(507).ListItem.Plot]"/>
+</include>
+
+			<control type="fixedlist" id="507">
+				<left>75</left>
+				<right>20</right>
+				<top>540</top>
+				<height>380</height>
+				<orientation>horizontal</orientation>
+				<movement>2</movement>
+				<preloaditems>3</preloaditems>
+				<scrolltime tween="cubic" easing="out">500</scrolltime>
+				<onleft>507</onleft>
+				<onright>507</onright>
+				<onup>804</onup>
+				<ondown>noop</ondown>
+				<viewtype label="Icon Row">icon</viewtype>
+				<pagecontrol>5072</pagecontrol>
+				<visible>$EXP[Exp_View_507]</visible>
+
+				<texturefocus />
+<texturenofocus />
+<itemlayout width="300" height="360">
+					<include>SquareRowCard</include>
+				</itemlayout>
+
+				<focusedlayout width="300" height="360">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<include content="SquareRowCard">
+							<param name="focused" value="true"/>
+						</include>
+					</control>
+				</focusedlayout>
+			</control>
+
+			<!-- Horizontal scrollbar -->
+			<control type="scrollbar" id="5072">
+				<left>75</left>
+				<bottom>20</bottom>
+				<right>20</right>
+				<height>5</height>
+				<orientation>horizontal</orientation>
+				<texturenib>colors/white.png</texturenib>
+				<texturenibfocus>colors/white.png</texturenibfocus>
+				<textureback>colors/white.png</textureback>
+				<colorback>20FFFFFF</colorback>
+				<colornib>accent_color</colornib>
+				<colornibfocus>white</colornibfocus>
+			</control>
+
+		</control>
+	</include>
+
+</includes>

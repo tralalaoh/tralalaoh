@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="View_503_NowPlaying">
+		<control type="group">
+			<include>OpenClose_Right</include>
+			<left>596</left>
+			<visible>Control.IsVisible(503)</visible>
+			<include>Visible_Right</include>
+
+			<!-- ============================================================ -->
+			<!-- SONG LIST — id=503                                           -->
+			<!-- Content: songs. Scrollbar: 503600 (right panel).            -->
+			<!-- ============================================================ -->
+			<control type="fixedlist" id="503">
+				<top>list_top_offset</top>
+				<bottom>list_bottom_offset</bottom>
+				<right>594</right>
+				<scrolltime tween="cubic" easing="out">500</scrolltime>
+				<orientation>vertical</orientation>
+				<pagecontrol>503600</pagecontrol>
+				<movement>7</movement>
+				<focusposition>6</focusposition>
+				<onleft>9000</onleft>
+				<onright>503</onright>
+				<onup>804</onup>
+				<ondown>503</ondown>
+				<viewtype label="Now Playing">list</viewtype>
+				<visible>$EXP[Exp_View_503]</visible>
+
+				<texturefocus />
+<texturenofocus />
+<focusedlayout height="list_item_height" condition="Container.Content(songs)">
+					<control type="image">
+						<left>0</left>
+						<right>0</right>
+						<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+						<visible>Control.HasFocus(503)</visible>
+					</control>
+					<control type="label">
+						<left>35</left>
+						<right>120</right>
+						<aligny>center</aligny>
+						<scroll>true</scroll>
+						<label>$VAR[ListLabelVar]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+					<control type="label">
+						<right>20</right>
+						<align>right</align>
+						<aligny>center</aligny>
+						<textcolor>accent_color</textcolor>
+						<label>$VAR[ListLabel2Var]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+				</focusedlayout>
+
+				<itemlayout height="list_item_height" condition="Container.Content(songs)">
+					<control type="label">
+						<left>35</left>
+						<right>120</right>
+						<aligny>center</aligny>
+						<textcolor>unfocused_text</textcolor>
+						<label>$VAR[ListLabelVar]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+					<control type="label">
+						<right>20</right>
+						<align>right</align>
+						<aligny>center</aligny>
+						<textcolor>grey</textcolor>
+						<label>$VAR[ListLabel2Var]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+				</itemlayout>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- RIGHT INFO PANEL — album art + track metadata                -->
+			<!-- ============================================================ -->
+			<control type="group">
+				<depth>DepthContentPanel</depth>
+				<control type="group">
+					<right>-20</right>
+					<width>634</width>
+					<include content="ContentPanel">
+						<param name="left" value="0" />
+						<param name="top" value="-20" />
+						<param name="width" value="656" />
+						<param name="flipx" value="true" />
+					</include>
+
+					<!-- Album art -->
+					<control type="image">
+						<left>40</left>
+						<top>130</top>
+						<width>460</width>
+						<height>260</height>
+						<aspectratio align="center">keep</aspectratio>
+						<texture background="true" fallback="DefaultAlbumCover.png">$INFO[Container(503).ListItem.Art(thumb)]</texture>
+					</control>
+
+					<!-- Track title -->
+					<control type="label">
+						<left>40</left>
+						<top>410</top>
+						<right>20</right>
+						<font>font45</font>
+						<scroll>true</scroll>
+						<label>$INFO[Container(503).ListItem.Title]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+
+					<!-- Artist -->
+					<control type="label">
+						<left>40</left>
+						<top>470</top>
+						<right>20</right>
+						<font>font32</font>
+						<textcolor>unfocused_text</textcolor>
+						<label>$INFO[Container(503).ListItem.Artist]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+
+					<!-- Album · Year -->
+					<control type="label">
+						<left>40</left>
+						<top>520</top>
+						<right>20</right>
+						<font>font27</font>
+						<textcolor>grey</textcolor>
+						<label>$INFO[Container(503).ListItem.Album]$INFO[Container(503).ListItem.Year, [COLOR white]·[/COLOR] ]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+
+					<!-- Duration -->
+					<control type="label">
+						<left>40</left>
+						<top>560</top>
+						<right>20</right>
+						<font>font27</font>
+						<textcolor>grey</textcolor>
+						<label>$INFO[Container(503).ListItem.Duration]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+
+					<control type="scrollbar" id="503600">
+						<left>20</left>
+						<top>list_top_offset</top>
+						<width>12</width>
+						<bottom>list_bottom_offset</bottom>
+						<onleft>503</onleft>
+						<onright>503</onright>
+						<orientation>vertical</orientation>
+						<animation effect="zoom" end="50,100" time="300" tween="sine" center="20,0" easing="inout" condition="!Control.HasFocus(503600)">conditional</animation>
+					</control>
+				</control>
+			</control>
+		</control>
+	</include>
+</includes>

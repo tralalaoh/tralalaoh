@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     Includes_SpotlightTabs.xml
+	     Reusable spotlight tab button components.
+
+	     SpotlightTab        — video/custom category tab (view-type switching).
+	                           Used by: MovieSpotlightTabs, TVShowSpotlightTabs,
+	                                    Custom1/2/3SpotlightTabs.
+	                           Params: width, id, label, tab_num, property, path,
+	                                   type, onleft, onright, ondown_landscape,
+	                                   ondown_landscapeinfo, ondown_walll,
+	                                   ondown_wallp, ondown_default, indicator_visible
+
+	     SpotlightSimpleTab  — simple tab (no view-type switching, single ondown).
+	                           Used by: Music, Addons, Videos, LiveTV, Radio,
+	                                    Pictures, MusicVideos, GamesSpotlightTabs.
+	                           Params: width, id, label, tab_num, property, path,
+	                                   onleft, onright, ondown, indicator_visible
+	═══════════════════════════════════════════════════════════════ -->
+
+	<include name="SpotlightTab">
+		<definition>
+			<control type="group">
+				<width>$PARAM[width]</width>
+				<height>50</height>
+				<defaultcontrol>$PARAM[id]</defaultcontrol>
+				<control type="button" id="$PARAM[id]">
+					<left>0</left>
+					<top>0</top>
+					<width>$PARAM[width]</width>
+					<height>40</height>
+					<label>$PARAM[label]</label>
+					<font>font25_title</font>
+					<textcolor>unfocused_text</textcolor>
+					<focusedcolor>accent_color</focusedcolor>
+					<shadowcolor>text_shadow</shadowcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<texturefocus />
+					<texturenofocus />
+					<onfocus>SetProperty($PARAM[property].tab,$PARAM[tab_num],home)</onfocus>
+					<onfocus>SetProperty($PARAM[property].path,$PARAM[path],home)</onfocus>
+					<onfocus>Skin.SetString($PARAM[property].type,$PARAM[type])</onfocus>
+					<onleft>$PARAM[onleft]</onleft>
+					<onright>$PARAM[onright]</onright>
+					<onup>9000</onup>
+					<ondown condition="String.IsEqual(Skin.String($PARAM[property].type),landscape)">$PARAM[ondown_landscape]</ondown>
+					<ondown condition="String.IsEqual(Skin.String($PARAM[property].type),landscapeinfo)">$PARAM[ondown_landscapeinfo]</ondown>
+					<ondown condition="String.IsEqual(Skin.String($PARAM[property].type),walll)">$PARAM[ondown_walll]</ondown>
+					<ondown condition="String.IsEqual(Skin.String($PARAM[property].type),wallp)">$PARAM[ondown_wallp]</ondown>
+					<ondown>$PARAM[ondown_default]</ondown>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>43</top>
+					<right>0</right>
+					<height>3</height>
+					<texture colordiffuse="accent_color">colors/white.png</texture>
+					<visible>$PARAM[indicator_visible]</visible>
+				</control>
+			</control>
+		</definition>
+	</include>
+
+	<include name="SpotlightSimpleTab">
+		<definition>
+			<control type="group">
+				<width>$PARAM[width]</width>
+				<height>50</height>
+				<defaultcontrol>$PARAM[id]</defaultcontrol>
+				<control type="button" id="$PARAM[id]">
+					<left>0</left>
+					<top>0</top>
+					<width>$PARAM[width]</width>
+					<height>40</height>
+					<label>$PARAM[label]</label>
+					<font>font25_title</font>
+					<textcolor>unfocused_text</textcolor>
+					<focusedcolor>accent_color</focusedcolor>
+					<shadowcolor>text_shadow</shadowcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<texturefocus />
+					<texturenofocus />
+					<onfocus>SetProperty($PARAM[property].tab,$PARAM[tab_num],home)</onfocus>
+					<onfocus>SetProperty($PARAM[property].path,$PARAM[path],home)</onfocus>
+					<onleft>$PARAM[onleft]</onleft>
+					<onright>$PARAM[onright]</onright>
+					<onup>9000</onup>
+					<ondown>$PARAM[ondown]</ondown>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>43</top>
+					<right>0</right>
+					<height>3</height>
+					<texture colordiffuse="accent_color">colors/white.png</texture>
+					<visible>$PARAM[indicator_visible]</visible>
+				</control>
+			</control>
+		</definition>
+	</include>
+
+</includes>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol>9000</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<controls>
+
+		<!-- BACKDROP: close on click outside -->
+		<control type="button">
+			<left>0</left>
+			<top>0</top>
+			<right>0</right>
+			<bottom>0</bottom>
+			<texturefocus />
+			<texturenofocus />
+			<onclick>Action(close)</onclick>
+		</control>
+
+		<!-- ============================================================
+		     OPTIONS PANEL — anchored to right edge of screen
+		     right=40 keeps it 40px from screen edge at any resolution
+		     ============================================================ -->
+		<control type="group">
+			<right>40</right>
+			<top>110</top>
+			<width>580</width>
+			<height>520</height>
+
+			<!-- Panel bg: white rounded rect tinted with skin dialog color -->
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>580</width>
+				<height>520</height>
+				<aspectratio>stretch</aspectratio>
+				<texture colordiffuse="dialog_bg">masks/options-panel-bg.png</texture>
+			</control>
+
+			<!-- ==================== HEADER ==================== -->
+			<control type="label">
+				<left>28</left>
+				<top>0</top>
+				<width>330</width>
+				<height>76</height>
+				<aligny>center</aligny>
+				<font>font37</font>
+				<textcolor>white</textcolor>
+				<label>Options</label>
+			</control>
+			<!-- Close × -->
+			<control type="button" id="10">
+				<right>0</right>
+				<top>0</top>
+				<width>60</width>
+				<height>76</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>font27</font>
+				<textcolor>grey</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<texturefocus colordiffuse="border_alpha">colors/white.png</texturefocus>
+				<texturenofocus />
+				<onclick>Action(close)</onclick>
+				<label>×</label>
+				<ondown>11</ondown>
+			</control>
+
+			<!-- Separator -->
+			<control type="image">
+				<left>20</left>
+				<top>76</top>
+				<right>20</right>
+				<height>1</height>
+				<texture colordiffuse="border_alpha">colors/white.png</texture>
+			</control>
+
+			<!-- ==================== DASHBOARD GRID ==================== -->
+
+			<!-- LEFT CARD: Day + Date
+			     dialog-bg-squareish.png is white rounded rect — tinted with dialog_bg2 -->
+			<control type="image">
+				<left>20</left>
+				<top>88</top>
+				<width>370</width>
+				<height>120</height>
+				<aspectratio>stretch</aspectratio>
+				<texture colordiffuse="dialog_bg2" border="40">masks/dialog-bg-squareish.png</texture>
+			</control>
+			<!-- Day of week — bold e.g. Friday -->
+			<control type="label">
+				<left>36</left>
+				<top>96</top>
+				<width>326</width>
+				<height>40</height>
+				<aligny>center</aligny>
+				<font>font32_title</font>
+				<textcolor>white</textcolor>
+				<label>[B]$INFO[System.Date(DDDD)][/B]</label>
+			</control>
+			<!-- Date — formatted e.g. 03 April 2026 -->
+			<control type="label">
+				<left>36</left>
+				<top>142</top>
+				<width>326</width>
+				<height>28</height>
+				<aligny>center</aligny>
+				<font>font10</font>
+				<textcolor>grey</textcolor>
+				<label>$INFO[System.Date(DD MMMM YYYY)]</label>
+			</control>
+
+			<!-- RIGHT CARD: Settings button
+			     button bg: dialog_bg2 (nofocus) / white (focus)
+			     icon renders AFTER button — sits on top of bg texture
+			     label pushed to bottom via textoffsety so icon fits above -->
+			<control type="button" id="11">
+				<left>402</left>
+				<top>88</top>
+				<width>158</width>
+				<height>120</height>
+				<align>center</align>
+				<aligny>top</aligny>
+				<textoffsety>58</textoffsety>
+				<font>font25_title</font>
+				<textcolor>white</textcolor>
+				<focusedcolor>focused_text</focusedcolor>
+				<texturefocus colordiffuse="white" border="40">masks/dialog-bg-squareish.png</texturefocus>
+				<texturenofocus colordiffuse="dialog_bg2" border="40">masks/dialog-bg-squareish.png</texturenofocus>
+				<label>[B]Settings[/B]</label>
+				<onclick>Dialog.Close(all)</onclick>
+				<onclick>ActivateWindow(settings)</onclick>
+				<onup>10</onup>
+				<ondown>9000</ondown>
+			</control>
+			<!-- Settings icon — rendered after button, floats above bg -->
+			<control type="image">
+				<left>463</left>
+				<top>96</top>
+				<width>36</width>
+				<height>36</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="white">icons/settings/system.png</texture>
+			</control>
+
+			<!-- ==================== ITEM LIST ==================== -->
+			<control type="panel" id="9000">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>0</left>
+				<top>224</top>
+				<width>580</width>
+				<bottom>16</bottom>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>11</onup>
+				<ondown>9000</ondown>
+				<orientation>vertical</orientation>
+
+				<!-- Unfocused row: grey icon + grey label -->
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout height="70" width="580">
+					<control type="image">
+						<left>24</left>
+						<top>0</top>
+						<width>32</width>
+						<height>70</height>
+						<aspectratio aligny="center">keep</aspectratio>
+						<texture colordiffuse="grey">$INFO[ListItem.Thumb]</texture>
+					</control>
+					<control type="label">
+						<left>72</left>
+						<top>0</top>
+						<right>20</right>
+						<height>70</height>
+						<aligny>center</aligny>
+						<font>font13</font>
+						<textcolor>grey</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</itemlayout>
+
+				<!-- Focused row: white pill (menu.png) + dark icon + dark label -->
+				<focusedlayout height="70" width="580">
+					<!-- Kill default Kodi focus rectangle from Defaults.xml -->
+					<control type="image">
+						<left>0</left>
+						<top>0</top>
+						<width>580</width>
+						<height>70</height>
+						<texture colordiffuse="dialog_bg">colors/black.png</texture>
+					</control>
+					<control type="image">
+						<left>12</left>
+						<top>0</top>
+						<width>556</width>
+						<height>70</height>
+						<aspectratio>stretch</aspectratio>
+						<texture colordiffuse="white" border="12">masks/focus_pill.png</texture>
+					</control>
+					<control type="image">
+						<left>24</left>
+						<top>0</top>
+						<width>32</width>
+						<height>70</height>
+						<aspectratio aligny="center">keep</aspectratio>
+						<texture colordiffuse="focused_text">$INFO[ListItem.Thumb]</texture>
+					</control>
+					<control type="label">
+						<left>72</left>
+						<top>0</top>
+						<right>20</right>
+						<height>70</height>
+						<aligny>center</aligny>
+						<font>font13</font>
+						<textcolor>focused_text</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</focusedlayout>
+
+				<content>
+					<!-- DEFAULT ON — hidden via !Skin.HasSetting(PowerMenuHideX) so they show without any saved setting -->
+					<item>
+						<label>Favourites</label>
+						<thumb>icons/favourites.png</thumb>
+						<onclick>Dialog.Close(all)</onclick>
+						<onclick>ActivateWindow(Favourites)</onclick>
+						<visible>!Skin.HasSetting(PowerMenuHideFavourites)</visible>
+					</item>
+					<item>
+						<label>Add-ons</label>
+						<thumb>icons/settings/addons.png</thumb>
+						<onclick>Dialog.Close(all)</onclick>
+						<onclick>ActivateWindow(AddonBrowser)</onclick>
+						<visible>!Skin.HasSetting(PowerMenuHideAddons)</visible>
+					</item>
+					<item>
+						<label>Reload skin</label>
+						<thumb>icons/settings/skin.png</thumb>
+						<onclick>Dialog.Close(all)</onclick>
+						<onclick>ReloadSkin()</onclick>
+						<visible>!Skin.HasSetting(PowerMenuHideReloadSkin)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13012]</label>
+						<thumb>icons/power.png</thumb>
+						<onclick>Quit()</onclick>
+						<visible>!Skin.HasSetting(PowerMenuHideQuit) + System.ShowExitButton</visible>
+					</item>
+					<!-- DEFAULT OFF — shown only when Skin.HasSetting(PowerMenuX) is enabled -->
+					<item>
+						<label>Search</label>
+						<thumb>icons/search.png</thumb>
+						<onclick>Dialog.Close(all)</onclick>
+						<onclick>ActivateWindow(Custom_1107_SearchDialog)</onclick>
+						<visible>Skin.HasSetting(PowerMenuSearch)</visible>
+					</item>
+					<item>
+						<label>File manager</label>
+						<thumb>icons/settings/filemanager.png</thumb>
+						<onclick>Dialog.Close(all)</onclick>
+						<onclick>ActivateWindow(FileManager)</onclick>
+						<visible>Skin.HasSetting(PowerMenuFileManager)</visible>
+					</item>
+					<item>
+						<label>Switch user</label>
+						<thumb>icons/settings/profiles.png</thumb>
+						<onclick>Dialog.Close(all,true)</onclick>
+						<onclick>System.LogOff</onclick>
+						<visible>Skin.HasSetting(PowerMenuSwitchUser) + [System.HasLoginScreen | Integer.IsGreater(System.ProfileCount,1)] + System.Loggedon</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13016]</label>
+						<thumb>icons/power.png</thumb>
+						<onclick>Powerdown()</onclick>
+						<visible>Skin.HasSetting(PowerMenuPowerDown) + System.CanPowerDown</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13011]</label>
+						<thumb>icons/infodialogs/timer.png</thumb>
+						<onclick>Suspend()</onclick>
+						<visible>Skin.HasSetting(PowerMenuSuspend) + System.CanSuspend</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13010]</label>
+						<thumb>icons/power.png</thumb>
+						<onclick>Hibernate()</onclick>
+						<visible>Skin.HasSetting(PowerMenuHibernate) + System.CanHibernate</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13013]</label>
+						<thumb>icons/settings/system.png</thumb>
+						<onclick>Reset()</onclick>
+						<visible>Skin.HasSetting(PowerMenuReboot) + System.CanReboot</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[20150]</label>
+						<thumb>icons/infodialogs/timer.png</thumb>
+						<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
+						<visible>Skin.HasSetting(PowerMenuShutdownTimer) + !System.HasAlarm(shutdowntimer) + [System.CanPowerDown | System.CanSuspend | System.CanHibernate]</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[20151] $INFO[System.AlarmPos,(,)]</label>
+						<thumb>icons/infodialogs/timer.png</thumb>
+						<onclick>CancelAlarm(shutdowntimer)</onclick>
+						<visible>System.HasAlarm(shutdowntimer)</visible>
+					</item>
+					<item>
+						<label>$VAR[MasterModeLabel]</label>
+						<thumb>icons/settings/system.png</thumb>
+						<onclick>mastermode</onclick>
+						<visible>Skin.HasSetting(PowerMenuMasterMode) + System.HasLocks</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13017]</label>
+						<thumb>icons/infodialogs/timer.png</thumb>
+						<onclick>InhibitIdleShutdown(true)</onclick>
+						<visible>Skin.HasSetting(PowerMenuIdleShutdown) + System.HasShutdown + !System.IdleShutdownInhibited</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[13018]</label>
+						<thumb>icons/infodialogs/timer.png</thumb>
+						<onclick>InhibitIdleShutdown(false)</onclick>
+						<visible>Skin.HasSetting(PowerMenuIdleShutdown) + System.HasShutdown + System.IdleShutdownInhibited</visible>
+					</item>
+				</content>
+			</control>
+
+		</control>
+	</controls>
+</window>

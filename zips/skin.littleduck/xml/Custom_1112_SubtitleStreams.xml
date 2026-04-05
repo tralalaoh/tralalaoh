@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Subtitle stream picker — uses script.skinvariables for reliable ISO lang codes -->
+<!-- ListItem.Label = ISO-639-2 code, ListItem.Label2 = full name                  -->
+<!-- ListItem.Property(language) = ISO for flag, ListItem.Property(iscurrent) check -->
+<window type="dialog" id="1112">
+	<defaultcontrol always="true">6001</defaultcontrol>
+	<onload>Dialog.Close(1111)</onload>
+	<controls>
+
+		<!-- Click-to-close background -->
+		<control type="button">
+			<left>0</left>
+			<top>0</top>
+			<width>100%</width>
+			<height>100%</height>
+			<texturefocus />
+			<texturenofocus />
+			<onclick>Action(Close)</onclick>
+		</control>
+
+		<!-- Light screen dimmer — keeps video visible -->
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>100%</width>
+			<height>100%</height>
+			<texture colordiffuse="20000000">colors/black.png</texture>
+			<animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
+		</control>
+
+		<!-- Dialog panel -->
+		<control type="group">
+			<centerleft>50%</centerleft>
+			<centertop>50%</centertop>
+			<width>900</width>
+			<height>680</height>
+			<animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
+
+			<!-- Black semi-transparent panel background -->
+			<control type="image">
+				<texture colordiffuse="CC000000">masks/landscape.png</texture>
+			</control>
+
+			<!-- Header: title -->
+			<control type="label">
+				<left>30</left>
+				<top>0</top>
+				<width>800</width>
+				<height>80</height>
+				<font>font32_title</font>
+				<aligny>center</aligny>
+				<textcolor>unfocused_text</textcolor>
+				<shadowcolor>black</shadowcolor>
+				<label>[B]Subtitles[/B]</label>
+			</control>
+			<!-- Header: subtitle icon -->
+			<control type="image">
+				<right>25</right>
+				<top>22</top>
+				<width>36</width>
+				<height>36</height>
+				<texture colordiffuse="80FFFFFF">osd/fullscreen/buttons/settings-subtitle.png</texture>
+			</control>
+
+			<!-- Gold divider under header -->
+			<control type="image">
+				<left>20</left>
+				<top>80</top>
+				<right>20</right>
+				<height>1</height>
+				<texture colordiffuse="accent_color">colors/white.png</texture>
+			</control>
+
+			<!-- Stream list -->
+			<control type="panel" id="6001">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>0</left>
+				<top>82</top>
+				<width>900</width>
+				<bottom>10</bottom>
+				<orientation>vertical</orientation>
+				<scrolltime tween="sine">200</scrolltime>
+				<content>plugin://script.skinvariables/?info=get_player_streams&amp;stream_type=subtitle&amp;reload=$INFO[Window.Property(UID)]</content>
+				<onclick>RunScript(script.skinvariables,set_player_subtitle=$INFO[ListItem.Property(index)],reload_property=UID)</onclick>
+
+				<!-- ── Unfocused row ── -->
+				<include content="StreamRowLayout">
+					<param name="content_label" value="$INFO[ListItem.Label2]$INFO[ListItem.Property(isforced),  (forced),]$INFO[ListItem.Property(isdefault),  (default),]"/>
+					<param name="panel_id" value="6001"/>
+				</include>
+			</control>
+
+		</control>
+	</controls>
+</window>

@@ -1,0 +1,1509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     Includes_CardLayouts.xml
+	     Reusable building-blocks for list-item card rendering.
+
+	     Includes defined here:
+	       RatingCircle          — circular score badge (top-right of card)
+	       ProgressBar           — thin resume bar at card bottom
+	       WatchedIndicatorCircle — watch-progress ring + checkmark (bottom-right)
+	       ContentStatusBadge   — Live / New / Premiere / Finale / Collection icon (top-left)
+	       PlayingIndicator     — waveform icon while item is currently playing (bottom-left)
+	       FavoriteIndicator    — heart icon when item is in favourites (top-right)
+	       FocusableProgressBar  — focusable seek-style progress bar (views + OSD)
+	       PosterCardLayout      — poster card itemlayout+focusedlayout pair
+	                               (DialogVideoInfo panels: Seasons/Related/Similar/
+	                                Collection/Director/Recommendations)
+	                               Optional: fallback (default DefaultVideoCover.png)
+	                                         label2   (default $INFO[ListItem.Year])
+	       SquareCardLayout      — square card itemlayout+focusedlayout pair
+	                               (cast panels id=50/51 + general use)
+	                               Optional: card_width (300), card_height (340),
+	                                         img_width (280), img_height (280),
+	                                         group_top (6), fallback (DefaultAddon.png),
+	                                         art ($INFO[ListItem.Art(thumb)]),
+	                                         show_labels (true), label1_top (286),
+	                                         label2_top (314), show_progress (true),
+	                                         show_watched (true), show_rating (false),
+	                                         panel_id (0), mask (masks/addons.png),
+	                                         bordersize (20)
+	       LandscapeCardLayout   — landscape card itemlayout+focusedlayout pair
+	                               (DialogVideoInfo panels: Videos/6022, Fanart/6024)
+	                               Optional: card_width (560), card_height (380),
+	                                         img_width (540), img_height (304),
+	                                         group_top (4), fallback (DefaultVideo.png),
+	                                         art ($INFO[ListItem.Thumb]),
+	                                         show_labels (true),
+	                                         label1_top (308), label2_top (338)
+	       StreamRowLayout       — audio/subtitle stream list row itemlayout+focusedlayout.
+	                               (Custom_1111_AudioStreams, Custom_1112_SubtitleStreams)
+	                               Required: content_label (codec/channel info string)
+	                                         panel_id     (panel control id for HasFocus)
+	                               Optional: has_cc_badge (default true)
+	═══════════════════════════════════════════════════════════════ -->
+
+	<include name="RatingCircle">
+		<param name="animation">False</param>
+		<param name="label-align">right</param>
+		<param name="label-width">44</param>
+		<definition>
+			<control type="group">
+				<animation effect="fade" time="0" condition="$PARAM[animation]">VisibleChange</animation>
+				<include content="UserRatingContent" condition="Skin.HasSetting(circle_userrating)">
+					<param name="infolabel" value="ListItem.UserRating" />
+					<param name="left" value="$PARAM[left]"/>
+					<param name="top" value="$PARAM[top]"/>
+					<param name="width" value="$PARAM[width]"/>
+					<param name="height" value="$PARAM[height]"/>
+					<param name="label-left" value="$PARAM[label-left]"/>
+					<param name="label-top" value="$PARAM[label-top]"/>
+					<param name="cornerdiffuse" value="$PARAM[cornerdiffuse]"/>
+					<param name="label-align" value="$PARAM[label-align]"/>
+					<param name="label-width" value="$PARAM[label-width]"/>
+				</include>
+				<include content="UserRatingContent" condition="Skin.HasSetting(circle_rating)">
+					<param name="infolabel" value="ListItem.Rating" />
+					<param name="left" value="$PARAM[left]"/>
+					<param name="top" value="$PARAM[top]"/>
+					<param name="width" value="$PARAM[width]"/>
+					<param name="height" value="$PARAM[height]"/>
+					<param name="label-left" value="$PARAM[label-left]"/>
+					<param name="label-top" value="$PARAM[label-top]"/>
+					<param name="cornerdiffuse" value="$PARAM[cornerdiffuse]"/>
+					<param name="label-align" value="$PARAM[label-align]"/>
+					<param name="label-width" value="$PARAM[label-width]"/>
+				</include>
+			</control>
+		</definition>
+	</include>
+
+
+	<include name="ProgressBar">
+		<param name="focused">false</param>
+		<definition>
+			<control type="progress">
+				<left>$PARAM[left]</left>
+				<top>$PARAM[top]</top>
+				<width>$PARAM[width]</width>
+				<height>4</height>
+				<texturebg colordiffuse="bg_overlay" border="12,0,12,0">progress/progress-nib.png</texturebg>
+				<midtexture colordiffuse="accent_color" border="12,0,12,0">progress/progress-nib.png</midtexture>
+				<info>Container($PARAM[id]).ListItem.Property(WatchedProgress)</info>
+				<visible>[String.IsEqual(ListItem.DBtype,movie) + !String.IsEmpty(Container($PARAM[id]).ListItem.Property(WatchedProgress)) + !Integer.IsEqual(Container($PARAM[id]).ListItem.Property(WatchedProgress),0)] | [Integer.IsGreater(Container($PARAM[id]).ListItem.Property(UnwatchedEpisodes),0) + !String.IsEmpty(Container($PARAM[id]).ListItem.Property(WatchedProgress)) + !Integer.IsEqual(Container($PARAM[id]).ListItem.Property(WatchedProgress),0)] | [String.IsEqual(ListItem.DBtype,episode) + !String.IsEmpty(Container($PARAM[id]).ListItem.Property(WatchedProgress)) + !Integer.IsEqual(Container($PARAM[id]).ListItem.Property(WatchedProgress),0)]</visible>
+				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+			</control>
+		</definition>
+	</include>
+
+	<include name="WatchedIndicatorCircle">
+		<!-- Resume: dynamic ring — hidden while actively playing (PlayingIndicator takes over) -->
+		<control type="image">
+			<right>8</right>
+			<bottom>8</bottom>
+			<width>48</width>
+			<height>48</height>
+			<texture colordiffuse="accent_color" diffuse="indicator/circle-diffuse.png">$INFO[ListItem.PercentPlayed,indicator/progress/p,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsResumable + !ListItem.IsPlaying</visible>
+		</control>
+		<!-- Watched: full gold circle — hidden while actively playing -->
+		<control type="image">
+			<right>8</right>
+			<bottom>8</bottom>
+			<width>48</width>
+			<height>48</height>
+			<texture colordiffuse="accent_color" diffuse="indicator/circle-diffuse.png">indicator/progress/p100.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>Integer.IsGreater(ListItem.Playcount,0) + !ListItem.IsResumable + !ListItem.IsPlaying</visible>
+		</control>
+		<!-- Watched: checkmark overlay — hidden while actively playing -->
+		<control type="image">
+			<right>8</right>
+			<bottom>8</bottom>
+			<width>48</width>
+			<height>48</height>
+			<texture colordiffuse="accent_color">indicator/checkmark.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>Integer.IsGreater(ListItem.Playcount,0) + !ListItem.IsResumable + !ListItem.IsPlaying</visible>
+		</control>
+	</include>
+
+	<!-- Content status badge: top-left corner — Live > New > Premiere > Finale > Collection -->
+	<include name="ContentStatusBadge">
+		<!-- LIVE -->
+		<control type="image">
+			<left>8</left>
+			<top>8</top>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="FF4444FF">indicator/live.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsLive</visible>
+		</control>
+		<!-- NEW -->
+		<control type="image">
+			<left>8</left>
+			<top>8</top>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="accent_color">indicator/new.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsNew + !ListItem.IsLive</visible>
+		</control>
+		<!-- PREMIERE -->
+		<control type="image">
+			<left>8</left>
+			<top>8</top>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="accent_color">indicator/premiere.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsPremiere + !ListItem.IsLive + !ListItem.IsNew</visible>
+		</control>
+		<!-- FINALE -->
+		<control type="image">
+			<left>8</left>
+			<top>8</top>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="accent_color">indicator/finale.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsFinale + !ListItem.IsLive + !ListItem.IsNew + !ListItem.IsPremiere</visible>
+		</control>
+		<!-- COLLECTION -->
+		<control type="image">
+			<left>8</left>
+			<top>8</top>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="C8FFFFFF">indicator/collection.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>[ListItem.IsCollection | String.IsEqual(ListItem.Property(tmdb_type),collection)] + !ListItem.IsLive + !ListItem.IsNew + !ListItem.IsPremiere + !ListItem.IsFinale</visible>
+		</control>
+	</include>
+
+	<!-- Playing indicator: bottom-left corner — waveform while item is active -->
+	<include name="PlayingIndicator">
+		<control type="image">
+			<left>8</left>
+			<bottom>8</bottom>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="accent_color">indicator/playing.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsPlaying</visible>
+		</control>
+	</include>
+
+	<!-- Favourite indicator: top-right corner — heart when item is in favourites -->
+	<include name="FavoriteIndicator">
+		<control type="image">
+			<right>8</right>
+			<top>8</top>
+			<width>36</width>
+			<height>36</height>
+			<texture colordiffuse="FFFF69B4">indicator/favorite.png</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<visible>ListItem.IsFavourite | !String.IsEmpty(Window(home).Property(LittleDuck.Fav.$INFO[ListItem.Property(tmdb_id)]))</visible>
+		</control>
+	</include>
+
+	<!-- ══════════════════════════════════════════════════════════════════════
+	     UniversalIndicators
+	     Single dark pill at bottom-right, strictly INSIDE the artwork bounds.
+	     Call inside a <control type="group"> sized to the image dimensions:
+
+	       <control type="group">
+	           <left>X</left><top>Y</top>
+	           <width>IMG_W</width><height>IMG_H</height>
+	           <include>UniversalIndicators</include>
+	       </control>
+
+	     Pill: 110x32px, right=10, bottom=10 → always 10px from every edge.
+	     4 icon slots (18x18), left-to-right:
+	       [Status] [Favorite] [Playing] [Watched ✓ / Progress ring+dot]
+	     Outer group <visible>: pure boolean (no $INFO) — hides pill entirely
+	     when nothing is active. Favorite cross-addon check lives on its icon.
+	     ══════════════════════════════════════════════════════════════════════ -->
+	<include name="UniversalIndicators">
+		<!-- Pill: 134x40  |  Icons: 24x24  |  Top offset: 8px  |  Side pad: 10px  |  Gap: 6px
+		     Slot left edges: status=10  favorite=40  playing=70  watched/ring=100
+		     Progress ring (slot 1, resumable):
+		       Arc  32x32  left=100 top=4  — fills clockwise with % played
+		       Punch 10x10 left=111 top=15 — ring band = 11px (wide, readable)
+		       Dot   6x6   left=113 top=17 — accent_color centre point -->
+		<control type="group">
+			<right>25</right>
+			<bottom>25</bottom>
+			<width>134</width>
+			<height>40</height>
+			<!-- NOTE: $INFO[] must NOT be used in group <visible> inside itemlayout — it silently breaks the condition.
+			     The cross-addon favourite check ($INFO-based) lives only on the heart icon control itself. -->
+			<visible>Integer.IsGreater(ListItem.Playcount,0) | ListItem.IsResumable | ListItem.IsPlaying | ListItem.IsFavourite | ListItem.IsLive | ListItem.IsNew | ListItem.IsPremiere | ListItem.IsFinale | ListItem.IsCollection | String.IsEqual(ListItem.Property(tmdb_type),collection)</visible>
+
+			<!-- Dark pill background -->
+			<control type="image">
+				<left>0</left><top>0</top><width>134</width><height>40</height>
+				<texture colordiffuse="E5121218">indicator/pill.png</texture>
+			</control>
+
+			<!-- ── SLOT 4 (left=10): Content status — highest priority wins ── -->
+			<!-- LIVE (red) -->
+			<control type="image">
+				<left>10</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FF5555FF">indicator/live.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsLive</visible>
+			</control>
+			<!-- NEW -->
+			<control type="image">
+				<left>10</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FFFFFFFF">indicator/new.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsNew + !ListItem.IsLive</visible>
+			</control>
+			<!-- PREMIERE -->
+			<control type="image">
+				<left>10</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FFFFFFFF">indicator/premiere.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsPremiere + !ListItem.IsLive + !ListItem.IsNew</visible>
+			</control>
+			<!-- FINALE -->
+			<control type="image">
+				<left>10</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FFFFFFFF">indicator/finale.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsFinale + !ListItem.IsLive + !ListItem.IsNew + !ListItem.IsPremiere</visible>
+			</control>
+			<!-- COLLECTION -->
+			<control type="image">
+				<left>10</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FFFFFFFF">indicator/collection.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>[ListItem.IsCollection | String.IsEqual(ListItem.Property(tmdb_type),collection)] + !ListItem.IsLive + !ListItem.IsNew + !ListItem.IsPremiere + !ListItem.IsFinale</visible>
+			</control>
+
+			<!-- ── SLOT 3 (left=40): Favorite heart ── -->
+			<control type="image">
+				<left>40</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FFFF69B4">indicator/favorite.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsFavourite | !String.IsEmpty(Window(home).Property(LittleDuck.Fav.$INFO[ListItem.Property(tmdb_id)]))</visible>
+			</control>
+
+			<!-- ── SLOT 2 (left=70): Playing waveform ── -->
+			<control type="image">
+				<left>70</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FFFFFFFF">indicator/playing.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsPlaying</visible>
+			</control>
+
+			<!-- ── SLOT 1 (left=100): Watched checkmark (centred in 32px ring area) ── -->
+			<control type="image">
+				<left>104</left><top>8</top><width>24</width><height>24</height>
+				<texture colordiffuse="FF66BB6A">indicator/checkmark.png</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>Integer.IsGreater(ListItem.Playcount,0) + !ListItem.IsResumable + !ListItem.IsPlaying</visible>
+			</control>
+
+			<!-- ── SLOT 1 (left=100): Radial progress ring 32x32 ── -->
+			<!-- Progress ring: accent_color (gold) -->
+			<control type="image">
+				<left>100</left><top>4</top><width>32</width><height>32</height>
+				<texture colordiffuse="accent_color">$INFO[ListItem.PercentPlayed,indicator/progress/p,.png]</texture>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<visible>ListItem.IsResumable + !ListItem.IsPlaying</visible>
+			</control>
+
+		</control>
+	</include>
+
+	<include name="FocusableProgressBar">
+		<param name="width">100%</param>
+		<param name="onunfocus_id">200</param>
+		<definition>
+			<control type="progress">
+				<animation effect="fade" end="0" time="200">WindowClose</animation>
+				<left>0</left>
+				<width>$PARAM[width]</width>
+				<height>6</height>
+				<info>Player.ProgressCache</info>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+				<midtexture>colors/white50.png</midtexture>
+				<animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
+			</control>
+			<control type="progress" id="23">
+				<animation effect="fade" end="0" time="200">WindowClose</animation>
+				<left>0</left>
+				<width>$PARAM[width]</width>
+				<height>6</height>
+				<info>Player.Progress</info>
+				<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
+				<midtexture colordiffuse="accent_color">colors/white.png</midtexture>
+			</control>
+			<control type="button" id="87">
+				<include>HiddenObject</include>
+				<onup>$PARAM[onunfocus_id]</onup>
+				<onunfocus condition="Player.Forwarding | Player.Rewinding">PlayerControl(Play)</onunfocus>
+				<ondown>$PARAM[onunfocus_id]</ondown>
+				<onright condition="!Player.Forwarding32x">PlayerControl(Forward)</onright>
+				<onleft condition="!Player.Rewinding32x">PlayerControl(Rewind)</onleft>
+				<visible>Player.SeekEnabled</visible>
+				<onclick condition="Player.Forwarding | Player.Rewinding">PlayerControl(Play)</onclick>
+			</control>
+			<control type="slider">
+				<top>-5</top>
+				<left>0</left>
+				<width>$PARAM[width]</width>
+				<height>16</height>
+				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
+				<textureslidernib colordiffuse="accent_color">osd/progress/nub_circle.png</textureslidernib>
+				<textureslidernibfocus colordiffuse="white">osd/progress/nub_circle.png</textureslidernibfocus>
+				<info>Player.Progress</info>
+				<action>seek</action>
+				<visible>!Control.HasFocus(87) + Player.SeekEnabled</visible>
+			</control>
+			<control type="slider">
+				<top>-5</top>
+				<left>0</left>
+				<width>$PARAM[width]</width>
+				<height>16</height>
+				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
+				<textureslidernib colordiffuse="accent_color">osd/progress/nub_circle.png</textureslidernib>
+				<textureslidernibfocus colordiffuse="white">osd/progress/nub_circle.png</textureslidernibfocus>
+				<info>Player.Progress</info>
+				<action>seek</action>
+				<visible>Control.HasFocus(87) + Player.SeekEnabled</visible>
+			</control>
+		</definition>
+	</include>
+
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     PosterCardLayout — poster card itemlayout+focusedlayout pair.
+	     Used by DialogVideoInfo panels: Seasons (6015), Related (6027),
+	     Similar (6020), Collection (6025), Director (6026), Reco (6021),
+	     Cast (id=50/51).
+	     Optional: fallback    (default DefaultVideoCover.png)
+	               label2     (default $INFO[ListItem.Year])
+	               img_width  (default 230)   img_height (default 345)
+	               show_progress (default true)  show_watched (default true)
+	               show_rating   (default false)  panel_id (default 0)
+	               art        (default $INFO[ListItem.Art(poster)])
+	               card_width (default 250)   card_height (default 420)
+	               label1_top (default 349)   label2_top  (default 373)
+	               label_width (default 240)
+	═══════════════════════════════════════════════════════════════ -->
+	<include name="PosterCardLayout">
+		<param name="fallback">DefaultVideoCover.png</param>
+		<param name="label2">$INFO[ListItem.Year]</param>
+		<param name="img_width">230</param>
+		<param name="img_height">345</param>
+		<param name="show_progress">true</param>
+		<param name="show_watched">true</param>
+		<param name="show_rating">false</param>
+		<param name="panel_id">0</param>
+		<param name="art">$INFO[ListItem.Art(poster)]</param>
+		<param name="card_width">250</param>
+		<param name="card_height">420</param>
+		<param name="label1_top">349</param>
+		<param name="label2_top">373</param>
+		<param name="label_width">240</param>
+		<!-- group_top: space above images; must be ≥ |frame_top| for the overflow frame to stay in-bounds -->
+		<param name="group_top">8</param>
+		<!-- frame_* override the focus frame size/pos so it overflows the image on all sides -->
+		<param name="frame_left">2</param>
+		<param name="frame_top">-8</param>
+		<param name="frame_width">246</param>
+		<param name="frame_height">361</param>
+		<definition>
+			<itemlayout height="$PARAM[card_height]" width="$PARAM[card_width]">
+				<control type="group">
+					<top>$PARAM[group_top]</top>
+					<!-- Unfocused border overlay -->
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture colordiffuse="button_focus2">masks/poster.png</texture>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="masks/poster.png">$PARAM[fallback]</texture>
+						<aspectratio aligny="center">stretch</aspectratio>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="masks/poster.png" background="true">$PARAM[art]</texture>
+						<aspectratio aligny="center">stretch</aspectratio>
+					</control>
+					<control type="label">
+						<left>6</left>
+						<width>$PARAM[label_width]</width>
+						<height>28</height>
+						<top>$PARAM[label1_top]</top>
+						<align>center</align>
+						<font>font12</font>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>6</left>
+						<width>$PARAM[label_width]</width>
+						<height>22</height>
+						<top>$PARAM[label2_top]</top>
+						<align>center</align>
+						<font>font12</font>
+						<textcolor>grey</textcolor>
+						<label>$PARAM[label2]</label>
+					</control>
+				</control>
+					<!-- Progress bar -->
+					<control type="group">
+						<visible>$PARAM[show_progress]</visible>
+						<include content="ProgressBar">
+							<param name="left" value="10" />
+							<param name="top" value="$PARAM[img_height]" />
+							<param name="width" value="$PARAM[img_width]" />
+							<param name="id" value="$PARAM[panel_id]" />
+						</include>
+					</control>
+					<!-- Watched indicator - wrapper group sized to image so right=8,bottom=8 lands at image corner -->
+					<control type="group">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<visible>$PARAM[show_watched]</visible>
+						<include>UniversalIndicators</include>
+					</control>
+					<!-- Rating circle - top-right of image -->
+					<control type="group">
+						<right>14</right>
+						<top>4</top>
+						<visible>$PARAM[show_rating]</visible>
+						<include content="RatingCircle">
+							<param name="left" value="0" />
+							<param name="top" value="0" />
+							<param name="width" value="56" />
+							<param name="height" value="56" />
+							<param name="label-left" value="0" />
+							<param name="label-top" value="18" />
+							<param name="label-align" value="center" />
+							<param name="label-width" value="56" />
+						</include>
+					</control>
+			</itemlayout>
+			<focusedlayout height="$PARAM[card_height]" width="$PARAM[card_width]">
+				<control type="group">
+					<top>$PARAM[group_top]</top>
+					<!-- Focused border frame — overflows the image so it stays visible after FocusBounce settles -->
+					<control type="image">
+						<left>$PARAM[frame_left]</left>
+						<top>$PARAM[frame_top]</top>
+						<width>$PARAM[frame_width]</width>
+						<height>$PARAM[frame_height]</height>
+						<include>FocusBounce</include>
+						<texture colordiffuse="button_focus">masks/poster.png</texture>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="masks/poster.png">$PARAM[fallback]</texture>
+						<aspectratio aligny="center">stretch</aspectratio>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="masks/poster.png" background="true">$PARAM[art]</texture>
+						<aspectratio aligny="center">stretch</aspectratio>
+					</control>
+					<control type="label">
+						<left>6</left>
+						<width>$PARAM[label_width]</width>
+						<height>28</height>
+						<top>$PARAM[label1_top]</top>
+						<align>center</align>
+						<font>font12</font>
+						<textcolor>accent_color</textcolor>
+						<scroll>true</scroll>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>6</left>
+						<width>$PARAM[label_width]</width>
+						<height>22</height>
+						<top>$PARAM[label2_top]</top>
+						<align>center</align>
+						<font>font12</font>
+						<textcolor>grey</textcolor>
+						<label>$PARAM[label2]</label>
+					</control>
+				</control>
+					<!-- Progress bar -->
+					<control type="group">
+						<visible>$PARAM[show_progress]</visible>
+						<include content="ProgressBar">
+							<param name="left" value="10" />
+							<param name="top" value="$PARAM[img_height]" />
+							<param name="width" value="$PARAM[img_width]" />
+							<param name="id" value="$PARAM[panel_id]" />
+							<param name="focused" value="true" />
+						</include>
+					</control>
+					<!-- Watched indicator - wrapper group sized to image so right=8,bottom=8 lands at image corner -->
+					<control type="group">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<visible>$PARAM[show_watched]</visible>
+						<include>UniversalIndicators</include>
+					</control>
+					<!-- Rating circle - top-right of image -->
+					<control type="group">
+						<right>14</right>
+						<top>4</top>
+						<visible>$PARAM[show_rating]</visible>
+						<include content="RatingCircle">
+							<param name="left" value="0" />
+							<param name="top" value="0" />
+							<param name="width" value="56" />
+							<param name="height" value="56" />
+							<param name="label-left" value="0" />
+							<param name="label-top" value="18" />
+							<param name="label-align" value="center" />
+							<param name="label-width" value="56" />
+						</include>
+					</control>
+			</focusedlayout>
+		</definition>
+	</include>
+
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     LandscapeCardLayout — landscape card itemlayout+focusedlayout pair.
+	     Used by DialogVideoInfo panels: Videos (6022), Fanart (6024).
+	     Optional: card_width  (default 560)    card_height (default 380)
+	               img_width   (default 540)    img_height  (default 304)
+	               group_top   (default 4)
+	               fallback    (default DefaultVideo.png)
+	               art         (default $INFO[ListItem.Thumb])
+	               show_labels (default true)
+	               label1_top  (default 308)    label2_top  (default 338)
+	═══════════════════════════════════════════════════════════════ -->
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     SquareCardLayout — square card itemlayout+focusedlayout pair.
+	     Also used for actor cards (pass mask=masks/poster.png, bordersize=0).
+	     Images render as plain rectangles; mask shapes the overlay+frame only.
+	     Optional: card_width  (default 300)   card_height (default 340)
+	               img_width   (default 280)   img_height  (default 280)
+	               group_top   (default 6)
+	               fallback    (default DefaultAddon.png)
+	               art         (default $INFO[ListItem.Art(thumb)])
+	               show_labels (default true)
+	               label1_top  (default 286)   label2_top  (default 314)
+	               show_progress (default true)  show_watched (default true)
+	               show_rating   (default false)  panel_id (default 0)
+	               mask        (default masks/addons.png) — overlay/frame shape
+	               bordersize  (default 20) — set 0 for poster/landscape masks
+	═══════════════════════════════════════════════════════════════ -->
+	<include name="SquareCardLayout">
+		<param name="card_width">300</param>
+		<param name="card_height">340</param>
+		<param name="img_width">280</param>
+		<param name="img_height">280</param>
+		<param name="group_top">6</param>
+		<param name="fallback">DefaultAddon.png</param>
+		<param name="art">$INFO[ListItem.Art(thumb)]</param>
+		<param name="show_labels">true</param>
+		<param name="label1_top">286</param>
+		<param name="label2_top">314</param>
+		<param name="show_progress">true</param>
+		<param name="show_watched">true</param>
+		<param name="show_rating">false</param>
+		<param name="panel_id">0</param>
+		<param name="mask">masks/addons.png</param>
+		<param name="bordersize">20</param>
+		<definition>
+			<itemlayout height="$PARAM[card_height]" width="$PARAM[card_width]">
+				<control type="group">
+					<top>$PARAM[group_top]</top>
+					<!-- Unfocused border overlay -->
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture colordiffuse="button_focus2">$PARAM[mask]</texture>
+						<bordersize>$PARAM[bordersize]</bordersize>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture fallback="$PARAM[fallback]">$PARAM[fallback]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+						<bordersize>$PARAM[bordersize]</bordersize>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture background="true">$PARAM[art]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+						<bordersize>$PARAM[bordersize]</bordersize>
+					</control>
+					<control type="group">
+						<visible>$PARAM[show_labels]</visible>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>26</height>
+							<top>$PARAM[label1_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>20</height>
+							<top>$PARAM[label2_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<textcolor>grey</textcolor>
+							<label>$INFO[ListItem.Label2]</label>
+						</control>
+					</control>
+				</control>
+					<!-- Progress bar -->
+					<control type="group">
+						<visible>$PARAM[show_progress]</visible>
+						<include content="ProgressBar">
+							<param name="left" value="10" />
+							<param name="top" value="$PARAM[img_height]" />
+							<param name="width" value="$PARAM[img_width]" />
+							<param name="id" value="$PARAM[panel_id]" />
+						</include>
+					</control>
+					<!-- Watched indicator - wrapper group sized to image area -->
+					<control type="group">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<visible>$PARAM[show_watched]</visible>
+						<include>UniversalIndicators</include>
+					</control>
+					<!-- Rating circle - top-right of image -->
+					<control type="group">
+						<right>14</right>
+						<top>4</top>
+						<visible>$PARAM[show_rating]</visible>
+						<include content="RatingCircle">
+							<param name="left" value="0" />
+							<param name="top" value="0" />
+							<param name="width" value="56" />
+							<param name="height" value="56" />
+							<param name="label-left" value="0" />
+							<param name="label-top" value="18" />
+							<param name="label-align" value="center" />
+							<param name="label-width" value="56" />
+						</include>
+					</control>
+			</itemlayout>
+			<focusedlayout height="$PARAM[card_height]" width="$PARAM[card_width]">
+				<control type="group">
+					<top>$PARAM[group_top]</top>
+					<!-- Focused border frame -->
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<include>FocusBounce</include>
+						<texture colordiffuse="button_focus">$PARAM[mask]</texture>
+						<bordersize>$PARAM[bordersize]</bordersize>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture fallback="$PARAM[fallback]">$PARAM[fallback]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+						<bordersize>$PARAM[bordersize]</bordersize>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture background="true">$PARAM[art]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+						<bordersize>$PARAM[bordersize]</bordersize>
+					</control>
+					<control type="group">
+						<visible>$PARAM[show_labels]</visible>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>26</height>
+							<top>$PARAM[label1_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<textcolor>accent_color</textcolor>
+							<scroll>true</scroll>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>20</height>
+							<top>$PARAM[label2_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<textcolor>grey</textcolor>
+							<label>$INFO[ListItem.Label2]</label>
+						</control>
+					</control>
+				</control>
+					<!-- Progress bar -->
+					<control type="group">
+						<visible>$PARAM[show_progress]</visible>
+						<include content="ProgressBar">
+							<param name="left" value="10" />
+							<param name="top" value="$PARAM[img_height]" />
+							<param name="width" value="$PARAM[img_width]" />
+							<param name="id" value="$PARAM[panel_id]" />
+							<param name="focused" value="true" />
+						</include>
+					</control>
+					<!-- Watched indicator - wrapper group sized to image area -->
+					<control type="group">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<visible>$PARAM[show_watched]</visible>
+						<include>UniversalIndicators</include>
+					</control>
+					<!-- Rating circle - top-right of image -->
+					<control type="group">
+						<right>14</right>
+						<top>4</top>
+						<visible>$PARAM[show_rating]</visible>
+						<include content="RatingCircle">
+							<param name="left" value="0" />
+							<param name="top" value="0" />
+							<param name="width" value="56" />
+							<param name="height" value="56" />
+							<param name="label-left" value="0" />
+							<param name="label-top" value="18" />
+							<param name="label-align" value="center" />
+							<param name="label-width" value="56" />
+						</include>
+					</control>
+			</focusedlayout>
+		</definition>
+	</include>
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     LandscapeCardLayout — landscape card itemlayout+focusedlayout pair.
+	     Used by DialogVideoInfo panels: Videos (6022), Fanart (6024).
+	     Optional: card_width  (default 560)    card_height (default 380)
+	               img_width   (default 540)    img_height  (default 304)
+	               group_top   (default 4)
+	               fallback    (default DefaultVideo.png)
+	               art         (default $INFO[ListItem.Thumb])
+	               show_labels (default true)
+	               label1_top  (default 308)    label2_top  (default 338)
+	═══════════════════════════════════════════════════════════════ -->
+	<include name="LandscapeCardLayout">
+		<param name="card_width">560</param>
+		<param name="card_height">380</param>
+		<param name="img_width">540</param>
+		<param name="img_height">304</param>
+		<param name="group_top">4</param>
+		<param name="fallback">DefaultVideo.png</param>
+		<param name="art">$INFO[ListItem.Thumb]</param>
+		<param name="show_labels">true</param>
+		<param name="label1_top">308</param>
+		<param name="label2_top">338</param>
+		<param name="show_progress">true</param>
+		<param name="show_watched">true</param>
+		<param name="show_rating">false</param>
+		<param name="panel_id">0</param>
+		<!-- mask: diffuse texture applied to images to round corners; pass "" to disable -->
+		<param name="mask">masks/landscape.png</param>
+		<!-- focus frame override: default = same as image area; pass negative top/oversized width to overwhelm the image -->
+		<param name="frame_left">10</param>
+		<param name="frame_top">0</param>
+		<param name="frame_width">540</param>
+		<param name="frame_height">304</param>
+		<definition>
+			<itemlayout height="$PARAM[card_height]" width="$PARAM[card_width]">
+				<control type="group">
+					<top>$PARAM[group_top]</top>
+					<!-- Unfocused border overlay -->
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture colordiffuse="button_focus2">masks/landscape.png</texture>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="$PARAM[mask]">$PARAM[fallback]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="$PARAM[mask]" background="true">$PARAM[art]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+					</control>
+					<control type="group">
+						<visible>$PARAM[show_labels]</visible>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>26</height>
+							<top>$PARAM[label1_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>20</height>
+							<top>$PARAM[label2_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<textcolor>grey</textcolor>
+							<label>$INFO[ListItem.Label2]</label>
+						</control>
+					</control>
+				</control>
+					<!-- Progress bar -->
+					<control type="group">
+						<visible>$PARAM[show_progress]</visible>
+						<include content="ProgressBar">
+							<param name="left" value="10" />
+							<param name="top" value="$PARAM[img_height]" />
+							<param name="width" value="$PARAM[img_width]" />
+							<param name="id" value="$PARAM[panel_id]" />
+						</include>
+					</control>
+					<!-- Watched indicator - wrapper group sized to image area -->
+					<control type="group">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<visible>$PARAM[show_watched]</visible>
+						<include>UniversalIndicators</include>
+					</control>
+					<!-- Rating circle - top-right of image -->
+					<control type="group">
+						<right>14</right>
+						<top>4</top>
+						<visible>$PARAM[show_rating]</visible>
+						<include content="RatingCircle">
+							<param name="left" value="0" />
+							<param name="top" value="0" />
+							<param name="width" value="56" />
+							<param name="height" value="56" />
+							<param name="label-left" value="0" />
+							<param name="label-top" value="18" />
+							<param name="label-align" value="center" />
+							<param name="label-width" value="56" />
+						</include>
+					</control>
+			</itemlayout>
+			<focusedlayout height="$PARAM[card_height]" width="$PARAM[card_width]">
+				<control type="group">
+					<top>$PARAM[group_top]</top>
+					<!-- Focused border frame — use frame_* params to extend beyond the image -->
+					<control type="image">
+						<left>$PARAM[frame_left]</left>
+						<top>$PARAM[frame_top]</top>
+						<width>$PARAM[frame_width]</width>
+						<height>$PARAM[frame_height]</height>
+						<include>FocusBounce</include>
+						<texture colordiffuse="button_focus">masks/landscape.png</texture>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="$PARAM[mask]">$PARAM[fallback]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<texture diffuse="$PARAM[mask]" background="true">$PARAM[art]</texture>
+						<aspectratio aligny="center">keep</aspectratio>
+					</control>
+					<control type="group">
+						<visible>$PARAM[show_labels]</visible>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>26</height>
+							<top>$PARAM[label1_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<textcolor>accent_color</textcolor>
+							<scroll>true</scroll>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+						<control type="label">
+							<left>10</left>
+							<width>$PARAM[img_width]</width>
+							<height>20</height>
+							<top>$PARAM[label2_top]</top>
+							<align>center</align>
+							<font>font12</font>
+							<textcolor>grey</textcolor>
+							<label>$INFO[ListItem.Label2]</label>
+						</control>
+					</control>
+				</control>
+					<!-- Progress bar -->
+					<control type="group">
+						<visible>$PARAM[show_progress]</visible>
+						<include content="ProgressBar">
+							<param name="left" value="10" />
+							<param name="top" value="$PARAM[img_height]" />
+							<param name="width" value="$PARAM[img_width]" />
+							<param name="id" value="$PARAM[panel_id]" />
+							<param name="focused" value="true" />
+						</include>
+					</control>
+					<!-- Watched indicator - wrapper group sized to image area -->
+					<control type="group">
+						<left>10</left>
+						<top>0</top>
+						<width>$PARAM[img_width]</width>
+						<height>$PARAM[img_height]</height>
+						<visible>$PARAM[show_watched]</visible>
+						<include>UniversalIndicators</include>
+					</control>
+					<!-- Rating circle - top-right of image -->
+					<control type="group">
+						<right>14</right>
+						<top>4</top>
+						<visible>$PARAM[show_rating]</visible>
+						<include content="RatingCircle">
+							<param name="left" value="0" />
+							<param name="top" value="0" />
+							<param name="width" value="56" />
+							<param name="height" value="56" />
+							<param name="label-left" value="0" />
+							<param name="label-top" value="18" />
+							<param name="label-align" value="center" />
+							<param name="label-width" value="56" />
+						</include>
+					</control>
+			</focusedlayout>
+		</definition>
+	</include>
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     StreamRowLayout — audio/subtitle stream list row.
+	     Used by Custom_1111_AudioStreams.xml and Custom_1112_SubtitleStreams.xml.
+	     Required: content_label (codec/channel info string)
+	               panel_id     (panel control id, for Control.HasFocus())
+	     Optional: has_cc_badge (default true) — show/hide CC impaired badge
+	═══════════════════════════════════════════════════════════════ -->
+	<include name="StreamRowLayout">
+		<param name="has_cc_badge">true</param>
+		<definition>
+			<itemlayout width="900" height="90">
+				<control type="image">
+					<left>20</left>
+					<top>89</top>
+					<right>20</right>
+					<height>1</height>
+					<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+				</control>
+				<control type="label">
+					<left>25</left>
+					<top>0</top>
+					<width>80</width>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>unfocused_text</textcolor>
+					<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+				</control>
+				<control type="label">
+					<left>110</left>
+					<top>0</top>
+					<width>18</width>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>grey</textcolor>
+					<label>|</label>
+				</control>
+				<control type="label">
+					<left>135</left>
+					<top>0</top>
+					<right>210</right>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>unfocused_text</textcolor>
+					<label>$PARAM[content_label]</label>
+				</control>
+				<control type="group">
+					<visible>$PARAM[has_cc_badge]</visible>
+					<control type="image">
+						<right>165</right>
+						<top>29</top>
+						<width>46</width>
+						<height>30</height>
+						<texture colordiffuse="50FFFFFF">flags/color/language/scc.png</texture>
+						<aspectratio>keep</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Property(isimpaired))</visible>
+					</control>
+				</control>
+				<control type="image">
+					<right>110</right>
+					<top>27</top>
+					<width>36</width>
+					<height>36</height>
+					<texture colordiffuse="50FFFFFF">lists/circle-fo.png</texture>
+					<visible>String.IsEmpty(ListItem.Property(iscurrent))</visible>
+				</control>
+				<control type="image">
+					<right>110</right>
+					<top>27</top>
+					<width>36</width>
+					<height>36</height>
+					<texture colordiffuse="accent_color">indicator/checkmark.png</texture>
+					<visible>!String.IsEmpty(ListItem.Property(iscurrent))</visible>
+				</control>
+				<control type="image">
+					<right>20</right>
+					<top>18</top>
+					<width>80</width>
+					<height>54</height>
+					<texture colordiffuse="B0FFFFFF">$INFO[ListItem.Property(language),flags/color/language/,.png]</texture>
+					<aspectratio>keep</aspectratio>
+				</control>
+			</itemlayout>
+			<focusedlayout width="900" height="90">
+				<control type="image">
+					<left>0</left>
+					<top>5</top>
+					<width>4</width>
+					<height>80</height>
+					<texture colordiffuse="accent_color">colors/white.png</texture>
+					<visible>Control.HasFocus($PARAM[panel_id])</visible>
+				</control>
+				<control type="image">
+					<left>4</left>
+					<top>0</top>
+					<right>0</right>
+					<height>90</height>
+					<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+					<visible>Control.HasFocus($PARAM[panel_id])</visible>
+				</control>
+				<control type="image">
+					<left>20</left>
+					<top>89</top>
+					<right>20</right>
+					<height>1</height>
+					<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+				</control>
+				<control type="label">
+					<left>25</left>
+					<top>0</top>
+					<width>80</width>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>accent_color</textcolor>
+					<label>[B][UPPERCASE]$INFO[ListItem.Label][/UPPERCASE][/B]</label>
+				</control>
+				<control type="label">
+					<left>110</left>
+					<top>0</top>
+					<width>18</width>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>grey</textcolor>
+					<label>|</label>
+				</control>
+				<control type="label">
+					<left>135</left>
+					<top>0</top>
+					<right>210</right>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>font14</font>
+					<textcolor>unfocused_text</textcolor>
+					<label>$PARAM[content_label]</label>
+				</control>
+				<control type="group">
+					<visible>$PARAM[has_cc_badge]</visible>
+					<control type="image">
+						<right>165</right>
+						<top>29</top>
+						<width>46</width>
+						<height>30</height>
+						<texture colordiffuse="90FFFFFF">flags/color/language/scc.png</texture>
+						<aspectratio>keep</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Property(isimpaired))</visible>
+					</control>
+				</control>
+				<control type="image">
+					<right>110</right>
+					<top>27</top>
+					<width>36</width>
+					<height>36</height>
+					<texture colordiffuse="90FFFFFF">lists/circle-fo.png</texture>
+					<visible>String.IsEmpty(ListItem.Property(iscurrent))</visible>
+				</control>
+				<control type="image">
+					<right>110</right>
+					<top>27</top>
+					<width>36</width>
+					<height>36</height>
+					<texture colordiffuse="accent_color">indicator/checkmark.png</texture>
+					<visible>!String.IsEmpty(ListItem.Property(iscurrent))</visible>
+				</control>
+				<control type="image">
+					<right>20</right>
+					<top>18</top>
+					<width>80</width>
+					<height>54</height>
+					<texture>$INFO[ListItem.Property(language),flags/color/language/,.png]</texture>
+					<aspectratio>keep</aspectratio>
+				</control>
+			</focusedlayout>
+		</definition>
+	</include>
+
+	<!-- ═══════════════════════════════════════════════════════════════
+	     Row View card building blocks
+	     Each include renders a single card (unfocused or focused) for
+	     the horizontal row views. Call with focused=false in itemlayout
+	     and focused=true inside a depth group in focusedlayout.
+
+	       SquareRowCard    — 300×360 slot, 280×280 icon  (View_507)
+	       LandscapeRowCard — 390×290 slot, 380×214 art   (View_510)
+	       PosterRowCard    — 244×406 slot, 220×330 poster (View_511)
+	═══════════════════════════════════════════════════════════════ -->
+
+	<include name="SquareRowCard">
+		<param name="focused">false</param>
+		<definition>
+			<!-- Gold focus border -->
+			<control type="image">
+				<include>FocusBounce</include>
+				<left>6</left>
+				<top>6</top>
+				<width>288</width>
+				<height>288</height>
+				<texture diffuse="masks/addons.png" colordiffuse="button_focus">colors/grey.png</texture>
+				<bordersize>19</bordersize>
+				<visible>$PARAM[focused]</visible>
+				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+			</control>
+			<!-- Card background: dimmer when focused -->
+			<control type="image">
+				<left>10</left>
+				<top>10</top>
+				<width>280</width>
+				<height>280</height>
+				<texture diffuse="masks/addons.png" colordiffuse="button_focus2">dialogs/dialog-bg-nobo.png</texture>
+				<bordersize>20</bordersize>
+				<visible>!$PARAM[focused]</visible>
+			</control>
+			<control type="image">
+				<left>10</left>
+				<top>10</top>
+				<width>280</width>
+				<height>280</height>
+				<texture diffuse="masks/addons.png" colordiffuse="dialog_bg">dialogs/dialog-bg-nobo.png</texture>
+				<bordersize>20</bordersize>
+				<visible>$PARAM[focused]</visible>
+			</control>
+			<!-- Addon icon -->
+			<control type="image">
+				<left>10</left>
+				<top>10</top>
+				<width>280</width>
+				<height>280</height>
+				<texture diffuse="masks/addons.png" fallback="DefaultAddon.png" background="true">$VAR[InfoWallThumbVar]</texture>
+				<aspectratio>keep</aspectratio>
+				<bordersize>20</bordersize>
+			</control>
+			<!-- Progress bar -->
+			<control type="progress">
+				<left>10</left>
+				<top>288</top>
+				<width>280</width>
+				<height>3</height>
+				<texturebg colordiffuse="00000000">colors/black.png</texturebg>
+				<midtexture colordiffuse="accent_color" border="12,0,12,0">progress/progress-nib.png</midtexture>
+				<info>ListItem.PercentPlayed</info>
+				<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+			</control>
+			<!-- Indicator group — sized to image so badges land at image corners -->
+			<control type="group">
+				<left>10</left>
+				<top>10</top>
+				<width>280</width>
+				<height>280</height>
+				<include>UniversalIndicators</include>
+			</control>
+			<!-- Label: unfocused_text / accent_color when focused -->
+			<control type="textbox">
+				<left>10</left>
+				<top>298</top>
+				<width>280</width>
+				<height>70</height>
+				<font>font10</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<textcolor>unfocused_text</textcolor>
+				<visible>!$PARAM[focused]</visible>
+			</control>
+			<control type="textbox">
+				<include>FocusBounce</include>
+				<left>10</left>
+				<top>298</top>
+				<width>280</width>
+				<height>70</height>
+				<font>font10</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<textcolor>accent_color</textcolor>
+				<visible>$PARAM[focused]</visible>
+			</control>
+		</definition>
+	</include>
+
+	<include name="LandscapeRowCard">
+		<param name="focused">false</param>
+		<definition>
+			<!-- Drop shadow: slightly deeper when focused -->
+			<control type="image">
+				<left>7</left>
+				<top>9</top>
+				<width>380</width>
+				<height>214</height>
+				<colordiffuse>55000000</colordiffuse>
+				<bordertexture border="20">overlays/shadow.png</bordertexture>
+				<bordersize>20</bordersize>
+				<visible>!$PARAM[focused]</visible>
+			</control>
+			<control type="image">
+				<left>7</left>
+				<top>9</top>
+				<width>380</width>
+				<height>214</height>
+				<colordiffuse>65000000</colordiffuse>
+				<bordertexture border="20">overlays/shadow.png</bordertexture>
+				<bordersize>20</bordersize>
+				<visible>$PARAM[focused]</visible>
+			</control>
+			<!-- Gold focus border -->
+			<control type="image">
+				<include>FocusBounce</include>
+				<left>1</left>
+				<top>1</top>
+				<width>388</width>
+				<height>222</height>
+				<texture colordiffuse="button_focus">masks/landscape.png</texture>
+				<bordersize>17</bordersize>
+				<visible>$PARAM[focused]</visible>
+				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+			</control>
+			<!-- Artwork -->
+			<control type="image">
+				<left>5</left>
+				<top>5</top>
+				<width>380</width>
+				<height>214</height>
+				<texture diffuse="masks/landscape.png" fallback="DefaultVideo.png" background="true">$VAR[IconWallThumbVar]</texture>
+				<bordersize>17</bordersize>
+			</control>
+			<!-- White inner glow (focused only) -->
+			<control type="image">
+				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+				<left>5</left>
+				<top>5</top>
+				<width>380</width>
+				<height>214</height>
+				<texture colordiffuse="20FFFFFF" diffuse="masks/landscape.png">colors/white.png</texture>
+				<bordersize>17</bordersize>
+				<visible>$PARAM[focused]</visible>
+			</control>
+			<!-- Progress bar -->
+			<control type="progress">
+				<left>5</left>
+				<top>221</top>
+				<width>380</width>
+				<height>3</height>
+				<texturebg colordiffuse="00000000">colors/black.png</texturebg>
+				<midtexture colordiffuse="accent_color" border="12,0,12,0">progress/progress-nib.png</midtexture>
+				<info>ListItem.PercentPlayed</info>
+				<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+			</control>
+			<!-- Indicator group — sized to image so badges land at image corners -->
+			<control type="group">
+				<left>5</left>
+				<top>5</top>
+				<width>380</width>
+				<height>214</height>
+				<include>UniversalIndicators</include>
+			</control>
+			<!-- Label: unfocused_text / accent_color + autoscroll when focused -->
+			<control type="textbox">
+				<left>5</left>
+				<top>230</top>
+				<width>380</width>
+				<height>80</height>
+				<font>font10</font>
+				<align>left</align>
+				<textcolor>unfocused_text</textcolor>
+				<shadowcolor>text_shadow</shadowcolor>
+				<label>$INFO[ListItem.Label]</label>
+				<visible>!$PARAM[focused]</visible>
+			</control>
+			<control type="textbox">
+				<include>FocusBounce</include>
+				<left>5</left>
+				<top>230</top>
+				<width>380</width>
+				<height>80</height>
+				<font>font10</font>
+				<align>left</align>
+				<textcolor>accent_color</textcolor>
+				<shadowcolor>text_shadow</shadowcolor>
+				<label>$INFO[ListItem.Label]</label>
+				<autoscroll time="2000" delay="1500" repeat="2000">true</autoscroll>
+				<visible>$PARAM[focused]</visible>
+			</control>
+		</definition>
+	</include>
+
+	<include name="PosterRowCard">
+		<param name="focused">false</param>
+		<definition>
+			<!-- Unfocused subtle border -->
+			<control type="image">
+				<left>12</left>
+				<top>5</top>
+				<width>220</width>
+				<height>330</height>
+				<texture colordiffuse="button_focus2">masks/poster.png</texture>
+				<visible>!$PARAM[focused]</visible>
+			</control>
+			<!-- Gold focus border — 4px larger than artwork on all sides -->
+			<control type="image">
+				<include>FocusBounce</include>
+				<left>8</left>
+				<top>1</top>
+				<width>228</width>
+				<height>338</height>
+				<texture colordiffuse="button_focus">masks/poster.png</texture>
+				<visible>$PARAM[focused]</visible>
+			</control>
+			<!-- Poster artwork -->
+			<control type="image">
+				<left>12</left>
+				<top>5</top>
+				<width>220</width>
+				<height>330</height>
+				<texture diffuse="masks/poster.png" fallback="DefaultMovies.png" background="true">$VAR[PosterThumbVar]</texture>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<!-- Label: unfocused_text / accent_color + autoscroll when focused -->
+			<control type="textbox">
+				<left>12</left>
+				<top>360</top>
+				<width>220</width>
+				<height>70</height>
+				<font>font10</font>
+				<align>left</align>
+				<textcolor>unfocused_text</textcolor>
+				<shadowcolor>text_shadow</shadowcolor>
+				<label>$INFO[ListItem.Label]</label>
+				<visible>!$PARAM[focused]</visible>
+			</control>
+			<control type="textbox">
+				<include>FocusBounce</include>
+				<left>12</left>
+				<top>360</top>
+				<width>220</width>
+				<height>70</height>
+				<font>font10</font>
+				<align>left</align>
+				<textcolor>accent_color</textcolor>
+				<shadowcolor>text_shadow</shadowcolor>
+				<label>$INFO[ListItem.Label]</label>
+				<autoscroll time="2000" delay="1500" repeat="2000">true</autoscroll>
+				<visible>$PARAM[focused]</visible>
+			</control>
+			<!-- Progress bar -->
+			<control type="progress">
+				<left>12</left>
+				<top>340</top>
+				<width>220</width>
+				<height>3</height>
+				<texturebg colordiffuse="00000000">colors/black.png</texturebg>
+				<midtexture colordiffuse="accent_color" border="12,0,12,0">progress/progress-nib.png</midtexture>
+				<info>ListItem.PercentPlayed</info>
+				<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+			</control>
+			<!-- Indicator group — sized to image so badges land at image corners -->
+			<control type="group">
+				<left>12</left>
+				<top>5</top>
+				<width>220</width>
+				<height>330</height>
+				<include>UniversalIndicators</include>
+			</control>
+		</definition>
+	</include>
+
+</includes>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+	<defaultcontrol always="true">9000</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="multiimage">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<aspectratio>scale</aspectratio>
+			<fadetime>600</fadetime>
+			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+			<animation effect="fade" time="400">VisibleChange</animation>
+			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+		</control>
+
+		<!-- Dialog gradient panel (right content area) -->
+		<control type="image">
+			<left>490</left>
+			<top>122</top>
+			<right>20</right>
+			<bottom>128</bottom>
+			<texture diffuse="masks/dialog-bg-large.png">dialogs/dialog-gradient.png</texture>
+		</control>
+
+		<!-- Right content group -->
+		<control type="group" id="9100">
+			<include>OpenClose_Right</include>
+			<left>472</left>
+
+			<!-- Profiles card grid — visible when "Profiles" tab is selected -->
+			<control type="panel" id="2">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<top>148</top>
+				<left>30</left>
+				<visible>Container(9000).Hasfocus(2)</visible>
+				<right>0</right>
+				<bottom>137</bottom>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>2</onup>
+				<ondown>2</ondown>
+				<scrolltime>200</scrolltime>
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout height="370" width="290">
+					<!-- Card background -->
+					<control type="image">
+						<left>10</left>
+						<top>5</top>
+						<width>270</width>
+						<height>355</height>
+						<texture colordiffuse="dialog_bg2">dialogs/dialog-bg-nobo.png</texture>
+					</control>
+					<!-- Profile avatar -->
+					<control type="image">
+						<left>45</left>
+						<top>30</top>
+						<width>200</width>
+						<height>200</height>
+						<texture diffuse="masks/poster.png" fallback="DefaultUser.png">$INFO[Listitem.Icon]</texture>
+					</control>
+					<!-- Profile name -->
+					<control type="label">
+						<left>10</left>
+						<top>242</top>
+						<width>270</width>
+						<height>55</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>unfocused_text</textcolor>
+						<font>font_settings_item</font>
+					</control>
+					<!-- Profile directory -->
+					<control type="label">
+						<left>10</left>
+						<top>298</top>
+						<width>270</width>
+						<height>45</height>
+						<font>font_settings_header</font>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label fallback="13170">$INFO[ListItem.Label2]</label>
+						<textcolor>grey</textcolor>
+						<visible>!String.Contains(Listitem.Label,$LOCALIZE[20058])</visible>
+					</control>
+				</itemlayout>
+				<focusedlayout height="370" width="290">
+					<!-- Card background -->
+					<control type="image">
+						<left>10</left>
+						<top>5</top>
+						<width>270</width>
+						<height>355</height>
+						<texture colordiffuse="dialog_bg2">dialogs/dialog-bg-nobo.png</texture>
+					</control>
+					<!-- Gold focus border -->
+					<control type="image">
+						<include>FocusBounce</include>
+						<left>10</left>
+						<top>5</top>
+						<width>270</width>
+						<height>355</height>
+						<texture colordiffuse="button_focus2">dialogs/dialog-bg-nobo.png</texture>
+						<include>Animation_FocusTextureFade</include>
+					</control>
+					<!-- Profile avatar -->
+					<control type="image">
+						<left>45</left>
+						<top>30</top>
+						<width>200</width>
+						<height>200</height>
+						<texture diffuse="masks/poster.png" fallback="DefaultUser.png">$INFO[Listitem.Icon]</texture>
+					</control>
+					<!-- Profile name -->
+					<control type="label">
+						<left>10</left>
+						<top>242</top>
+						<width>270</width>
+						<height>55</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>FFFFFFFF</textcolor>
+						<font>font_settings_item</font>
+					</control>
+					<!-- Profile directory -->
+					<control type="label">
+						<left>10</left>
+						<top>298</top>
+						<width>270</width>
+						<height>45</height>
+						<font>font_settings_header</font>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label fallback="13170">$INFO[ListItem.Label2]</label>
+						<textcolor>unfocused_text</textcolor>
+						<visible>!String.Contains(Listitem.Label,$LOCALIZE[20058])</visible>
+					</control>
+				</focusedlayout>
+			</control>
+
+			<!-- General settings panel — visible when "General" tab is selected -->
+			<control type="grouplist" id="9001">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<visible>Container(9000).Hasfocus(1)</visible>
+				<left>25</left>
+				<right>25</right>
+				<height>735</height>
+				<top>148</top>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>9001</onup>
+				<ondown>9001</ondown>
+				<!-- Section sub-header -->
+				<control type="label">
+					<height>50</height>
+					<right>0</right>
+					<font>font_settings_header</font>
+					<textcolor>grey</textcolor>
+					<label>GENERAL</label>
+					<aligny>center</aligny>
+					<textoffsetx>5</textoffsetx>
+				</control>
+				<control type="image">
+					<height>1</height>
+					<right>0</right>
+					<texture colordiffuse="18FFFFFF">colors/white.png</texture>
+				</control>
+				<control type="radiobutton" id="4">
+					<label>$LOCALIZE[31057]</label>
+					<include>DefaultSettingButton</include>
+				</control>
+				<control type="button" id="5">
+					<label>$LOCALIZE[31058]</label>
+					<label2>[B]$INFO[System.ProfileAutoLogin][/B]</label2>
+					<include>DefaultSettingButton</include>
+					<enable>!Window.IsVisible(ProfileSettings) + !System.HasLoginScreen</enable>
+				</control>
+			</control>
+		</control>
+
+		<!-- Left sidebar -->
+		<control type="group">
+			<depth>DepthContentPanel</depth>
+			<include>OpenClose_Left</include>
+			<include content="ContentPanel">
+				<param name="width" value="530" />
+			</include>
+			<control type="list" id="9000">
+				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+				<left>0</left>
+				<top>130</top>
+				<width>472</width>
+				<height>720</height>
+				<onleft>9100</onleft>
+				<onright>9100</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<scrolltime>300</scrolltime>
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout height="90" width="472">
+					<control type="label">
+						<left>25</left>
+						<width>432</width>
+						<height>90</height>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>unfocused_text</textcolor>
+						<font>font_settings_item</font>
+						<aligny>center</aligny>
+					</control>
+				</itemlayout>
+				<focusedlayout height="90" width="472">
+					<!-- White pill focus background -->
+					<control type="image">
+						<left>10</left>
+						<top>8</top>
+						<width>452</width>
+						<height>74</height>
+						<texture border="12" colordiffuse="FFFFFFFF">masks/focus_pill.png</texture>
+						<animation effect="fade" start="100" end="50" time="40" condition="!Control.HasFocus(9000)">Conditional</animation>
+					</control>
+					<control type="label">
+						<left>25</left>
+						<width>432</width>
+						<height>90</height>
+						<font>font_settings_item</font>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>focused_text</textcolor>
+					</control>
+				</focusedlayout>
+				<content>
+					<item id="1">
+						<label>$LOCALIZE[128]</label>
+						<onclick>noop</onclick>
+					</item>
+					<item id="2">
+						<label>$LOCALIZE[13200]</label>
+						<onclick>noop</onclick>
+					</item>
+				</content>
+			</control>
+			<!-- Skin name — bottom right of sidebar -->
+			<control type="label">
+				<right>20</right>
+				<bottom>30</bottom>
+				<width>440</width>
+				<height>40</height>
+				<font>font_settings_header</font>
+				<label>$INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)]</label>
+				<textcolor>grey</textcolor>
+				<align>right</align>
+				<aligny>center</aligny>
+			</control>
+		</control>
+
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="$LOCALIZE[10034]" />
+		</include>
+		<include>BottomBar</include>
+	</controls>
+</window>

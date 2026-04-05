@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<visible>Window.IsActive(fullscreenvideo) | Window.IsActive(visualisation)</visible>
+	<visible>![Window.IsActive(sliderdialog) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(pvrguideinfo) | Window.IsActive(1110)]</visible>
+	<visible>Player.Seeking | Player.HasPerformedSeek(3) | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | !String.IsEmpty(Player.SeekNumeric) | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
+	<include>Animation_BottomSlide</include>
+	<depth>DepthOSD</depth>
+	<zorder>0</zorder>
+	<controls>
+		<include>PVRChannelNumberInput</include>
+		<control type="group">
+			<animation effect="slide" start="0,200" end="0,0" time="300" tween="cubic" easing="out">VisibleChange</animation>
+			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | ![!String.IsEmpty(Player.SeekNumeric) | Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused] | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
+			<visible>!Player.HasGame</visible>
+			<bottom>0</bottom>
+			<height>190</height>
+			<control type="image">
+				<left>-40</left>
+				<width>120%</width>
+				<height>200</height>
+				<texture flipy="true">frame/osdfade.png</texture>
+			</control>
+			<control type="group">
+				<visible>!Window.IsVisible(videoosd) + !Window.IsVisible(musicosd)</visible>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<control type="grouplist">
+					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+					<visible>[PVR.IsRecordingPlayingChannel + !Player.ChannelPreviewActive] | PVR.IsPlayingActiveRecording</visible>
+					<left>20</left>
+					<centertop>125</centertop>
+					<height>60</height>
+					<align>left</align>
+					<orientation>horizontal</orientation>
+					<itemgap>-5</itemgap>
+					<control type="image">
+						<top>100</top>
+						<left>20</left>
+						<width>60</width>
+						<height>60</height>
+						<aligny>center</aligny>
+						<texture>osd/fullscreen/buttons/record.png</texture>
+					</control>
+					<control type="label">
+						<top>110</top>
+						<left>90</left>
+						<width>400</width>
+						<height>60</height>
+						<aligny>center</aligny>
+						<font>font25_title</font>
+						<label>[COLOR red][B]$LOCALIZE[19158][/B][/COLOR]</label>
+					</control>
+				</control>
+				<control type="grouplist">
+					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+					<right>20</right>
+					<centertop>125</centertop>
+					<width>800</width>
+					<height>50</height>
+					<align>right</align>
+					<include>Animation_BottomSlide</include>
+					<orientation>horizontal</orientation>
+					<itemgap>5</itemgap>
+					<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !Player.ChannelPreviewActive + Window.IsActive(fullscreenvideo)</visible>
+					<animation effect="fade" start="0" end="100" time="200" delay="1000">Visible</animation>
+					<include content="MediaFlag">
+					<param name="texture" value="$INFO[VideoPlayer.VideoCodec,flags/white/videocodec/,.png]" />
+					</include>
+					<include content="MediaFlag">
+					<param name="texture" value="$INFO[VideoPlayer.VideoResolution,flags/white/videoresolution/,.png]" />
+					</include>
+					<include content="MediaFlag">
+						<param name="texture" value="$INFO[VideoPlayer.HdrType,flags/white/videohdr/,.png]" />
+						<param name="visible" value="!String.IsEmpty(VideoPlayer.HdrType)" />
+					</include>
+					<include content="MediaFlag">
+						<param name="texture" value="$INFO[VideoPlayer.VideoAspect,flags/white/aspectratio/,.png]" />
+					</include>
+					<include content="MediaFlag">
+						<param name="texture" value="$INFO[VideoPlayer.AudioCodec,flags/white/audiocodec/,.png]" />
+					</include>
+					<include content="MediaFlag">
+						<param name="texture" value="$INFO[VideoPlayer.AudioChannels,flags/white/audiochannel/,.png]" />
+					</include>
+				</control>
+				<control type="grouplist">
+					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+					<right>20</right>
+					<centertop>125</centertop>
+					<width>800</width>
+					<height>50</height>
+					<align>right</align>
+					<include>Animation_BottomSlide</include>
+					<orientation>horizontal</orientation>
+					<itemgap>10</itemgap>
+					<visible>Player.ShowInfo + !Player.ChannelPreviewActive + Window.IsActive(visualisation)</visible>
+					<animation effect="fade" start="0" end="100" time="200" delay="1000">Visible</animation>
+					<include content="MediaFlag">
+						<param name="texture" value="flags/white/rds/rds.png" />
+						<param name="visible" value="RDS.HasRDS" />
+					</include>
+					<include content="MediaFlag">
+						<param name="texture" value="$INFO[MusicPlayer.Codec,flags/white/audiocodec/,.png]" />
+					</include>
+					<include content="MediaFlag">
+						<param name="texture" value="$INFO[MusicPlayer.Channels,flags/white/audiochannel/,.png]" />
+					</include>
+					<control type="group">
+						<visible>!String.IsEmpty(MusicPlayer.SampleRate)</visible>
+						<width>115</width>
+						<control type="label">
+							<width>115</width>
+							<height>60</height>
+							<align>center</align>
+							<aligny>center</aligny>
+							<label>$INFO[MusicPlayer.SampleRate, ,kHz]</label>
+							<font>font_flag</font>
+						</control>
+						<include content="MediaFlag">
+							<param name="texture" value="flags/white/flag.png" />
+						</include>
+					</control>
+					<control type="group">
+						<visible>!String.IsEmpty(MusicPlayer.BitRate)</visible>
+						<width>115</width>
+						<control type="label">
+							<width>115</width>
+							<height>60</height>
+							<align>center</align>
+							<aligny>center</aligny>
+							<label>$INFO[MusicPlayer.BitRate, ,kbps ]</label>
+							<font>font_flag</font>
+						</control>
+						<include content="MediaFlag">
+							<param name="texture" value="flags/white/flag.png" />
+						</include>
+					</control>
+					<control type="group">
+						<visible>!String.IsEmpty(MusicPlayer.BitsPerSample)</visible>
+						<width>115</width>
+						<control type="label">
+							<width>115</width>
+							<height>60</height>
+							<align>center</align>
+							<aligny>center</aligny>
+							<label>$INFO[MusicPlayer.BitsPerSample, ,bit]</label>
+							<font>font_flag</font>
+						</control>
+						<include content="MediaFlag">
+							<param name="texture" value="flags/white/flag.png" />
+						</include>
+					</control>
+				</control>
+			</control>
+			<control type="label">
+				<centerleft>50%</centerleft>
+				<centertop>125</centertop>
+				<width>50%</width>
+				<height>60</height>
+				<align>center</align>
+				<aligny>top</aligny>
+				<label>$VAR[SeekTimeLabelVar]</label>
+				<font>font45</font>
+				<shadowcolor>black</shadowcolor>
+				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
+			</control>
+			<control type="label" id="40000">
+				<centerleft>50%</centerleft>
+				<centertop>175</centertop>
+				<width>50%</width>
+				<height>50</height>
+				<align>center</align>
+				<aligny>top</aligny>
+				<label>$VAR[SeekLabel]</label>
+				<font>font13</font>
+				<shadowcolor>black</shadowcolor>
+			</control>
+			<control type="group">
+				<visible>VideoPlayer.Content(LiveTV)</visible>
+				<control type="group">
+					<visible>Player.SeekEnabled + VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress">
+						<param name="ts_bar_top" value="70"/>
+						<param name="epg_bar_top" value="78"/>
+						<param name="ts_bar_height" value="8"/>
+						<param name="epg_bar_height" value="8"/>
+					</include>
+				</control>
+				<control type="group">
+					<visible>Player.SeekEnabled + !VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress">
+						<param name="ts_bar_top" value="70"/>
+						<param name="ts_bar_height" value="16"/>
+					</include>
+				</control>
+				<control type="group">
+					<visible>!Player.SeekEnabled + VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress">
+						<param name="epg_bar_top" value="70"/>
+						<param name="epg_bar_height" value="16"/>
+					</include>
+				</control>
+				<control type="group">
+					<visible>!Player.SeekEnabled + !VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress"/>
+				</control>
+					<control type="slider" id="403">
+						<left>0</left>
+						<top>64</top> <!-- Changed from 60 to 68 -->
+						<width>100%</width>
+						<height>16</height>
+						<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
+						<textureslidernib colordiffuse="button_focus">osd/progress/nub_circle.png</textureslidernib>
+						<textureslidernibfocus colordiffuse="white">osd/progress/nub_circle.png</textureslidernibfocus>
+						<info>PVR.TimeshiftSeekbar</info>
+						<action>seek</action>
+						<visible>Player.SeekEnabled + !Player.ChannelPreviewActive</visible>
+					</control>
+			</control>
+			<control type="group">
+				<visible>!VideoPlayer.Content(LiveTV)</visible>
+				<control type="progress">
+					<left>0</left>
+					<top>73</top>
+					<width>100%</width>
+					<height>6</height>
+					<info>Player.ProgressCache</info>
+					<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+					<midtexture>colors/white50.png</midtexture>
+				</control>
+				<control type="progress">
+					<left>0</left>
+					<top>73</top>
+					<width>100%</width>
+					<height>6</height>
+					<info>Player.Progress</info>
+					<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
+					<midtexture colordiffuse="accent_color">colors/white.png</midtexture>
+				</control>
+				<control type="slider" id="401">
+					<left>0</left>
+					<top>64</top>
+					<width>100%</width>
+					<height>16</height>
+					<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
+					<textureslidernib colordiffuse="accent_color">osd/progress/nub_circle.png</textureslidernib>
+					<textureslidernibfocus colordiffuse="white">osd/progress/nub_circle.png</textureslidernibfocus>
+					<info>Player.Seekbar</info>
+					<action>seek</action>
+					<visible>Player.SeekEnabled</visible>
+				</control>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>74</top>
+				<width>100%</width>
+				<height>4</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+				<lefttexture>colors/white.png</lefttexture>
+				<midtexture colordiffuse="FFFF0000">colors/white.png</midtexture>
+				<righttexture>colors/white.png</righttexture>
+				<info>Player.Editlist</info>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>74</top>
+				<width>100%</width>
+				<height>4</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/red50.png</texturebg>
+				<righttexture>colors/red.png</righttexture>
+				<info>Player.Cuts</info>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>74</top>
+				<width>100%</width>
+				<height>4</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+				<righttexture>colors/white.png</righttexture>
+				<info>Player.SceneMarkers</info>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>74</top>
+				<width>100%</width>
+				<height>4</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+				<righttexture>colors/white.png</righttexture>
+				<info>Player.Chapters</info>
+			</control>
+		</control>
+		<control type="group">
+			<visible>!Window.IsVisible(playerprocessinfo)</visible>
+			<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + VideoPlayer.Content(LiveTV)</visible>
+			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | !Player.Seeking | !Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding | !Player.Paused</visible>
+			<animation effect="fade" start="0" end="100" time="300" delay="250">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
+			<animation effect="slide" end="0,-20" time="150" condition="VideoPlayer.Content(LiveTV)">conditional</animation>
+			<bottom>0</bottom>
+			<height>380</height>
+			<control type="label">
+				<left>20</left>
+				<width>80%</width>
+				<top>-200</top>
+				<height>25</height>
+				<label>$INFO[VideoPlayer.ChannelName]</label>
+				<shadowcolor>text_shadow</shadowcolor>
+				<font>font45_title</font>
+			</control>
+			<control type="label">
+				<left>20</left>
+				<width>290</width>
+				<top>-160</top>
+				<height>25</height>
+				<label>$INFO[VideoPlayer.ChannelNumberLabel]</label>
+				<shadowcolor>text_shadow</shadowcolor>
+				<font>WeatherTemp</font>
+			</control>
+			<!-- pvr info background -->
+			<control type="image">
+				<left>0</left>
+				<width>100%</width>
+				<height>240</height>
+				<texture colordiffuse="dialog_tint">dialogs/dialog-bg-nobo.png</texture>
+			</control>
+			<control type="image">
+				<left>20</left>
+				<top>20</top>
+				<width>200</width>
+				<height>200</height>
+				<aspectratio aligny="center">keep</aspectratio>
+				<texture>$INFO[Player.Icon]</texture>
+			</control>
+			<control type="textbox">
+				<left>240</left>
+				<top>10</top>
+				<right>20</right>
+				<height>160</height>
+				<label fallback="19055">$INFO[VideoPlayer.Plot]</label>
+				<align>justify</align>
+				<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
+				<visible>String.IsEmpty(PVR.EpgEventIcon)</visible>
+			</control>
+			<control type="textbox">
+				<left>240</left>
+				<top>10</top>
+				<right>240</right>
+				<height>160</height>
+				<label fallback="19055">$INFO[VideoPlayer.Plot]</label>
+				<align>justify</align>
+				<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
+				<visible>!String.IsEmpty(PVR.EpgEventIcon)</visible>
+			</control>
+			<control type="image">
+				<right>20</right>
+				<top>20</top>
+				<width>200</width>
+				<height>200</height>
+				<aspectratio aligny="center">keep</aspectratio>
+				<texture fallback="DefaultTVShows.png">$INFO[PVR.EpgEventIcon]</texture>
+				<visible>!String.IsEmpty(PVR.EpgEventIcon)</visible>
+			</control>
+			<control type="label">
+				<left>240</left>
+				<top>180</top>
+				<right>20</right>
+				<height>25</height>
+				<label>$VAR[OSDNextLabelVar]</label>
+				<visible>VideoPlayer.HasEpg + !RDS.HasRadioText</visible>
+			</control>
+			<control type="label">
+				<left>240</left>
+				<top>180</top>
+				<height>25</height>
+				<label>[COLOR grey]$LOCALIZE[14304]: [/COLOR]$INFO[RDS.GetLine(0)]</label>
+				<visible>RDS.HasRadioText</visible>
+			</control>
+		</control>
+		<!-- ══════════════════════════════════════════════════════════
+		     PAUSE CARD — cinematic info overlay (non-LiveTV)
+		     Auto-shows on pause and when Info / i is pressed
+		     Group covers bottom 700px of screen (y=380..y=1080)
+		     ══════════════════════════════════════════════════════════ -->
+		<control type="group">
+			<visible>!Window.IsVisible(playerprocessinfo)</visible>
+			<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.Paused] + !VideoPlayer.Content(LiveTV) + Window.IsActive(fullscreenvideo)</visible>
+			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.Paused | !Player.Seeking | !Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding</visible>
+			<animation effect="fade" start="0" end="100" time="400" tween="quadratic" easing="out">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+			<bottom>0</bottom>
+			<height>700</height>
+
+			<!-- POSTER (left) — top at group y+0 = screen y=380 -->
+			<control type="image">
+				<left>30</left>
+				<top>0</top>
+				<width>360</width>
+				<height>565</height>
+				<aspectratio aligny="center">keep</aspectratio>
+				<texture diffuse="masks/poster.png" fallback="DefaultVideo.png" background="true">$VAR[NowPlayingPosterVar]</texture>
+				<include>OpenClose_Left</include>
+			</control>
+
+			<!-- INFO PANEL — top at group y+205 = screen y=585, bottom aligned with poster (y=945) -->
+			<control type="group">
+				<left>420</left>
+				<top>205</top>
+				<width>1100</width>
+				<height>360</height>
+
+				<!-- Gold accent line at panel top -->
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>1100</width>
+					<height>3</height>
+					<texture>colors/white.png</texture>
+					<colordiffuse>accent_color</colordiffuse>
+				</control>
+
+				<!-- MPAA badge + star rating -->
+				<control type="group">
+					<left>20</left>
+					<top>12</top>
+					<right>20</right>
+					<height>44</height>
+					<!-- MPAA flag image -->
+					<control type="image">
+						<left>0</left>
+						<top>2</top>
+						<width>90</width>
+						<height>40</height>
+						<aspectratio>keep</aspectratio>
+						<texture background="true">$VAR[MPAARatingIconVar]</texture>
+					</control>
+					<!-- Star icon -->
+					<control type="image">
+						<left>100</left>
+						<top>9</top>
+						<width>26</width>
+						<height>26</height>
+						<texture>icons/infodialogs/rating.png</texture>
+						<colordiffuse>accent_color</colordiffuse>
+					</control>
+					<!-- Numeric rating -->
+					<control type="label">
+						<left>132</left>
+						<top>0</top>
+						<width>200</width>
+						<height>44</height>
+						<label>$INFO[VideoPlayer.Rating]</label>
+						<font>font12</font>
+						<textcolor>FFE5E5E5</textcolor>
+						<aligny>center</aligny>
+					</control>
+				</control>
+
+				<!-- PLOT (scrolls while paused) -->
+				<control type="textbox">
+					<left>20</left>
+					<top>62</top>
+					<right>20</right>
+					<height>120</height>
+					<label fallback="19055">$INFO[VideoPlayer.Plot]</label>
+					<font>font12</font>
+					<textcolor>99FFFFFF</textcolor>
+					<autoscroll delay="6000" repeat="8000" time="5000">Player.Paused</autoscroll>
+				</control>
+
+				<!-- Divider -->
+				<control type="image">
+					<left>20</left>
+					<top>190</top>
+					<right>20</right>
+					<height>1</height>
+					<texture>colors/white.png</texture>
+					<colordiffuse>33FFFFFF</colordiffuse>
+				</control>
+
+				<!-- Director icon + Director · Genre · Duration -->
+				<control type="group">
+					<left>20</left>
+					<top>198</top>
+					<right>20</right>
+					<height>32</height>
+					<control type="image">
+						<left>0</left>
+						<top>3</top>
+						<width>26</width>
+						<height>26</height>
+						<texture>icons/infodialogs/director.png</texture>
+						<colordiffuse>99FFFFFF</colordiffuse>
+					</control>
+					<control type="label">
+						<left>34</left>
+						<top>0</top>
+						<right>0</right>
+						<height>32</height>
+						<label>$VAR[PauseCardMetaVar]</label>
+						<font>font12</font>
+						<textcolor>FFE5E5E5</textcolor>
+						<aligny>center</aligny>
+					</control>
+				</control>
+
+				<!-- Next episode (playlist only) -->
+				<control type="label">
+					<left>20</left>
+					<top>234</top>
+					<right>20</right>
+					<height>28</height>
+					<label>$VAR[OSDNextLabelVar]</label>
+					<font>font12</font>
+					<textcolor>accent_color</textcolor>
+					<scroll>true</scroll>
+					<visible>Integer.IsGreater(Playlist.Length(video),1)</visible>
+				</control>
+
+				<!-- Quality: codec flag images -->
+				<control type="grouplist">
+					<scrolltime>0</scrolltime>
+					<left>20</left>
+					<top>266</top>
+					<width>750</width>
+					<height>38</height>
+					<orientation>horizontal</orientation>
+					<align>left</align>
+					<itemgap>8</itemgap>
+					<control type="image">
+						<texture background="true">$INFO[VideoPlayer.VideoResolution,flags/color/resolution/,.png]</texture>
+						<aspectratio>keep</aspectratio>
+						<height>38</height>
+						<width>68</width>
+						<visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
+					</control>
+					<control type="image">
+						<texture background="true">$INFO[VideoPlayer.VideoCodec,flags/color/source/,.png]</texture>
+						<aspectratio>keep</aspectratio>
+						<height>38</height>
+						<width>68</width>
+						<visible>!String.IsEmpty(VideoPlayer.VideoCodec)</visible>
+					</control>
+					<control type="image">
+						<texture background="true">$INFO[VideoPlayer.AudioCodec,flags/color/audio/,.png]</texture>
+						<aspectratio>keep</aspectratio>
+						<height>38</height>
+						<width>68</width>
+						<visible>!String.IsEmpty(VideoPlayer.AudioCodec)</visible>
+					</control>
+					<control type="image">
+						<texture background="true">$INFO[VideoPlayer.AudioChannels,flags/color/channels/,.png]</texture>
+						<aspectratio>keep</aspectratio>
+						<height>38</height>
+						<width>68</width>
+						<visible>!String.IsEmpty(VideoPlayer.AudioChannels)</visible>
+					</control>
+					<control type="image">
+						<texture background="true">$INFO[VideoPlayer.HdrType,flags/color/hdr/,.png]</texture>
+						<aspectratio>keep</aspectratio>
+						<height>38</height>
+						<width>68</width>
+						<visible>!String.IsEmpty(VideoPlayer.HdrType)</visible>
+					</control>
+				</control>
+
+				<!-- Studio: white logo from resource.images.studios.white only -->
+				<control type="image">
+					<left>20</left>
+					<top>310</top>
+					<width>110</width>
+					<height>38</height>
+					<aspectratio>keep</aspectratio>
+					<texture background="true">$INFO[VideoPlayer.Studio,resource://resource.images.studios.white/,.png]</texture>
+				</control>
+
+			</control>
+			<!-- end INFO CARD -->
+
+		</control>
+		<!-- end pause card -->
+	</controls>
+</window>

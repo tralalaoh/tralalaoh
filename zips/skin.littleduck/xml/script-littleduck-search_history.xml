@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="SearchHistory">
+        <item>
+            <label>yeralti</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>joker</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>stranger </label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>joker </label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>stranger things</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>vampire hunter d bloodlust</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>hannah montana</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>my name</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>bloodhounds</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>a shop for killers</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>stranger</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+        <item>
+            <label>veliaht</label>
+            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
+        </item>
+    </include>
+</includes>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol condition="[Container.Content(movies) | Container.Content(tvshows) | Container.Content(sets) | Container.Content(seasons) | Container.Content(actors)]" always="true">511</defaultcontrol>
+	<defaultcontrol condition="Container.Content(addons)" always="true">507</defaultcontrol>
+	<defaultcontrol condition="[Container.Content(files) | Container.Content(sources)]" always="true">55</defaultcontrol>
+	<defaultcontrol always="true">510</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<views>55,56,57,503,507,510,511</views>
+	<menucontrol>9000</menucontrol>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
+			<include>View_55_WideList</include>
+			<include>View_56_WideInfoWall</include>
+			<include>View_57_WidePosterWall</include>
+			<include condition="$EXP[Exp_View_503_Include]">View_503_NowPlaying</include>
+			<include condition="$EXP[Exp_View_505_Include]">View_505_Spotlight</include>
+			<include>View_507_SquareRow</include>
+			<include>View_510_LandscapeRow</include>
+			<include>View_511_PosterRow</include>
+			<control type="group">
+				<depth>DepthContentPanel</depth>
+				<include>OpenClose_Left</include>
+				<visible>Control.IsVisible(55) | Control.IsVisible(56) | Control.IsVisible(57)</visible>
+				<include>Visible_Left</include>
+				<include content="LeftInfoPanel">
+					<param name="show_ratings" value="true" />
+					<param name="show_plot" value="false" />
+					<param name="show_infoline" value="true" />
+					<param name="infoline_label" value="$INFO[ListItem.Rating,[COLOR accent_color]★ ,[/COLOR]]$INFO[ListItem.Year, [COLOR unfocused_text]|[/COLOR] ]$INFO[ListItem.MPAA, [COLOR unfocused_text]|[/COLOR] ]$INFO[ListItem.Duration(m), [COLOR unfocused_text]|[/COLOR] , m]$INFO[ListItem.EndTime, [COLOR unfocused_text]|[/COLOR] Ends ]" />
+					<param name="ratings_top" value="356" />
+					<param name="show_collection_list" value="true" />
+					<param name="clearlogo_texture" value="$INFO[ListItem.Art(clearlogo)]" />
+					<param name="clearlogo_visible" value="!String.IsEmpty(ListItem.Art(clearlogo))" />
+					<param name="title_label" value="$INFO[ListItem.Label]" />
+					<param name="title_visible" value="String.IsEmpty(ListItem.Art(clearlogo))" />
+					<param name="infopanel_label" value="$VAR[InfoPanel]" />
+					<param name="infopanel_ep_label" value="$VAR[InfoPanelEpisode]" />
+				</include>
+			</control>
+			<include content="TopBar">
+				<param name="breadcrumbs_label" value="$VAR[BreadcrumbsVideoVar]" />
+			</include>
+			<include content="BottomBar">
+				<param name="info_visible" value="false" />
+			</include>
+			<control type="group">
+				<depth>DepthBars</depth>
+				<bottom>0</bottom>
+				<height>70</height>
+				<animation effect="fade" start="0" end="100" time="300" delay="300">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+				<include condition="!Skin.HasSetting(hide_mediaflags)">MediaFlags</include>
+			</control>
+			<include>CommonScrollbars</include>
+			<include>MediaMenuMouseOverlay</include>
+			<control type="group">
+				<include>MediaMenuCommon</include>
+				<control type="grouplist" id="9000">
+					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
+					<top>50</top>
+					<include>MediaMenuListCommon</include>
+					<control type="button" id="10">
+						<description>Watched Toggle</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[20367]</label>
+						<label2>[B]$INFO[Container.NumItems][/B]</label2>
+						<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.content(seasons) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+					</control>
+					<control type="label" id="203">
+						<include>MediaMenuLabelCommon</include>
+						<label>$LOCALIZE[31020]</label>
+					</control>
+					<control type="radiobutton" id="16">
+						<description>PartyMode</description>
+						<label>$LOCALIZE[589]</label>
+						<include>MediaMenuItemsCommon</include>
+						<visible>Container.Content(MusicVideos)</visible>
+					</control>
+					<control type="radiobutton" id="11">
+						<description>Unlock Shares</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[20336]</label>
+						<onclick>mastermode</onclick>
+						<selected>system.ismaster</selected>
+						<visible>system.haslocks</visible>
+					</control>
+					<control type="togglebutton" id="619">
+						<description>Update library</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[653]</label>
+						<onclick>UpdateLibrary(video)</onclick>
+						<visible>!Container.Content(addons)+ String.IsEmpty(Container.PluginName)</visible>
+						<altlabel>$LOCALIZE[13353]</altlabel>
+						<usealttexture>library.isscanningvideo</usealttexture>
+					</control>
+					<control type="button" id="612">
+						<description>Go to playlist</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31056]</label>
+						<onclick>ActivateWindow(videoplaylist)</onclick>
+						<visible>Integer.IsGreater(Playlist.Length(video),0)</visible>
+					</control>
+					<control type="button" id="621">
+						<description>Get more</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[21452]</label>
+						<onclick>ActivateWindow(addonbrowser,addons://more/video/,return)</onclick>
+						<visible>Container.Content(addons)</visible>
+					</control>
+					<control type="button" id="622">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31117]</label>
+						<onclick condition="System.AddonIsEnabled(plugin.library.node.editor)">ActivateWindow(programs,plugin://plugin.library.node.editor/?ltype=video,return)</onclick>
+						<onclick condition="System.HasAddon(plugin.library.node.editor) + !System.AddonIsEnabled(plugin.library.node.editor)">EnableAddon(plugin.library.node.editor)</onclick>
+						<onclick condition="!System.HasAddon(plugin.library.node.editor)">InstallAddon(plugin.library.node.editor)</onclick>
+						<visible>Container.Content() + String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<control type="button" id="623">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31009]</label>
+						<onclick>InstallAddon(resource.images.studios.white)</onclick>
+						<visible>Container.Content(studios) + !System.AddonIsEnabled(resource.images.studios.white)</visible>
+					</control>
+					<control type="button" id="624">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[10140]</label>
+						<onclick>Addon.OpenSettings($INFO[Container.PluginName])</onclick>
+						<visible>!String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<include>MediaMenuNowPlaying</include>
+				</control>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- DEBUG OVERLAY — remove once issue is identified              -->
+			<!-- Toggle: Skin.ToggleSetting(debug_views) from any context     -->
+			<!-- ============================================================ -->
+			<control type="group">
+				<visible>Skin.HasSetting(debug_views)</visible>
+				<depth>10000</depth>
+				<!-- Background -->
+				<control type="image">
+					<left>10</left>
+					<top>10</top>
+					<width>700</width>
+					<height>430</height>
+					<texture colordiffuse="D0000000">colors/black.png</texture>
+				</control>
+				<!-- Title -->
+				<control type="label">
+					<left>20</left>
+					<top>18</top>
+					<width>680</width>
+					<height>28</height>
+					<font>font25_title</font>
+					<textcolor>FFFF6600</textcolor>
+					<label>[B]VIEW DEBUG — MyVideoNav[/B]</label>
+				</control>
+				<!-- ViewMode -->
+				<control type="label">
+					<left>20</left>
+					<top>52</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFFFFFFF</textcolor>
+					<label>ViewMode: $INFO[Container.ViewMode]</label>
+				</control>
+				<!-- Content -->
+				<control type="label">
+					<left>20</left>
+					<top>80</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFFFFFFF</textcolor>
+					<label>Content: $INFO[Container.Content]</label>
+				</control>
+				<!-- PluginName -->
+				<control type="label">
+					<left>20</left>
+					<top>108</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFFFFFFF</textcolor>
+					<label>Plugin: $INFO[Container.PluginName]</label>
+				</control>
+				<!-- NumItems -->
+				<control type="label">
+					<left>20</left>
+					<top>136</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFFFFFFF</textcolor>
+					<label>NumItems: $INFO[Container.NumItems]  Updating: $INFO[Container.IsUpdating]</label>
+				</control>
+				<!-- Divider -->
+				<control type="image">
+					<left>20</left>
+					<top>168</top>
+					<width>660</width>
+					<height>1</height>
+					<texture colordiffuse="60FFFFFF">colors/white.png</texture>
+				</control>
+				<!-- Control visibility -->
+				<control type="label">
+					<left>20</left>
+					<top>176</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FF00FF88</textcolor>
+					<label>Control.IsVisible: 55=$INFO[Control.IsVisible(55),YES,NO]  503=$INFO[Control.IsVisible(503),YES,NO]  507=$INFO[Control.IsVisible(507),YES,NO]</label>
+				</control>
+				<control type="label">
+					<left>20</left>
+					<top>204</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FF00FF88</textcolor>
+					<label>Control.IsVisible: 510=$INFO[Control.IsVisible(510),YES,NO]  511=$INFO[Control.IsVisible(511),YES,NO]</label>
+				</control>
+				<!-- Divider -->
+				<control type="image">
+					<left>20</left>
+					<top>236</top>
+					<width>660</width>
+					<height>1</height>
+					<texture colordiffuse="60FFFFFF">colors/white.png</texture>
+				</control>
+				<!-- Exp_Include states -->
+				<control type="label">
+					<left>20</left>
+					<top>244</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFFFFF44</textcolor>
+					<label>Inc_55=$EXP[Exp_View_55_Include]  Inc_503=$EXP[Exp_View_503_Include]  Inc_505=$EXP[Exp_View_505_Include]</label>
+				</control>
+				<control type="label">
+					<left>20</left>
+					<top>272</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFFFFF44</textcolor>
+					<label>Inc_507=$EXP[Exp_View_507_Include]  Inc_510=$EXP[Exp_View_510_Include]  Inc_511=$EXP[Exp_View_511_Include]</label>
+				</control>
+				<!-- Divider -->
+				<control type="image">
+					<left>20</left>
+					<top>304</top>
+					<width>660</width>
+					<height>1</height>
+					<texture colordiffuse="60FFFFFF">colors/white.png</texture>
+				</control>
+				<!-- ViewMode matches -->
+				<control type="label">
+					<left>20</left>
+					<top>312</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFAAAAFF</textcolor>
+					<label>ViewMode(55)=$INFO[Container.ViewMode(55),YES,NO]  ViewMode(507)=$INFO[Container.ViewMode(507),YES,NO]</label>
+				</control>
+				<control type="label">
+					<left>20</left>
+					<top>340</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>FFAAAAFF</textcolor>
+					<label>ViewMode(510)=$INFO[Container.ViewMode(510),YES,NO]  ViewMode(511)=$INFO[Container.ViewMode(511),YES,NO]</label>
+				</control>
+				<!-- Divider -->
+				<control type="image">
+					<left>20</left>
+					<top>372</top>
+					<width>660</width>
+					<height>1</height>
+					<texture colordiffuse="60FFFFFF">colors/white.png</texture>
+				</control>
+				<!-- Toggle hint -->
+				<control type="label">
+					<left>20</left>
+					<top>380</top>
+					<width>680</width>
+					<height>26</height>
+					<font>font13</font>
+					<textcolor>60FFFFFF</textcolor>
+					<label>Toggle off: Skin.ToggleSetting(debug_views)</label>
+				</control>
+			</control>
+			<!-- END DEBUG -->
+
+		</control>
+	</controls>
+</window>

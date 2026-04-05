@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<!--
+		View 505 - Spotlight Menu  (parent selector + landscape children)
+
+		CONCEPT
+		  Two-tier navigation driven by script.skinvariables buildviews:
+		    505 (top)    - compact tab/thumbnail strip showing the PARENT items
+		                   (TV shows, seasons, movie sets, plugin folders)
+		    506 (bottom) - landscape cards loaded from Container(505).ListItem.FileNameAndPath
+		                   i.e. the children of whatever tab is focused
+
+		EXAMPLES
+		  tvshows list       top: show posters   bottom: that show's seasons
+		  seasons list       top: text tabs      bottom: that season's episodes
+		  sets list          top: set posters    bottom: movies inside the set
+		  any plugin folder  same pattern, generic
+
+		TAB DESIGNS (Container 505)
+		  seasons content  - text-only tab (220x75): label + gold underline when focused
+		  everything else  - poster card  (120x155): 90x130 art + label below
+
+		LINKED TO script.skinvariables buildviews (skinviewtypes.json):
+		  Active for: tvshows, sets, seasons
+	-->
+
+	<include name="View_505_Spotlight">
+		<control type="group">
+			<include>OpenClose_Right</include>
+			<visible>Control.IsVisible(505)</visible>
+			<include>Visible_Right</include>
+
+			<!-- FANART BACKGROUND -->
+			<include content="FanartDiffuseBackground">
+				<param name="fanart" value="$INFO[Container(505).ListItem.Art(fanart)]" />
+				<param name="fadetime" value="600" />
+			</include>
+
+			<!-- Left vignette -->
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>100%</width>
+				<height>100%</height>
+				<aspectratio>stretch</aspectratio>
+				<texture>overlays/fanart_overlay.png</texture>
+			</control>
+
+			<!-- Bottom gradient -->
+			<control type="image">
+				<left>0</left>
+				<top>380</top>
+				<width>100%</width>
+				<height>700</height>
+				<aspectratio>stretch</aspectratio>
+				<texture>overlays/gradient-bottom.png</texture>
+			</control>
+
+			<!-- INFO HEADER
+			     container_id=505 : parent info (show/season/set)
+			     episode_container_id=506 : child info when 506 is focused -->
+			<include content="SpotlightViewHero">
+	<param name="clearlogo_texture" value="$INFO[Container(505).ListItem.Art(clearlogo)]"/>
+	<param name="clearlogo_visible" value="!String.IsEmpty(Container(505).ListItem.Art(clearlogo))"/>
+	<param name="title_label"       value="$INFO[Container(505).ListItem.Label]"/>
+	<param name="title_visible"     value="String.IsEmpty(Container(505).ListItem.Art(clearlogo))"/>
+	<param name="infoline_label"    value="$INFO[Container(505).ListItem.Rating,[COLOR accent_color]★ ,[/COLOR]]$INFO[Container(505).ListItem.Year, [COLOR unfocused_text]|[/COLOR] ]$INFO[Container(505).ListItem.MPAA, [COLOR unfocused_text]|[/COLOR] ]$INFO[Container(505).ListItem.Duration(h), [COLOR unfocused_text]|[/COLOR] , h]$INFO[Container(505).ListItem.Duration(mm),,m]$INFO[Container(505).ListItem.EndTime, [COLOR unfocused_text]|[/COLOR] Ends ]"/>
+	<param name="plot_label"        value="$INFO[Container(505).ListItem.Plot]"/>
+	<param name="episode_container_id" value="506"/>
+</include>
+
+			<!-- ============================================================ -->
+			<!-- TAB STRIP - id=505  (parent selector)                       -->
+			<!-- seasons  -> text tabs 220x75                                  -->
+			<!-- other    -> poster thumbnails 120x155                         -->
+			<!-- ============================================================ -->
+			<control type="fixedlist" id="505">
+				<left>75</left>
+				<top>580</top>
+				<right>20</right>
+				<height>46</height>
+				<orientation>horizontal</orientation>
+				<movement>1</movement>
+				<preloaditems>4</preloaditems>
+				<scrolltime tween="cubic" easing="out">400</scrolltime>
+				<onleft>505</onleft>
+				<onright>505</onright>
+				<onup>804</onup>
+				<ondown>SetFocus(506)</ondown>
+				<viewtype label="Spotlight">icon</viewtype>
+				<pagecontrol>5051</pagecontrol>
+				<visible>$EXP[Exp_View_505]</visible>
+				<onfocus>ClearProperty(TMDbHelper.WidgetContainer)</onfocus>
+
+				<!-- TEXT TABS: 200px cell (15px pad + 170px text + 15px pad) -->
+				<!-- fixedlist requires fixed pixel width - auto-width is unsupported -->
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout width="200" height="46">
+					<control type="label">
+						<left>15</left>
+						<top>0</top>
+						<width>170</width>
+						<height>46</height>
+						<aligny>center</aligny>
+						<font>font25_title</font>
+						<textcolor>60FFFFFF</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</itemlayout>
+				<focusedlayout width="200" height="46">
+					<control type="label">
+						<include>FocusBounce</include>
+						<left>15</left>
+						<top>0</top>
+						<width>170</width>
+						<height>46</height>
+						<aligny>center</aligny>
+						<font>font25_title</font>
+						<textcolor>accent_color</textcolor>
+						<label>[B]$INFO[ListItem.Label][/B]</label>
+					</control>
+				</focusedlayout>
+			</control>
+
+			<!-- ============================================================ -->
+			<!-- LANDSCAPE CHILDREN ROW - id=506                             -->
+			<!-- Content: sub-items of the focused tab (FileNameAndPath)      -->
+			<!-- Cards: 440x248 (16:9) + progress bar + 52px label            -->
+			<!-- ============================================================ -->
+			<control type="fixedlist" id="506">
+				<left>0</left>
+				<top>640</top>
+				<right>0</right>
+				<height>395</height>
+				<orientation>horizontal</orientation>
+				<movement>2</movement>
+				<preloaditems>3</preloaditems>
+				<scrolltime tween="cubic" easing="out">500</scrolltime>
+				<onleft>506</onleft>
+				<onright>506</onright>
+				<onup>SetFocus(505)</onup>
+				<ondown>noop</ondown>
+				<pagecontrol>5061</pagecontrol>
+				<content sortby="episode">$INFO[Container(505).ListItem.FileNameAndPath]</content>
+				<onclick condition="ListItem.IsFolder">Container.Update($INFO[ListItem.FolderPath])</onclick>
+				<onclick condition="!ListItem.IsFolder">PlayMedia($ESCINFO[ListItem.FileNameAndPath])</onclick>
+				<onfocus>SetProperty(TMDbHelper.WidgetContainer,506)</onfocus>
+
+				<!-- UNFOCUSED -->
+				<texturefocus />
+				<texturenofocus />
+				<itemlayout width="448" height="310">
+					<control type="image">
+						<left>4</left>
+						<top>4</top>
+						<width>440</width>
+						<height>248</height>
+						<texture diffuse="masks/landscape.png" fallback="DefaultTVShows.png" background="true">$VAR[IconWallThumbVar]</texture>
+						<bordersize>17</bordersize>
+					</control>
+					<control type="progress">
+						<left>4</left>
+						<top>252</top>
+						<width>440</width>
+						<height>3</height>
+						<texturebg colordiffuse="00000000">colors/black.png</texturebg>
+						<midtexture colordiffuse="accent_color" border="12,0,12,0">progress/progress-nib.png</midtexture>
+						<info>ListItem.PercentPlayed</info>
+						<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+					</control>
+					<!-- Indicator group — sized to image so badges land at image corners -->
+					<control type="group">
+						<left>4</left>
+						<top>4</top>
+						<width>440</width>
+						<height>248</height>
+						<include>UniversalIndicators</include>
+					</control>
+					<control type="textbox">
+						<left>4</left>
+						<top>258</top>
+						<width>440</width>
+						<height>52</height>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font10</font>
+						<textcolor>unfocused_text</textcolor>
+						<align>left</align>
+						<shadowcolor>text_shadow</shadowcolor>
+					</control>
+				</itemlayout>
+
+				<!-- FOCUSED -->
+				<focusedlayout width="448" height="310">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<!-- Gold focus border -->
+						<control type="image">
+							<include>FocusBounce</include>
+							<left>0</left>
+							<top>0</top>
+							<width>448</width>
+							<height>256</height>
+							<texture colordiffuse="button_focus">masks/landscape.png</texture>
+							<bordersize>17</bordersize>
+							<include>Animation_FocusTextureFade</include>
+						</control>
+						<!-- Artwork -->
+						<control type="image">
+							<left>4</left>
+							<top>4</top>
+							<width>440</width>
+							<height>248</height>
+							<texture diffuse="masks/landscape.png" fallback="DefaultTVShows.png" background="true">$VAR[IconWallThumbVar]</texture>
+							<bordersize>17</bordersize>
+						</control>
+						<!-- White inner glow -->
+						<control type="image">
+							<include>Animation_FocusTextureFade</include>
+							<left>4</left>
+							<top>4</top>
+							<width>440</width>
+							<height>248</height>
+							<texture colordiffuse="20FFFFFF" diffuse="masks/landscape.png">colors/white.png</texture>
+							<bordersize>17</bordersize>
+						</control>
+						<!-- Progress bar -->
+						<control type="progress">
+							<left>4</left>
+							<top>252</top>
+							<width>440</width>
+							<height>3</height>
+							<texturebg colordiffuse="00000000">colors/black.png</texturebg>
+							<midtexture colordiffuse="accent_color" border="12,0,12,0">progress/progress-nib.png</midtexture>
+							<info>ListItem.PercentPlayed</info>
+							<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+						</control>
+						<!-- Indicator group — sized to image so badges land at image corners -->
+						<control type="group">
+							<left>4</left>
+							<top>4</top>
+							<width>440</width>
+							<height>248</height>
+							<include>UniversalIndicators</include>
+						</control>
+						<!-- Label (gold, autoscroll) -->
+						<control type="textbox">
+							<include>FocusBounce</include>
+							<left>4</left>
+							<top>258</top>
+							<width>440</width>
+							<height>52</height>
+							<label>$INFO[ListItem.Label]</label>
+							<font>font10</font>
+							<textcolor>accent_color</textcolor>
+							<align>left</align>
+							<shadowcolor>text_shadow</shadowcolor>
+							<autoscroll time="2000" delay="1500" repeat="2000">true</autoscroll>
+						</control>
+					</control>
+				</focusedlayout>
+			</control>
+
+			<!-- Scrollbar for sub-list (shown when sub-list has items) -->
+			<control type="scrollbar" id="5061">
+				<left>75</left>
+				<bottom>20</bottom>
+				<right>20</right>
+				<height>5</height>
+				<orientation>horizontal</orientation>
+				<texturenib>colors/white.png</texturenib>
+				<texturenibfocus>colors/white.png</texturenibfocus>
+				<textureback>colors/white.png</textureback>
+				<colorback>20FFFFFF</colorback>
+				<colornib>accent_color</colornib>
+				<colornibfocus>white</colornibfocus>
+				<visible>Integer.IsGreater(Container(506).NumItems,0)</visible>
+			</control>
+
+			<!-- Scrollbar for tab strip (shown when sub-list is empty) -->
+			<control type="scrollbar" id="5051">
+				<left>75</left>
+				<bottom>20</bottom>
+				<right>20</right>
+				<height>5</height>
+				<orientation>horizontal</orientation>
+				<texturenib>colors/white.png</texturenib>
+				<texturenibfocus>colors/white.png</texturenibfocus>
+				<textureback>colors/white.png</textureback>
+				<colorback>20FFFFFF</colorback>
+				<colornib>accent_color</colornib>
+				<colornibfocus>white</colornibfocus>
+				<visible>!Integer.IsGreater(Container(506).NumItems,0)</visible>
+			</control>
+
+		</control>
+	</include>
+
+</includes>
