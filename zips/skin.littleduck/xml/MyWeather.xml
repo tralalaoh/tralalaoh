@@ -95,7 +95,7 @@
 					<aligny>center</aligny>
 					<textoffsetx>40</textoffsetx>
 					<textoffsety>0</textoffsety>
-					<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+					<texturefocus />
 					<texturenofocus />
 					<onup>20000</onup>
 					<ondown>15100</ondown>

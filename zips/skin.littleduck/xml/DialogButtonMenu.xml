@@ -194,7 +194,7 @@
 						<width>556</width>
 						<height>70</height>
 						<aspectratio>stretch</aspectratio>
-						<texture colordiffuse="white" border="12">masks/focus_pill.png</texture>
+						<texture colordiffuse="00FFFFFF" border="12">masks/focus_pill.png</texture>
 					</control>
 					<control type="image">
 						<left>24</left>

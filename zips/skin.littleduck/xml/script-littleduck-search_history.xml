@@ -2,10 +2,6 @@
 <includes>
     <include name="SearchHistory">
         <item>
-            <label>yeralti</label>
-            <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
-        </item>
-        <item>
             <label>joker</label>
             <onclick>RunScript(script.littleduck.helper,mode=re_search)</onclick>
         </item>

@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    skin.littleduck — Skin Settings Dialog
+    1920×1080 | panel 1720×920 @ (100,80)
+    Sidebar  : w=380  h=820
+    List     : x=380  w=1340  h=700  item-h=110
+    Info box : x=380  y=800   w=1340 h=120
+
+    Fonts (skin.littleduck Font.xml only):
+      font32             title
+      font_settings_item 25px bold  — setting label
+      font14             33px       — sidebar item / info title
+      font13             30px       — subtitle / value text
+      font12             25px       — dim / description
+
+    Focus style:
+      Normal bg  : transparent gold  33FFCC00  + 4px solid gold right bar
+      Danger bg  : transparent red   33FF3300  + 4px solid red  right bar
+      NO solid fill focus
+
+    Radio buttons: native 120×75 → rendered at 80×50 to keep ratio
+-->
+<window type="dialog">
+    <defaultcontrol always="true">9001</defaultcontrol>
+    <controls>
+
+        <!-- dim overlay -->
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="CC0A0B0F">special://skin/media/colors/white.png</texture>
+        </control>
+
+        <control type="group">
+            <left>100</left><top>80</top><width>1720</width><height>920</height>
+
+            <!-- panel bg -->
+            <control type="image">
+                <left>0</left><top>0</top><width>1720</width><height>920</height>
+                <texture colordiffuse="F00A0B0F">special://skin/media/colors/white.png</texture>
+            </control>
+            <control type="image">
+                <left>0</left><top>0</top><width>1720</width><height>1</height>
+                <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+            </control>
+            <control type="image">
+                <left>0</left><top>919</top><width>1720</width><height>1</height>
+                <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+            </control>
+
+            <!-- ═══════════ HEADER ═══════════ -->
+            <control type="group">
+                <left>0</left><top>0</top><width>1720</width><height>100</height>
+                <control type="image">
+                    <left>44</left><top>30</top><width>34</width><height>34</height>
+                    <texture colordiffuse="FFFFCC00">special://skin/media/icons/sliders.png</texture>
+                </control>
+                <control type="label">
+                    <left>92</left><top>0</top><width>900</width><height>58</height>
+                    <label>Skin Settings</label>
+                    <font>font32</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
+                <!-- breadcrumb caret (visible only when drilled in) -->
+                <control type="image" id="9021">
+                    <left>92</left><top>65</top><width>12</width><height>12</height>
+                    <texture colordiffuse="88FFFFFF">special://skin/media/icons/caret-right.png</texture>
+                    <visible>false</visible>
+                </control>
+                <control type="label" id="9020">
+                    <left>92</left><top>58</top><width>1400</width><height>30</height>
+                    <label>Main Menu Items</label>
+                    <font>font12</font>
+                    <textcolor>FF8B92A5</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
+                <control type="image">
+                    <left>0</left><top>99</top><width>1720</width><height>1</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+                <!-- ── Back button (touch/tablet) ───────────────────────────
+                     The button itself is invisible (no focus box, no label).
+                     Two image overlays swap colour with Control.HasFocus() so
+                     only the arrow icon changes — gold on focus, dim otherwise.
+                     The <onclick>Action(Back)</onclick> is intentionally absent;
+                     Python's onClick(9030) already handles step-by-step navigation
+                     and the deferred-reload logic.  Having both would double-fire. -->
+                <control type="button" id="9030">
+                    <left>1652</left><top>28</top><width>44</width><height>44</height>
+                    <label></label>
+                    <texturenofocus></texturenofocus>
+                    <texturefocus></texturefocus>
+                </control>
+                <!-- gold icon when focused -->
+                <control type="image">
+                    <left>1652</left><top>28</top><width>44</width><height>44</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="FFFFCC00">special://skin/media/icons/back.png</texture>
+                    <visible>Control.HasFocus(9030)</visible>
+                </control>
+                <!-- dim white icon when not focused -->
+                <control type="image">
+                    <left>1652</left><top>28</top><width>44</width><height>44</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="88FFFFFF">special://skin/media/icons/back.png</texture>
+                    <visible>!Control.HasFocus(9030)</visible>
+                </control>
+            </control>
+
+            <!-- ═══════════ SIDEBAR ═══════════ -->
+            <control type="group">
+                <left>0</left><top>100</top><width>380</width><height>820</height>
+                <control type="image">
+                    <left>0</left><top>0</top><width>380</width><height>820</height>
+                    <texture colordiffuse="28000000">special://skin/media/colors/white.png</texture>
+                </control>
+                <control type="image">
+                    <left>379</left><top>0</top><width>1</width><height>820</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+
+                <control type="list" id="9000">
+                    <left>0</left><top>16</top><width>380</width><height>774</height>
+                    <onup>9000</onup>
+                    <ondown>9000</ondown>
+                    <onright>9001</onright>
+                    <onleft>9000</onleft>
+                    <scrolltime>150</scrolltime>
+
+                    <!-- NORMAL sidebar item -->
+                    <itemlayout height="64" width="380">
+                        <control type="image">
+                            <left>22</left><top>19</top><width>26</width><height>26</height>
+                            <texture colordiffuse="66FFFFFF">$INFO[ListItem.Art(icon)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>60</left><top>0</top><width>300</width><height>64</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font13</font>
+                            <textcolor>88FFFFFF</textcolor>
+                            <align>left</align><aligny>center</aligny>
+                        </control>
+                    </itemlayout>
+
+                    <!-- FOCUSED sidebar item: gold when list owns focus, dim otherwise -->
+                    <focusedlayout height="64" width="380">
+                        <!-- transparent gold bg — only when sidebar has focus -->
+                        <control type="image">
+                            <left>6</left><top>4</top><width>368</width><height>56</height>
+                            <texture colordiffuse="22FFCC00">special://skin/media/colors/white.png</texture>
+                            <visible>Control.HasFocus(9000)</visible>
+                        </control>
+                        <!-- solid gold right bar — only when sidebar has focus -->
+                        <control type="image">
+                            <left>373</left><top>14</top><width>4</width><height>36</height>
+                            <texture colordiffuse="FFFFCC00">special://skin/media/colors/white.png</texture>
+                            <visible>Control.HasFocus(9000)</visible>
+                        </control>
+                        <!-- dim card bg when sidebar does not have focus -->
+                        <control type="image">
+                            <left>6</left><top>4</top><width>368</width><height>56</height>
+                            <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                            <visible>!Control.HasFocus(9000)</visible>
+                        </control>
+                        <control type="image">
+                            <left>22</left><top>19</top><width>26</width><height>26</height>
+                            <texture colordiffuse="FFFFCC00">$INFO[ListItem.Art(icon)]</texture>
+                            <visible>Control.HasFocus(9000)</visible>
+                        </control>
+                        <control type="image">
+                            <left>22</left><top>19</top><width>26</width><height>26</height>
+                            <texture colordiffuse="88FFFFFF">$INFO[ListItem.Art(icon)]</texture>
+                            <visible>!Control.HasFocus(9000)</visible>
+                        </control>
+                        <control type="label">
+                            <left>60</left><top>0</top><width>300</width><height>64</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font13</font>
+                            <textcolor>FFFFCC00</textcolor>
+                            <align>left</align><aligny>center</aligny>
+                            <visible>Control.HasFocus(9000)</visible>
+                        </control>
+                        <control type="label">
+                            <left>60</left><top>0</top><width>300</width><height>64</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font13</font>
+                            <textcolor>CCFFFFFF</textcolor>
+                            <align>left</align><aligny>center</aligny>
+                            <visible>!Control.HasFocus(9000)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <!-- skin version watermark -->
+                <control type="label">
+                    <left>20</left><bottom>14</bottom><width>340</width><height>26</height>
+                    <label>$INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)]</label>
+                    <font>font12</font>
+                    <textcolor>33FFFFFF</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
+            </control>
+
+            <!-- ═══════════ SETTINGS LIST ═══════════ -->
+            <control type="list" id="9001">
+                <left>380</left><top>100</top><width>1340</width><height>700</height>
+                <onup>9001</onup>
+                <ondown>9001</ondown>
+                <onleft>9000</onleft>
+                <onright>9001</onright>
+                <scrolltime>150</scrolltime>
+                <itemgap>2</itemgap>
+
+                <!-- ── NORMAL card (h=110) ── -->
+                <itemlayout height="110" width="1340">
+
+                    <!-- card bg: parent / danger / leaf -->
+                    <control type="image">
+                        <left>30</left><top>6</top><width>1280</width><height>98</height>
+                        <texture colordiffuse="FF1E2230">special://skin/media/colors/white.png</texture>
+                        <visible>String.IsEqual(ListItem.Property(type),parent)</visible>
+                    </control>
+                    <control type="image">
+                        <left>30</left><top>6</top><width>1280</width><height>98</height>
+                        <texture colordiffuse="FF1A1010">special://skin/media/colors/white.png</texture>
+                        <visible>String.IsEqual(ListItem.Property(danger),true)</visible>
+                    </control>
+                    <control type="image">
+                        <left>30</left><top>6</top><width>1280</width><height>98</height>
+                        <texture colordiffuse="FF13151E">special://skin/media/colors/white.png</texture>
+                        <visible>![String.IsEqual(ListItem.Property(type),parent) | String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+
+                    <!-- ── PARENT row: icon + label (top) + subtitle (bottom) + right chevron ── -->
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>String.IsEqual(ListItem.Property(type),parent)</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>String.IsEqual(ListItem.Property(type),parent)</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>58</top><width>900</width><height>34</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FF8B92A5</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>String.IsEqual(ListItem.Property(type),parent)</visible>
+                    </control>
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>String.IsEqual(ListItem.Property(type),parent)</visible>
+                    </control>
+
+                    <!-- ── LEAF row: icon + label (top) + subtitle (bottom) ── -->
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>!String.IsEqual(ListItem.Property(type),parent)</visible>
+                    </control>
+                    <!-- label: white, or red for danger -->
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>![String.IsEqual(ListItem.Property(type),parent) | String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFF5555</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>String.IsEqual(ListItem.Property(danger),true)</visible>
+                    </control>
+                    <!-- subtitle / value — shown for all types except bool/select/number (they use badges) -->
+                    <control type="label">
+                        <left>108</left><top>58</top><width>900</width><height>34</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FF8B92A5</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>![String.IsEqual(ListItem.Property(type),bool) | String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]</visible>
+                    </control>
+
+                    <!-- right icon — rendered at 28×28 square (SVG so no ratio issue) -->
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>!String.IsEqual(ListItem.Property(type),bool)</visible>
+                    </control>
+
+                    <!-- BOOL toggle: 120×75 native, keep aspect -->
+                    <control type="image">
+                        <left>1202</left><top>33</top><width>72</width><height>44</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture colordiffuse="FF4EC94E">special://skin/media/buttons/radio-button-on.png</texture>
+                        <visible>[String.IsEqual(ListItem.Property(type),bool) + String.IsEqual(ListItem.Property(bool_on),true)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1202</left><top>33</top><width>72</width><height>44</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture colordiffuse="FF8B92A5">special://skin/media/buttons/radio-button-off.png</texture>
+                        <visible>[String.IsEqual(ListItem.Property(type),bool) + String.IsEqual(ListItem.Property(bool_on),false)]</visible>
+                    </control>
+
+                    <!-- SELECT / NUMBER badge -->
+                    <control type="image">
+                        <left>1060</left><top>32</top><width>230</width><height>46</height>
+                        <texture colordiffuse="1AFFFFFF">special://skin/media/colors/white.png</texture>
+                        <visible>[String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1060</left><top>32</top><width>230</width><height>46</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]</visible>
+                    </control>
+
+                    <!-- API KEY status badge: green pill if set, dim if empty -->
+                    <control type="image">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <texture colordiffuse="2A4EC94E">special://skin/media/colors/white.png</texture>
+                        <visible>[String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),true)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <texture colordiffuse="1AFFFFFF">special://skin/media/colors/white.png</texture>
+                        <visible>[String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),false)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <label>$INFO[ListItem.Property(key_val)]</label>
+                        <font>font12</font>
+                        <textcolor>FF4EC94E</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),true)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <label>Not set</label>
+                        <font>font12</font>
+                        <textcolor>FF8B92A5</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),false)]</visible>
+                    </control>
+
+                </itemlayout>
+
+                <!-- ── FOCUSED card: transparent gold bg + solid gold right bar ── -->
+                <focusedlayout height="110" width="1340">
+
+                    <!-- card bg: transparent gold or danger red — only when list owns focus -->
+                    <control type="image">
+                        <left>30</left><top>2</top><width>1280</width><height>106</height>
+                        <texture colordiffuse="33FFCC00">special://skin/media/colors/white.png</texture>
+                        <visible>[Control.HasFocus(9001) + !String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>30</left><top>2</top><width>1280</width><height>106</height>
+                        <texture colordiffuse="33FF3300">special://skin/media/colors/white.png</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <!-- dim neutral card bg when list does not have focus -->
+                    <control type="image">
+                        <left>30</left><top>6</top><width>1280</width><height>98</height>
+                        <texture colordiffuse="FF13151E">special://skin/media/colors/white.png</texture>
+                        <visible>!Control.HasFocus(9001)</visible>
+                    </control>
+                    <!-- solid gold right bar — only when list owns focus -->
+                    <control type="image">
+                        <left>1306</left><top>16</top><width>4</width><height>78</height>
+                        <texture colordiffuse="FFFFCC00">special://skin/media/colors/white.png</texture>
+                        <visible>[Control.HasFocus(9001) + !String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <!-- solid red right bar for danger -->
+                    <control type="image">
+                        <left>1306</left><top>16</top><width>4</width><height>78</height>
+                        <texture colordiffuse="FFFF5555">special://skin/media/colors/white.png</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+
+                    <!-- PARENT focused: icon + label (top) + subtitle (bottom) + right chevron -->
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FFFFCC00">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>[!Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <!-- label: gold when focused, white when not -->
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFFCC00</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[!Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <!-- subtitle: gold-dim when focused, grey when not -->
+                    <control type="label">
+                        <left>108</left><top>58</top><width>900</width><height>34</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>CCFFCC00</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>58</top><width>900</width><height>34</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FF8B92A5</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[!Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <!-- right chevron -->
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FFFFCC00">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>[!Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+
+                    <!-- LEAF focused: icon + label + subtitle -->
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FFFFCC00">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>[Control.HasFocus(9001) + ![String.IsEqual(ListItem.Property(type),parent) | String.IsEqual(ListItem.Property(danger),true)]]</visible>
+                    </control>
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FFFF5555">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>68</left><top>38</top><width>26</width><height>26</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(icon)]</texture>
+                        <visible>[!Control.HasFocus(9001) + !String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <!-- label: gold or red when focused, white when not -->
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFFCC00</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + ![String.IsEqual(ListItem.Property(type),parent) | String.IsEqual(ListItem.Property(danger),true)]]</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFF5555</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>8</top><width>900</width><height>46</height>
+                        <label>$INFO[ListItem.Label]</label>
+                        <font>font_settings_item</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[!Control.HasFocus(9001) + !String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <!-- subtitle: gold-dim when focused, grey when not; hidden only for bool/select/number -->
+                    <control type="label">
+                        <left>108</left><top>58</top><width>900</width><height>34</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>CCFFCC00</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + ![String.IsEqual(ListItem.Property(type),bool) | String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)] + !String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>108</left><top>58</top><width>900</width><height>34</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FF8B92A5</textcolor>
+                        <align>left</align><aligny>center</aligny>
+                        <visible>[!Control.HasFocus(9001) + ![String.IsEqual(ListItem.Property(type),bool) | String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)] + !String.IsEqual(ListItem.Property(type),parent)]</visible>
+                    </control>
+
+                    <!-- right icon focused: gold/red when focused, grey when not -->
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FFFFCC00">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>[Control.HasFocus(9001) + ![String.IsEqual(ListItem.Property(type),bool) | String.IsEqual(ListItem.Property(danger),true)]]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FFFF5555">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(danger),true)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1264</left><top>41</top><width>28</width><height>28</height>
+                        <texture colordiffuse="FF8B92A5">$INFO[ListItem.Art(right_icon)]</texture>
+                        <visible>[!Control.HasFocus(9001) + !String.IsEqual(ListItem.Property(type),bool)]</visible>
+                    </control>
+
+                    <!-- BOOL focused: gold off-toggle when focused, grey when not -->
+                    <control type="image">
+                        <left>1202</left><top>33</top><width>72</width><height>44</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture colordiffuse="FF4EC94E">special://skin/media/buttons/radio-button-on.png</texture>
+                        <visible>[String.IsEqual(ListItem.Property(type),bool) + String.IsEqual(ListItem.Property(bool_on),true)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1202</left><top>33</top><width>72</width><height>44</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture colordiffuse="CCFFCC00">special://skin/media/buttons/radio-button-off.png</texture>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),bool) + String.IsEqual(ListItem.Property(bool_on),false)]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1202</left><top>33</top><width>72</width><height>44</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture colordiffuse="FF8B92A5">special://skin/media/buttons/radio-button-off.png</texture>
+                        <visible>[!Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),bool) + String.IsEqual(ListItem.Property(bool_on),false)]</visible>
+                    </control>
+
+                    <!-- badge focused: gold when focused, normal when not -->
+                    <control type="image">
+                        <left>1060</left><top>32</top><width>230</width><height>46</height>
+                        <texture colordiffuse="22FFCC00">special://skin/media/colors/white.png</texture>
+                        <visible>[Control.HasFocus(9001) + [String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]]</visible>
+                    </control>
+                    <control type="image">
+                        <left>1060</left><top>32</top><width>230</width><height>46</height>
+                        <texture colordiffuse="1AFFFFFF">special://skin/media/colors/white.png</texture>
+                        <visible>[!Control.HasFocus(9001) + [String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1060</left><top>32</top><width>230</width><height>46</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FFFFCC00</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + [String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1060</left><top>32</top><width>230</width><height>46</height>
+                        <label>$INFO[ListItem.Label2]</label>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[!Control.HasFocus(9001) + [String.IsEqual(ListItem.Property(type),select) | String.IsEqual(ListItem.Property(type),number)]]</visible>
+                    </control>
+
+                    <!-- API KEY status badge focused -->
+                    <control type="image">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <texture colordiffuse="2A000000">special://skin/media/colors/white.png</texture>
+                        <visible>String.IsEqual(ListItem.Property(type),apikey)</visible>
+                    </control>
+                    <control type="label">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <label>$INFO[ListItem.Property(key_val)]</label>
+                        <font>font12</font>
+                        <textcolor>FF4EC94E</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),true)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <label>Not set</label>
+                        <font>font12</font>
+                        <textcolor>CCFFCC00</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),false)]</visible>
+                    </control>
+                    <control type="label">
+                        <left>1040</left><top>32</top><width>250</width><height>46</height>
+                        <label>Not set</label>
+                        <font>font12</font>
+                        <textcolor>FF8B92A5</textcolor>
+                        <align>center</align><aligny>center</aligny>
+                        <visible>[!Control.HasFocus(9001) + String.IsEqual(ListItem.Property(type),apikey) + String.IsEqual(ListItem.Property(key_set),false)]</visible>
+                    </control>
+
+                </focusedlayout>
+            </control>
+
+            <!-- ═══════════ INFO BOX ═══════════ -->
+            <control type="group">
+                <left>380</left><top>800</top><width>1340</width><height>120</height>
+                <control type="image">
+                    <left>0</left><top>0</top><width>1340</width><height>120</height>
+                    <texture colordiffuse="40000000">special://skin/media/colors/white.png</texture>
+                </control>
+                <control type="image">
+                    <left>0</left><top>0</top><width>1340</width><height>1</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+                <control type="image">
+                    <left>44</left><top>38</top><width>28</width><height>28</height>
+                    <texture colordiffuse="88FFCC00">special://skin/media/icons/info.png</texture>
+                </control>
+                <control type="label" id="9010">
+                    <left>88</left><top>16</top><width>1210</width><height>40</height>
+                    <label>Select a setting</label>
+                    <font>font14</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
+                <control type="label" id="9011">
+                    <left>88</left><top>58</top><width>1210</width><height>52</height>
+                    <label>Navigate the list to see a description here.</label>
+                    <font>font13</font>
+                    <textcolor>FF8B92A5</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                    <wrapmultiline>true</wrapmultiline>
+                </control>
+            </control>
+
+        </control>
+    </controls>
+</window>

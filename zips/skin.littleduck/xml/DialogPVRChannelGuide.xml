@@ -56,7 +56,7 @@
 							<left>0</left>
 							<width>730</width>
 							<bottom>0</bottom>
-							<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+							<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 							<visible>Control.HasFocus(11)</visible>
 							<animation effect="fade" start="100" end="0" time="0">UnFocus</animation>
 						</control>

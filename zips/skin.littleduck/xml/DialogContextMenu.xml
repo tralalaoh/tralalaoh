@@ -314,7 +314,7 @@
 				<textcolor>unfocused_text</textcolor>
 				<focusedcolor>FFFFFFFF</focusedcolor>
 				<shadowcolor>text_shadow</shadowcolor>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+				<texturefocus />
 				<texturenofocus colordiffuse="08FFFFFF">colors/white.png</texturenofocus>
 				<label2>[COLOR 30FFFFFF]>[/COLOR]</label2>
 				<textcolor2>30FFFFFF</textcolor2>

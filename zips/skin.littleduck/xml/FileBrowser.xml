@@ -96,7 +96,7 @@
 						<right>0</right>
 						<height>71</height>
 						<visible>Control.HasFocus(450)</visible>
-						<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+						<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 					</control>
 					<control type="image">
 						<left>35</left>
@@ -159,7 +159,7 @@
 						<right>0</right>
 						<height>71</height>
 						<visible>Control.HasFocus(451)</visible>
-						<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+						<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 					</control>
 					<control type="image">
 						<left>35</left>

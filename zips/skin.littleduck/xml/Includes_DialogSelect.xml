@@ -221,7 +221,7 @@
 							<height>90</height>
 							<aligny>center</aligny>
 							<font>font14</font>
-							<textcolor>accent_color</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 							<label>[B][UPPERCASE]$INFO[ListItem.Label][/UPPERCASE][/B]</label>
 						</control>
 						<!-- Pipe separator -->
@@ -395,7 +395,7 @@
 						<top>0</top>
 						<right>25</right>
 						<bottom>0</bottom>
-						<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+						<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 						<visible>Control.HasFocus(6)</visible>
 					</control>
 					<control type="image">
@@ -564,7 +564,7 @@
 						</itemlayout>
 						<focusedlayout width="408" height="374">
 							<control type="image">
-								<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+								<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 								<visible>Control.HasFocus(3)</visible>
 							</control>
 							<control type="image">

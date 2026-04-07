@@ -54,7 +54,7 @@
 						<height>80</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+						<texturefocus />
 						<texturenofocus />
 						<radioposx>280</radioposx>
 						<textoffsetx>20</textoffsetx>
@@ -64,7 +64,7 @@
 						<height>80</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+						<texturefocus />
 						<texturenofocus />
 						<textoffsetx>20</textoffsetx>
 						<label></label>
@@ -73,7 +73,7 @@
 						<height>80</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+						<texturefocus />
 						<texturenofocus />
 						<textoffsetx>20</textoffsetx>
 						<label>$LOCALIZE[190]</label>
@@ -82,7 +82,7 @@
 						<height>80</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+						<texturefocus />
 						<texturenofocus />
 						<textoffsetx>20</textoffsetx>
 						<label>$LOCALIZE[192]</label>

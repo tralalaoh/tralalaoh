@@ -325,7 +325,7 @@
 					<top>0</top>
 					<right>0</right>
 					<bottom>0</bottom>
-					<texture colordiffuse="button_focus">$PARAM[diffuse]</texture>
+					<texture colordiffuse="00FFFFFF">$PARAM[diffuse]</texture>
 					<visible>Control.HasFocus($PARAM[list_id])</visible>
 				</control>
 				<control type="group">
@@ -369,7 +369,7 @@
 						<font>$PARAM[font]</font>
 						<aligny>center</aligny>
 						<label>$INFO[ListItem.Label]</label>
-						<textcolor>FFFFFFFF</textcolor>
+						<textcolor>accent_color</textcolor>
 						<scroll>true</scroll>
 					</control>
 				</control>
@@ -535,7 +535,7 @@
 						<top>10</top>
 						<right>25</right>
 						<bottom>10</bottom>
-						<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+						<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 						<animation effect="fade" start="100" end="0" time="0" condition="!Control.HasFocus($PARAM[list_id])">Conditional</animation>
 					</control>
 					<control type="image">

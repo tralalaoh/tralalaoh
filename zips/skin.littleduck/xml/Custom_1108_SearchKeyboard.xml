@@ -722,7 +722,7 @@
 							<left>60</left><top>52</top><width>500</width><height>28</height>
 							<font>font27</font>
 							<label>$INFO[ListItem.Year]</label>
-							<textcolor>accent_color</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 						</control>
 					</focusedlayout>
 					<content>$VAR[SearchProviderLiveVar]</content>

@@ -7,7 +7,7 @@
 	<color name="dialog_bg2">FF242424</color>
 	<color name="button_focus">FFFCC200</color>
 	<color name="button_focus2">CCFCC200</color>
-	<color name="focused_text">FF0D0D0D</color>
+	<color name="focused_text">FFFCC200</color>
 	<color name="unfocused_text">FFE5E5E5</color>
 	<color name="accent_color">FFFCC200</color>
 	<color name="selected">FFFFD700</color>

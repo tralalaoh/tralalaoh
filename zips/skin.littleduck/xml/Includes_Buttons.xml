@@ -5,8 +5,8 @@
 	     Use these everywhere instead of hardcoding colordiffuse="button_focus".
 	     To retheme the entire skin, edit $VAR[ColorHighlight] in Variables.xml. -->
 	<include name="Texture_Pill_H">
-		<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-		<alttexturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</alttexturefocus>
+		<texturefocus />
+		<alttexturefocus />
 		<texturenofocus />
 		<alttexturenofocus />
 	</include>
@@ -52,8 +52,8 @@
 				<font>font12</font>
 				<textcolor>unfocused_text</textcolor>
 				<focusedcolor>focused_text</focusedcolor>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-				<alttexturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</alttexturefocus>
+				<texturefocus />
+				<alttexturefocus />
 				<texturenofocus />
 				<alttexturenofocus />
 				<onclick>noop</onclick>
@@ -68,10 +68,10 @@
 		</definition>
 	</include>
 	<include name="DefaultSettingButton">
-		<param name="height">90</param>
+		<param name="height">60</param>
 		<param name="left">0</param>
-		<param name="right">20</param>
-		<param name="textoffsetx">30</param>
+		<param name="right">25</param>
+		<param name="textoffsetx">40</param>
 		<definition>
 			<textoffsetx>$PARAM[textoffsetx]</textoffsetx>
 			<top>0</top>
@@ -79,30 +79,19 @@
 			<height>$PARAM[height]</height>
 			<right>$PARAM[right]</right>
 			<aligny>center</aligny>
-			<wrapmultiline>true</wrapmultiline>
 			<invalidcolor>invalid</invalidcolor>
 			<selectedcolor>selected</selectedcolor>
-			<font>font_settings_item</font>
+			<font>font12</font>
 			<textcolor>unfocused_text</textcolor>
 			<focusedcolor>focused_text</focusedcolor>
-			<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-			<texturenofocus border="12" colordiffuse="1EFFFFFF">masks/focus_pill.png</texturenofocus>
-			<!-- Pill toggle for radiobutton state -->
-			<radiowidth>120</radiowidth>
-			<radioheight>56</radioheight>
-			<radioposy>17</radioposy>
-			<textureradioonfocus>buttons/toggle-pill-on.png</textureradioonfocus>
-			<textureradioonnofocus>buttons/toggle-pill-on.png</textureradioonnofocus>
-			<textureradioofffocus>buttons/toggle-pill-off.png</textureradioofffocus>
-			<textureradiooffnofocus>buttons/toggle-pill-off.png</textureradiooffnofocus>
-			<include>FocusBounce</include>
-			<label2></label2>
+			<texturefocus />
+			<texturenofocus />
 		</definition>
 	</include>
 	<include name="DefaultSystemSettingsButton">
-		<param name="height">80</param>
-		<param name="right">20</param>
-		<param name="textoffsetx">30</param>
+		<param name="height">60</param>
+		<param name="right">25</param>
+		<param name="textoffsetx">40</param>
 		<definition>
 			<textoffsetx>$PARAM[textoffsetx]</textoffsetx>
 			<top>0</top>
@@ -114,58 +103,25 @@
 			<font>font_settings_item</font>
 			<invalidcolor>invalid</invalidcolor>
 			<selectedcolor>selected</selectedcolor>
-			<texturefocus border="12" colordiffuse="FFFFFFFF">masks/focus_pill.png</texturefocus>
-			<texturenofocus border="12" colordiffuse="1EFFFFFF">masks/focus_pill.png</texturenofocus>
-			<include>FocusBounce</include>
-			<label2></label2>
+			<texturefocus />
+			<texturenofocus />
 		</definition>
 	</include>
 	<include name="DialogSettingButton">
-		<param name="height">90</param>
-		<param name="textoffsetx">30</param>
+		<param name="height">60</param>
+		<param name="textoffsetx">40</param>
 		<definition>
 			<textoffsetx>$PARAM[textoffsetx]</textoffsetx>
 			<top>0</top>
 			<height>$PARAM[height]</height>
 			<aligny>center</aligny>
-			<wrapmultiline>true</wrapmultiline>
-			<font>font_settings_item</font>
+			<font>font14</font>
 			<invalidcolor>invalid</invalidcolor>
 			<selectedcolor>selected</selectedcolor>
-			<textcolor>unfocused_text</textcolor>
-			<focusedcolor>focused_text</focusedcolor>
-			<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-			<texturenofocus border="12" colordiffuse="1EFFFFFF">masks/focus_pill.png</texturenofocus>
-			<include>FocusBounce</include>
-			<label2></label2>
+			<texturefocus />
+			<texturenofocus colordiffuse="00FFFFFF">colors/white.png</texturenofocus>
 		</definition>
 	</include>
-	<!-- Action button variant: shows caret-right chevron on the right side -->
-	<include name="DefaultSettingButtonAction">
-		<param name="height">90</param>
-		<param name="left">0</param>
-		<param name="right">20</param>
-		<param name="textoffsetx">30</param>
-		<definition>
-			<textoffsetx>$PARAM[textoffsetx]</textoffsetx>
-			<top>0</top>
-			<left>$PARAM[left]</left>
-			<height>$PARAM[height]</height>
-			<right>$PARAM[right]</right>
-			<aligny>center</aligny>
-			<wrapmultiline>true</wrapmultiline>
-			<invalidcolor>invalid</invalidcolor>
-			<selectedcolor>selected</selectedcolor>
-			<font>font_settings_item</font>
-			<textcolor>unfocused_text</textcolor>
-			<focusedcolor>focused_text</focusedcolor>
-			<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-			<texturenofocus border="12" colordiffuse="1EFFFFFF">masks/focus_pill.png</texturenofocus>
-			<include>FocusBounce</include>
-			<label2>›</label2>
-		</definition>
-	</include>
-
 	<include name="DefaultSettingLabel">
 		<left>0</left>
 		<top>0</top>
@@ -236,7 +192,7 @@
 				<height>110</height>
 				<align>left</align>
 				<aligny>top</aligny>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+				<texturefocus />
 				<texturenofocus />
 				<textoffsetx>40</textoffsetx>
 				<textoffsety>35</textoffsety>
@@ -432,7 +388,7 @@
 				<top>0</top>
 				<width>600</width>
 				<height>68</height>
-				<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+				<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 			</control>
 			<control type="label">
 				<left>0</left>
@@ -443,7 +399,7 @@
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>$INFO[ListItem.Label]</label>
-				<textcolor>FFFFFFFF</textcolor>
+				<textcolor>accent_color</textcolor>
 			</control>
 		</focusedlayout>
 	</include>

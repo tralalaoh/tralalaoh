@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Rabite Watch — AniList Authentication Dialog
+    =============================================
+    File   : resources/skins/Default/1080i/DialogAniListAuth.xml
+    Window : type="dialog"   (floats above the current screen)
+
+    Layout (1920 × 1080 reference resolution)
+    ─────────────────────────────────────────────────────────────────────
+    ┌─────────────────────────────────────────────────────────────────┐
+    │  HEADER — icon + "Connect AniList" title                        │
+    ├──────────────────────────────────┬──────────────────────────────┤
+    │  LEFT — step-by-step             │  RIGHT — QR code image       │
+    │  instructions                    │                              │
+    │                                  │                              │
+    ├──────────────────────────────────┴──────────────────────────────┤
+    │  STATUS label (feedback / error messages)                       │
+    ├─────────────────────────────────────────────────────────────────┤
+    │  [  Enter Token  ]                           [  Cancel  ]       │
+    └─────────────────────────────────────────────────────────────────┘
+
+    Control ID map (must match _AniListWindowDialog constants in services/anilist.py):
+        100  image   QR code
+        200  label   status / feedback
+        300  button  Enter Token
+        301  button  Cancel
+
+    Navigation map:
+        Enter Token  ←→  Cancel   (left/right)
+        Both buttons go up to themselves (no other focusable controls above)
+-->
+<window type="dialog">
+
+    <!-- Default focused control when the dialog opens -->
+    <defaultcontrol always="true">300</defaultcontrol>
+
+    <controls>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!--  BACKGROUND SCRIM — darkens whatever is behind the dialog -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <control type="image">
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>1920</width>
+            <height>1080</height>
+            <texture colordiffuse="BB000000">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+            <aspectratio>stretch</aspectratio>
+        </control>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!--  DIALOG PANEL  — centred, 1480 × 720                     -->
+        <!--  posx = (1920 − 1480) / 2 = 220                          -->
+        <!--  posy = (1080 −  720) / 2 = 180                          -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <control type="group">
+            <posx>220</posx>
+            <posy>180</posy>
+            <width>1480</width>
+            <height>720</height>
+
+            <!-- ── Panel background ── -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>1480</width>
+                <height>720</height>
+                <texture colordiffuse="F20D1B2E">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+            <!-- ── Top accent bar (AniList blue #02A9FF) ── -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>1480</width>
+                <height>4</height>
+                <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+            <!-- ── Outer border ── -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>1480</width>
+                <height>720</height>
+                <texture border="1" colordiffuse="55102030">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+
+            <!-- ══════════════════════════════════════════════════════ -->
+            <!--  HEADER  (y: 4 → 84, h: 80)                          -->
+            <!-- ══════════════════════════════════════════════════════ -->
+            <control type="group">
+                <posx>0</posx>
+                <posy>4</posy>
+                <width>1480</width>
+                <height>80</height>
+
+                <!-- Header tinted background -->
+                <control type="image">
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>1480</width>
+                    <height>80</height>
+                    <texture colordiffuse="20FFFFFF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+
+                <!-- AniList service icon -->
+                <control type="image">
+                    <posx>24</posx>
+                    <posy>16</posy>
+                    <width>48</width>
+                    <height>48</height>
+                    <texture>special://home/addons/plugin.video.rabitewatch/media/anilist.png</texture>
+                    <aspectratio>keep</aspectratio>
+                </control>
+
+                <!-- Title -->
+                <control type="label">
+                    <posx>86</posx>
+                    <posy>13</posy>
+                    <width>900</width>
+                    <height>34</height>
+                    <font>font20</font>
+                    <textcolor>FFE8F4FF</textcolor>
+                    <label>Connect AniList</label>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                </control>
+
+                <!-- Subtitle -->
+                <control type="label">
+                    <posx>86</posx>
+                    <posy>47</posy>
+                    <width>900</width>
+                    <height>26</height>
+                    <font>font12</font>
+                    <textcolor>FF4A6580</textcolor>
+                    <label>RABITE WATCH · ANILIST AUTHENTICATION</label>
+                    <align>left</align>
+                </control>
+
+                <!-- Header bottom border -->
+                <control type="image">
+                    <posx>0</posx>
+                    <posy>79</posy>
+                    <width>1480</width>
+                    <height>1</height>
+                    <texture colordiffuse="55102030">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+            </control>
+            <!-- /HEADER -->
+
+
+            <!-- ══════════════════════════════════════════════════════ -->
+            <!--  BODY  (y: 85, h: 530)                                -->
+            <!--  Left column : instructions  (w ≈ 780)                -->
+            <!--  Divider     : x = 824, w = 1                         -->
+            <!--  Right column: QR code       (w ≈ 620)                -->
+            <!-- ══════════════════════════════════════════════════════ -->
+
+            <!-- ── LEFT — Instructions ── -->
+            <control type="group">
+                <posx>28</posx>
+                <posy>100</posy>
+                <width>784</width>
+                <height>510</height>
+
+                <!-- Section heading -->
+                <control type="label">
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>784</width>
+                    <height>22</height>
+                    <font>font12</font>
+                    <textcolor>FF4A6580</textcolor>
+                    <label>HOW TO CONNECT</label>
+                    <align>left</align>
+                </control>
+
+                <!-- Step 1 -->
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>32</posy>
+                    <width>784</width>
+                    <height>70</height>
+
+                    <!-- Number badge -->
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <texture colordiffuse="3002A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                        <aspectratio>stretch</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <font>font13</font>
+                        <textcolor>FF02A9FF</textcolor>
+                        <label>1</label>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                    </control>
+
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>0</posy>
+                        <width>736</width>
+                        <height>26</height>
+                        <font>font16</font>
+                        <textcolor>FFD0E4F8</textcolor>
+                        <label>Scan the QR code with your phone</label>
+                        <align>left</align>
+                    </control>
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>28</posy>
+                        <width>736</width>
+                        <height>40</height>
+                        <font>font12</font>
+                        <textcolor>FF4A6580</textcolor>
+                        <label>Open your camera app and point it at the QR code on the right.</label>
+                        <align>left</align>
+                        <wrapmultiline>true</wrapmultiline>
+                    </control>
+                </control>
+
+                <!-- Step 2 -->
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>118</posy>
+                    <width>784</width>
+                    <height>90</height>
+
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <texture colordiffuse="3002A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                        <aspectratio>stretch</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <font>font13</font>
+                        <textcolor>FF02A9FF</textcolor>
+                        <label>2</label>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                    </control>
+
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>0</posy>
+                        <width>736</width>
+                        <height>26</height>
+                        <font>font16</font>
+                        <textcolor>FFD0E4F8</textcolor>
+                        <label>Log in and authorize Rabite Watch</label>
+                        <align>left</align>
+                    </control>
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>28</posy>
+                        <width>736</width>
+                        <height>56</height>
+                        <font>font12</font>
+                        <textcolor>FF4A6580</textcolor>
+                        <label>Sign into AniList on your phone, then tap Authorize. Your browser will redirect to a new page.</label>
+                        <align>left</align>
+                        <wrapmultiline>true</wrapmultiline>
+                    </control>
+                </control>
+
+                <!-- Step 3 -->
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>222</posy>
+                    <width>784</width>
+                    <height>90</height>
+
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <texture colordiffuse="3002A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                        <aspectratio>stretch</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <font>font13</font>
+                        <textcolor>FF02A9FF</textcolor>
+                        <label>3</label>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                    </control>
+
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>0</posy>
+                        <width>736</width>
+                        <height>26</height>
+                        <font>font16</font>
+                        <textcolor>FFD0E4F8</textcolor>
+                        <label>Copy your access token from the URL</label>
+                        <align>left</align>
+                    </control>
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>28</posy>
+                        <width>736</width>
+                        <height>56</height>
+                        <font>font12</font>
+                        <textcolor>FF4A6580</textcolor>
+                        <label>After the redirect, find the token in your browser URL bar after #access_token= and copy everything after it.</label>
+                        <align>left</align>
+                        <wrapmultiline>true</wrapmultiline>
+                    </control>
+                </control>
+
+                <!-- Step 4 -->
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>326</posy>
+                    <width>784</width>
+                    <height>90</height>
+
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <texture colordiffuse="3002A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                        <aspectratio>stretch</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>32</width>
+                        <height>32</height>
+                        <font>font13</font>
+                        <textcolor>FF02A9FF</textcolor>
+                        <label>4</label>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                    </control>
+
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>0</posy>
+                        <width>736</width>
+                        <height>26</height>
+                        <font>font16</font>
+                        <textcolor>FFD0E4F8</textcolor>
+                        <label>Press "Enter Token" and paste it here</label>
+                        <align>left</align>
+                    </control>
+                    <control type="label">
+                        <posx>48</posx>
+                        <posy>28</posy>
+                        <width>736</width>
+                        <height>56</height>
+                        <font>font12</font>
+                        <textcolor>FF4A6580</textcolor>
+                        <label>Use Kore, a Bluetooth keyboard, or the on-screen keyboard to paste your token and confirm.</label>
+                        <align>left</align>
+                        <wrapmultiline>true</wrapmultiline>
+                    </control>
+                </control>
+
+                <!-- Manual URL hint -->
+                <control type="label">
+                    <posx>0</posx>
+                    <posy>430</posy>
+                    <width>784</width>
+                    <height>26</height>
+                    <font>font12</font>
+                    <textcolor>FF2A4560</textcolor>
+                    <label>No QR scanner? Visit: anilist.co/api/v2/oauth/authorize?client_id=35064&amp;response_type=token</label>
+                    <align>left</align>
+                    <wrapmultiline>true</wrapmultiline>
+                </control>
+
+            </control>
+            <!-- /LEFT -->
+
+
+            <!-- ── Vertical divider ── -->
+            <control type="image">
+                <posx>826</posx>
+                <posy>84</posy>
+                <width>1</width>
+                <height>546</height>
+                <texture colordiffuse="55102030">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+
+            <!-- ── RIGHT — QR Code ── -->
+            <control type="group">
+                <posx>850</posx>
+                <posy>100</posy>
+                <width>606</width>
+                <height>510</height>
+
+                <!-- Section heading -->
+                <control type="label">
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>606</width>
+                    <height>22</height>
+                    <font>font12</font>
+                    <textcolor>FF4A6580</textcolor>
+                    <label>SCAN TO AUTHORIZE</label>
+                    <align>center</align>
+                </control>
+
+                <!-- White background behind QR (QR codes need white bg) -->
+                <control type="image">
+                    <posx>90</posx>
+                    <posy>36</posy>
+                    <width>428</width>
+                    <height>428</height>
+                    <texture colordiffuse="FFFFFFFF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+
+                <!-- QR code image — ID 100, set at runtime via setImage() -->
+                <control type="image" id="100">
+                    <posx>102</posx>
+                    <posy>48</posy>
+                    <width>404</width>
+                    <height>404</height>
+                    <!-- Default texture shown before onInit() fires.     -->
+                    <!-- Replaced immediately by Python with the real PNG. -->
+                    <texture>special://home/addons/plugin.video.rabitewatch/media/anilist.png</texture>
+                    <aspectratio>keep</aspectratio>
+                </control>
+
+                <!-- Blue corner bracket — Top Left -->
+                <control type="image">
+                    <posx>76</posx>
+                    <posy>22</posy>
+                    <width>28</width>
+                    <height>3</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+                <control type="image">
+                    <posx>76</posx>
+                    <posy>22</posy>
+                    <width>3</width>
+                    <height>28</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+
+                <!-- Blue corner bracket — Top Right -->
+                <control type="image">
+                    <posx>504</posx>
+                    <posy>22</posy>
+                    <width>28</width>
+                    <height>3</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+                <control type="image">
+                    <posx>529</posx>
+                    <posy>22</posy>
+                    <width>3</width>
+                    <height>28</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+
+                <!-- Blue corner bracket — Bottom Left -->
+                <control type="image">
+                    <posx>76</posx>
+                    <posy>465</posy>
+                    <width>28</width>
+                    <height>3</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+                <control type="image">
+                    <posx>76</posx>
+                    <posy>437</posy>
+                    <width>3</width>
+                    <height>28</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+
+                <!-- Blue corner bracket — Bottom Right -->
+                <control type="image">
+                    <posx>504</posx>
+                    <posy>465</posy>
+                    <width>28</width>
+                    <height>3</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+                <control type="image">
+                    <posx>529</posx>
+                    <posy>437</posy>
+                    <width>3</width>
+                    <height>28</height>
+                    <texture colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                    <aspectratio>stretch</aspectratio>
+                </control>
+
+            </control>
+            <!-- /RIGHT -->
+
+
+            <!-- ══════════════════════════════════════════════════════ -->
+            <!--  STATUS LABEL  — ID 200, updated by Python            -->
+            <!--  y: 640, h: 30                                        -->
+            <!-- ══════════════════════════════════════════════════════ -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>630</posy>
+                <width>1480</width>
+                <height>1</height>
+                <texture colordiffuse="55102030">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+            <control type="label" id="200">
+                <posx>28</posx>
+                <posy>638</posy>
+                <width>1200</width>
+                <height>30</height>
+                <font>font13</font>
+                <textcolor>FFC8D8EC</textcolor>
+                <label>Scan the QR code, then tap  Enter Token  to paste your token.</label>
+                <align>left</align>
+                <aligny>center</aligny>
+            </control>
+
+
+            <!-- ══════════════════════════════════════════════════════ -->
+            <!--  FOOTER BUTTONS  y: 672, h: 44                        -->
+            <!-- ══════════════════════════════════════════════════════ -->
+
+            <!-- Footer background -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>671</posy>
+                <width>1480</width>
+                <height>49</height>
+                <texture colordiffuse="28000000">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+            <!-- Footer top border -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>671</posy>
+                <width>1480</width>
+                <height>1</height>
+                <texture colordiffuse="55102030">special://home/addons/plugin.video.rabitewatch/media/white.png</texture>
+                <aspectratio>stretch</aspectratio>
+            </control>
+
+            <!--
+                BUTTON — Enter Token  (ID 300)
+                Navigation:
+                    onright  → 301  (Cancel)
+                    onleft   → 300  (self, nothing to the left)
+                    onup     → 300  (self, nothing above)
+                    ondown   → 300  (self)
+            -->
+            <control type="button" id="300">
+                <posx>28</posx>
+                <posy>678</posy>
+                <width>260</width>
+                <height>36</height>
+                <label>Enter Token</label>
+                <font>font16</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <focusedcolor>FFFFFFFF</focusedcolor>
+                <texturefocus colordiffuse="FF02A9FF">special://home/addons/plugin.video.rabitewatch/media/white.png</texturefocus>
+                <texturenofocus colordiffuse="CC005F8E">special://home/addons/plugin.video.rabitewatch/media/white.png</texturenofocus>
+                <onleft>300</onleft>
+                <onright>301</onright>
+                <onup>300</onup>
+                <ondown>300</ondown>
+            </control>
+
+            <!--
+                BUTTON — Cancel  (ID 301)
+                Navigation:
+                    onleft   → 300  (Enter Token)
+                    onright  → 301  (self)
+                    onup     → 301  (self)
+                    ondown   → 301  (self)
+            -->
+            <control type="button" id="301">
+                <posx>1192</posx>
+                <posy>678</posy>
+                <width>260</width>
+                <height>36</height>
+                <label>Cancel</label>
+                <font>font16</font>
+                <textcolor>FF8090A0</textcolor>
+                <focusedcolor>FFD0E4F8</focusedcolor>
+                <texturefocus colordiffuse="55FFFFFF">special://home/addons/plugin.video.rabitewatch/media/white.png</texturefocus>
+                <texturenofocus colordiffuse="00000000">special://home/addons/plugin.video.rabitewatch/media/white.png</texturenofocus>
+                <onleft>300</onleft>
+                <onright>301</onright>
+                <onup>301</onup>
+                <ondown>301</ondown>
+            </control>
+
+        </control>
+        <!-- /DIALOG PANEL group -->
+
+    </controls>
+</window>

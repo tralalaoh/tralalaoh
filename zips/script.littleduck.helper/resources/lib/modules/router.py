@@ -16,6 +16,10 @@ def routing():
     xbmc.log(f"###littleduck ROUTER: Params: {params}", 1)
     xbmc.log(f"###littleduck ROUTER: ========================================", 1)
 
+    if mode == "open_skin_settings":
+        from modules.skin_settings_dialog import open_settings
+        return open_settings()
+
     if mode == "manage_widgets":
         from modules.cpath_maker import CPaths
         return CPaths(params.get("cpath_setting")).manage_widgets()

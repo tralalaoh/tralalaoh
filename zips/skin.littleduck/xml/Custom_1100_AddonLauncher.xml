@@ -98,7 +98,7 @@
 							<left>25</left>
 							<right>25</right>
 							<bottom>0</bottom>
-							<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+							<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 							<animation effect="fade" start="100" end="0" time="0" condition="!Control.HasFocus(9000)">Conditional</animation>
 						</control>
 						<control type="label">

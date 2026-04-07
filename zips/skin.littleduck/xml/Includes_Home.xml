@@ -593,10 +593,10 @@
 					<top>115</top>
 					<onright>$PARAM[list_id]</onright>
 					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),5)">$PARAM[tab5_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
-					<onup>$PARAM[tab_up_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
+				<onup>$PARAM[tab_up_id]</onup>
 					<orientation>horizontal</orientation>
 					<movement>4</movement>
 					<right>0</right>
@@ -639,10 +639,10 @@
 					<top>115</top>
 					<onright>$PARAM[landscape_id]</onright>
 					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),5)">$PARAM[tab5_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
-					<onup>$PARAM[tab_up_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
+				<onup>$PARAM[tab_up_id]</onup>
 					<orientation>horizontal</orientation>
 					<movement>1</movement>
 					<right>0</right>
@@ -685,10 +685,10 @@
 					<top>115</top>
 					<onright>$PARAM[landscapeinfo_id]</onright>
 					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),5)">$PARAM[tab5_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
-					<onup>$PARAM[tab_up_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
+				<onup>$PARAM[tab_up_id]</onup>
 					<orientation>horizontal</orientation>
 					<movement>1</movement>
 					<right>0</right>
@@ -746,7 +746,7 @@
 							<height>52</height>
 							<label>$INFO[ListItem.Label]</label>
 							<font>font10</font>
-							<textcolor>accent_color</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 							<align>left</align>
 							<shadowcolor>text_shadow</shadowcolor>
 							<autoscroll time="2000" delay="1500" repeat="2000">true</autoscroll>
@@ -769,10 +769,10 @@
 					<scrolltime tween="cubic" easing="out">500</scrolltime>
 					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
 					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),5)">$PARAM[tab5_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
-					<onup>$PARAM[tab_up_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
+				<onup>$PARAM[tab_up_id]</onup>
 					<onright>$PARAM[walll_id]</onright>
 					<include content="WidgetListCommon">
 						<param name="list_id" value="$PARAM[walll_id]"/>
@@ -817,10 +817,10 @@
 					<scrolltime tween="cubic" easing="out">500</scrolltime>
 					<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
 					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),5)">$PARAM[tab5_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
-					<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
-					<onup>$PARAM[tab_up_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),4)">$PARAM[tab4_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),3)">$PARAM[tab3_id]</onup>
+				<onup condition="String.IsEqual(Window(Home).Property($PARAM[tab_prop]),2)">$PARAM[tab2_id]</onup>
+				<onup>$PARAM[tab_up_id]</onup>
 					<onright>$PARAM[wallp_id]</onright>
 					<include content="WidgetListCommon">
 						<param name="list_id" value="$PARAM[wallp_id]"/>
@@ -1611,7 +1611,7 @@
 							<include>FocusBounce</include>
 							<width>347</width>
 							<height>120</height>
-							<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+							<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 							<bordersize>17</bordersize>
 							<include>Animation_FocusTextureFade</include>
 							<visible>Control.HasFocus($PARAM[list_id])</visible>
@@ -1619,7 +1619,7 @@
 						<control type="image">
 							<width>347</width>
 							<height>120</height>
-							<texture border="12" colordiffuse="$VAR[ColorHighlight2]">masks/focus_pill.png</texture>
+							<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 							<bordersize>20</bordersize>
 						</control>
 						<control type="image">
@@ -1733,7 +1733,7 @@
 							<include>FocusBounce</include>
 							<width>347</width>
 							<height>120</height>
-							<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+							<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 							<bordersize>17</bordersize>
 							<include>Animation_FocusTextureFade</include>
 							<visible>Control.HasFocus($PARAM[list_id])</visible>
@@ -1741,7 +1741,7 @@
 						<control type="image">
 							<width>347</width>
 							<height>120</height>
-							<texture border="12" colordiffuse="$VAR[ColorHighlight2]">masks/focus_pill.png</texture>
+							<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 							<bordersize>20</bordersize>
 						</control>
 						<control type="image">
@@ -1817,7 +1817,7 @@
 							<textoffsetx>40</textoffsetx>
 							<onclick>$PARAM[button_onclick]</onclick>
 							<align>center</align>
-							<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+							<texturefocus />
 							<texturenofocus />
 							<focusedcolor>focused_text</focusedcolor>
 							<visible>$PARAM[visible_1]</visible>

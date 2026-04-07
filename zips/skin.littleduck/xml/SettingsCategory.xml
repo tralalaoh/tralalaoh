@@ -1,214 +1,387 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SettingsCategory.xml — skin.littleduck
+    Panel 1720×920 @ (100,80)  |  Sidebar w=380  |  Settings x=380 w=1310 h=700
+    Info box y=800 h=120       |  Scrollbar x=1700 w=10
+
+    CRITICAL — id=3 and id=5 MUST be <grouplist>, NOT <list>.
+    Kodi's CGUIWindowSettingsCategory casts them to CGUIGroupList*. A <list>
+    control returns NULL on that cast → settings engine silently skips population.
+    Styling is driven by the template controls (id=7–15) which the engine clones.
+
+    ID map (Kodi settings engine — MUST NOT change):
+      id=2   label       (hidden) Kodi writes current section name here
+      id=3   grouplist   categories (left panel) — engine populates, template=id=10
+      id=5   grouplist   settings items (right panel) — engine populates, templates=id=7..15
+      id=6   textbox     description / help text (bottom strip)
+      id=7   button      generic setting / sub-menu
+      id=8   radiobutton bool toggle (engine controls on/off state)
+      id=9   spincontrolex  list/dropdown setting
+      id=10  button      category button (cloned into id=3)
+      id=11  image       separator
+      id=13  sliderex    slider
+      id=14  label       section-header
+      id=15  colorbutton color swatch
+      id=20  radiobutton settings-level toggle (Basic/Standard/Advanced/Expert)
+      id=60  scrollbar   pagecontrol for id=5
+-->
 <window>
-	<defaultcontrol>3</defaultcontrol>
-	<backgroundcolor>background</backgroundcolor>
-	<controls>
-		<include>DefaultBackground</include>
-		<control type="multiimage">
-			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
-			<aspectratio>scale</aspectratio>
-			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
-			<animation effect="fade" start="0" end="100" time="400" reversible="true" condition="!Window.Previous(Settings)">WindowOpen</animation>
-			<animation effect="fade" start="100" end="0" time="300" reversible="true" condition="!Window.Next(Settings)">WindowClose</animation>
-			<animation effect="fade" time="400">VisibleChange</animation>
-			<imagepath colordiffuse="35FFFFFF">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
-			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
-		</control>
+    <defaultcontrol always="true">3</defaultcontrol>
+    <backgroundcolor>background</backgroundcolor>
+    <controls>
 
-		<!-- Right content panel -->
-		<control type="group">
-			<include>OpenClose_Right</include>
-			<!-- Dialog gradient panel background (gap from sidebar) -->
-			<control type="image">
-				<left>490</left>
-				<top>122</top>
-				<right>20</right>
-				<bottom>128</bottom>
-				<texture diffuse="masks/dialog-bg-large.png">dialogs/dialog-gradient.png</texture>
-			</control>
-			<control type="grouplist" id="5">
-				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
-				<itemgap>8</itemgap>
-				<description>control area</description>
-				<top>133</top>
-				<left>510</left>
-				<pagecontrol>60</pagecontrol>
-				<right>45</right>
-				<bottom>137</bottom>
-				<onleft>3</onleft>
-				<onright>60</onright>
-				<onup>5</onup>
-				<ondown>5</ondown>
-			</control>
-		</control>
+        <!-- ── Fanart background ─────────────────────────────────────────── -->
+        <include>DefaultBackground</include>
+        <control type="multiimage">
+            <depth>DepthBackground</depth>
+            <include>FullScreenDimensions</include>
+            <aspectratio>scale</aspectratio>
+            <animation effect="zoom" center="auto" end="102,102" time="0"
+                       condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+            <animation effect="fade" start="0" end="100" time="400" reversible="true"
+                       condition="!Window.Previous(Settings)">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="300" reversible="true"
+                       condition="!Window.Next(Settings)">WindowClose</animation>
+            <animation effect="fade" time="400">VisibleChange</animation>
+            <imagepath colordiffuse="35FFFFFF">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+            <visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+        </control>
 
-		<!-- Default control templates (Kodi binds these by id) -->
-		<control type="button" id="7">
-			<description>Default Button</description>
-			<include>DefaultSettingButtonAction</include>
-		</control>
-		<control type="radiobutton" id="8">
-			<description>Default RadioButton</description>
-			<include>DefaultSettingButton</include>
-		</control>
-		<control type="spincontrolex" id="9">
-			<description>Default SpinControlex</description>
-			<include>DefaultSettingButton</include>
-			<aligny>center</aligny>
-		</control>
-		<control type="sliderex" id="13">
-			<description>Default Slider</description>
-			<include>DefaultSettingButton</include>
-			<aligny>center</aligny>
-		</control>
-		<control type="image" id="11">
-			<description>separator image</description>
-			<height>1</height>
-			<texture colordiffuse="18FFFFFF">colors/white.png</texture>
-		</control>
-		<control type="label" id="14">
-			<description>Default Label (section header)</description>
-			<width>1450</width>
-			<textoffsetx>5</textoffsetx>
-			<top>0</top>
-			<height>50</height>
-			<label></label>
-			<align>left</align>
-			<aligny>center</aligny>
-			<font>font_settings_header</font>
-			<textcolor>grey</textcolor>
-		</control>
-		<control type="colorbutton" id="15">
-			<description>Default ColorButton</description>
-			<include>DefaultSettingButton</include>
-		</control>
+        <!-- ── Dim overlay ───────────────────────────────────────────────── -->
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="CC0A0B0F">special://skin/media/colors/white.png</texture>
+        </control>
 
-		<!-- Left sidebar -->
-		<control type="group">
-			<depth>DepthContentPanel</depth>
-			<include>OpenClose_Left</include>
-			<include content="ContentPanel">
-				<param name="width" value="530" />
-			</include>
-			<control type="grouplist" id="3">
-				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
-				<description>button area</description>
-				<left>0</left>
-				<top>130</top>
-				<width>472</width>
-				<height>770</height>
-				<usecontrolcoords>true</usecontrolcoords>
-				<onleft>5</onleft>
-				<onright>5</onright>
-				<onup>3</onup>
-				<ondown>20</ondown>
-			</control>
-			<control type="button" id="10">
-				<description>Default Category Button</description>
-				<left>0</left>
-				<height>90</height>
-				<width>472</width>
-				<textoffsetx>25</textoffsetx>
-				<aligny>center</aligny>
-				<font>font_settings_item</font>
-				<texturefocus border="12" colordiffuse="FFFFFFFF">masks/focus_pill.png</texturefocus>
-				<texturenofocus />
-			</control>
-			<!-- Skin name — bottom right of sidebar -->
-			<control type="label">
-				<right>20</right>
-				<bottom>30</bottom>
-				<width>440</width>
-				<height>40</height>
-				<font>font_settings_header</font>
-				<label>$INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)]</label>
-				<textcolor>grey</textcolor>
-				<align>right</align>
-				<aligny>center</aligny>
-			</control>
-		</control>
+        <!-- ════════════════════════════════════════════════════════════════
+             MAIN PANEL — 1720×920 @ (100,80)
+        ════════════════════════════════════════════════════════════════════ -->
+        <control type="group">
+            <left>100</left><top>80</top><width>1720</width><height>920</height>
 
-		<!-- Scrollbar -->
-		<control type="group">
-			<right>0</right>
-			<top>133</top>
-			<bottom>137</bottom>
-			<width>60</width>
-			<control type="scrollbar" id="60">
-				<right>0</right>
-				<top>0</top>
-				<bottom>0</bottom>
-				<width>12</width>
-				<orientation>vertical</orientation>
-				<texturesliderbackground />
-				<animation effect="slide" end="6,0" time="300" tween="sine" easing="inout" condition="!Control.HasFocus(60)">conditional</animation>
-				<onleft>5</onleft>
-				<onright>5</onright>
-				<animation effect="fade" start="0" end="100" time="200" delay="300">Visible</animation>
-				<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
-				<animation effect="fade" start="0" end="100" delay="300" time="320">WindowOpen</animation>
-				<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
-				<hitrect x="0" y="0" w="60" h="100%" />
-			</control>
-		</control>
+            <!-- panel bg -->
+            <control type="image">
+                <left>0</left><top>0</top><width>1720</width><height>920</height>
+                <texture colordiffuse="F00A0B0F">special://skin/media/colors/white.png</texture>
+            </control>
+            <control type="image">
+                <left>0</left><top>0</top><width>1720</width><height>1</height>
+                <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+            </control>
+            <control type="image">
+                <left>0</left><top>919</top><width>1720</width><height>1</height>
+                <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+            </control>
 
-		<include content="TopBar">
-			<param name="breadcrumbs_label" value="$INFO[Control.GetLabel(2)]" />
-		</include>
-		<include>BottomBar</include>
+            <!-- ═══════════ HEADER ═══════════ -->
+            <control type="group">
+                <left>0</left><top>0</top><width>1720</width><height>100</height>
 
-		<!-- Settings level toggle (bottom of sidebar) -->
-		<control type="group">
-			<depth>DepthContentPanel</depth>
-			<include>OpenClose_Left</include>
-			<control type="radiobutton" id="20">
-				<width>445</width>
-				<left>25</left>
-				<bottom>70</bottom>
-				<height>90</height>
-				<aligny>center</aligny>
-				<onclick>SettingsLevelChange</onclick>
-				<textoffsetx>100</textoffsetx>
-				<textoffsety>0</textoffsety>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-				<texturenofocus />
-				<radioposx>40</radioposx>
-				<radioposy>0</radioposy>
-				<radiowidth>40</radiowidth>
-				<radioheight>40</radioheight>
-				<onleft>5</onleft>
-				<onright>5</onright>
-				<onup>3</onup>
-				<ondown>3</ondown>
-				<textcolor>unfocused_text</textcolor>
-				<focusedcolor>focused_text</focusedcolor>
-				<textureradioonfocus colordiffuse="focused_text">icons/settings.png</textureradioonfocus>
-				<textureradioonnofocus colordiffuse="unfocused_text">icons/settings.png</textureradioonnofocus>
-				<textureradioofffocus colordiffuse="focused_text">icons/settings.png</textureradioofffocus>
-				<textureradiooffnofocus colordiffuse="unfocused_text">icons/settings.png</textureradiooffnofocus>
-			</control>
-		</control>
+                <!-- Settings gear icon -->
+                <control type="image">
+                    <left>44</left><top>30</top><width>34</width><height>34</height>
+                    <texture colordiffuse="FFFFCC00">special://skin/media/icons/settings.png</texture>
+                </control>
 
-		<!-- Description area -->
-		<control type="group">
-			<include>OpenClose_Right</include>
-			<control type="textbox" id="6">
-				<description>description area</description>
-				<left>510</left>
-				<bottom>25</bottom>
-				<right>60</right>
-				<height>100</height>
-				<font>font_settings_header</font>
-				<align>left</align>
-				<textcolor>unfocused_text</textcolor>
-				<autoscroll time="3000" delay="5000" repeat="5000">true</autoscroll>
-			</control>
-		</control>
+                <!-- Window title -->
+                <control type="label">
+                    <left>92</left><top>0</top><width>900</width><height>58</height>
+                    <label>Settings</label>
+                    <font>font32</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
 
-		<control type="label" id="2">
-			<description>breadcrumbs label</description>
-			<visible>False</visible>
-		</control>
-	</controls>
+                <!-- Breadcrumb — Kodi writes the current section name into id=2,
+                     we read it back here. Works because id=2 is at window top level. -->
+                <control type="label">
+                    <left>92</left><top>58</top><width>1400</width><height>30</height>
+                    <label>$INFO[Control.GetLabel(2)]</label>
+                    <font>font12</font>
+                    <textcolor>FF8B92A5</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
+
+                <!-- Header bottom rule -->
+                <control type="image">
+                    <left>0</left><top>99</top><width>1720</width><height>1</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+
+                <!-- Back button — invisible hit area + two icon layers -->
+                <control type="button" id="9030">
+                    <left>1652</left><top>28</top><width>44</width><height>44</height>
+                    <label></label>
+                    <onclick>Action(Back)</onclick>
+                    <texturenofocus></texturenofocus>
+                    <texturefocus></texturefocus>
+                    <onleft>3</onleft><onright>3</onright>
+                    <onup>9030</onup><ondown>9030</ondown>
+                </control>
+                <control type="image">
+                    <left>1652</left><top>28</top><width>44</width><height>44</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="FFFFCC00">special://skin/media/icons/back.png</texture>
+                    <visible>Control.HasFocus(9030)</visible>
+                </control>
+                <control type="image">
+                    <left>1652</left><top>28</top><width>44</width><height>44</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="88FFFFFF">special://skin/media/icons/back.png</texture>
+                    <visible>!Control.HasFocus(9030)</visible>
+                </control>
+            </control>
+
+            <!-- ═══════════ SIDEBAR GROUP ═══════════ -->
+            <control type="group">
+                <left>0</left><top>100</top><width>380</width><height>820</height>
+
+                <!-- sidebar bg + right divider -->
+                <control type="image">
+                    <left>0</left><top>0</top><width>380</width><height>820</height>
+                    <texture colordiffuse="28000000">special://skin/media/colors/white.png</texture>
+                </control>
+                <control type="image">
+                    <left>379</left><top>0</top><width>1</width><height>820</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+
+                <!-- id=3 Categories grouplist.
+                     Engine clones id=10 (button) once per category and calls SetLabel().
+                     No itemlayout/focusedlayout — grouplist does not support those. -->
+                <control type="grouplist" id="3">
+                    <left>0</left><top>16</top><width>380</width><height>690</height>
+                    <onup>3</onup><ondown>3</ondown>
+                    <onleft>3</onleft><onright>5</onright>
+                    <scrolltime>150</scrolltime>
+                </control>
+
+                <!-- Sidebar bottom divider -->
+                <control type="image">
+                    <left>20</left><bottom>114</bottom><width>340</width><height>1</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+
+                <!-- id=20  Settings-level toggle (Basic / Standard / Advanced / Expert).
+                     Kodi sets the label to the current level name and controls the
+                     selected state; <onclick>SettingsLevelChange</onclick> cycles it. -->
+                <control type="radiobutton" id="20">
+                    <left>0</left><bottom>50</bottom><width>380</width><height>64</height>
+                    <aligny>center</aligny>
+                    <onclick>SettingsLevelChange</onclick>
+                    <textoffsetx>60</textoffsetx>
+                    <font>font13</font>
+                    <textcolor>88FFFFFF</textcolor>
+                    <focusedcolor>FFFFCC00</focusedcolor>
+                    <texturefocus colordiffuse="22FFCC00">special://skin/media/colors/white.png</texturefocus>
+                    <texturenofocus></texturenofocus>
+                    <radioposx>18</radioposx><radioposy>19</radioposy>
+                    <radiowidth>26</radiowidth><radioheight>26</radioheight>
+                    <textureradioonfocus    colordiffuse="FFFFCC00">special://skin/media/icons/settings.png</textureradioonfocus>
+                    <textureradioonnofocus  colordiffuse="88FFFFFF">special://skin/media/icons/settings.png</textureradioonnofocus>
+                    <textureradioofffocus   colordiffuse="FFFFCC00">special://skin/media/icons/settings.png</textureradioofffocus>
+                    <textureradiooffnofocus colordiffuse="88FFFFFF">special://skin/media/icons/settings.png</textureradiooffnofocus>
+                    <onup>3</onup><ondown>20</ondown>
+                    <onleft>5</onleft><onright>5</onright>
+                </control>
+
+                <!-- Version watermark -->
+                <control type="label">
+                    <left>20</left><bottom>14</bottom><width>340</width><height>26</height>
+                    <label>$INFO[System.AddonTitle(skin.littleduck)] v$INFO[System.AddonVersion(skin.littleduck)]</label>
+                    <font>font12</font>
+                    <textcolor>33FFFFFF</textcolor>
+                    <align>left</align><aligny>center</aligny>
+                </control>
+            </control>
+
+            <!-- ═══════════ SETTINGS GROUPLIST — id=5 ═══════════
+                 Engine iterates the active category's settings and clones the
+                 appropriate template control (id=7/8/9/11/13/14/15) per row.
+                 It calls SetLabel(), SetLabel2(), SetSelected() on each clone.
+                 Scrollbar id=60 is wired via <pagecontrol>.
+            ════════════════════════════════════════════════════════════════ -->
+            <control type="grouplist" id="5">
+                <left>380</left><top>100</top><width>1310</width><height>700</height>
+                <onup>5</onup><ondown>5</ondown>
+                <onleft>3</onleft><onright>5</onright>
+                <scrolltime>150</scrolltime>
+                <pagecontrol>60</pagecontrol>
+            </control>
+
+            <!-- ── Scrollbar ─────────────────────────────────────────────── -->
+            <control type="scrollbar" id="60">
+                <left>1700</left><top>100</top><width>10</width><height>700</height>
+                <orientation>vertical</orientation>
+                <texturesliderbackground />
+                <animation effect="slide" end="6,0" time="300" tween="sine" easing="inout"
+                           condition="!Control.HasFocus(60)">conditional</animation>
+                <onleft>5</onleft><onright>5</onright>
+                <animation effect="fade" start="0" end="100" time="200" delay="300">Visible</animation>
+                <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+                <animation effect="fade" start="0" end="100" delay="300" time="320">WindowOpen</animation>
+                <animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
+                <hitrect x="0" y="0" w="40" h="100%" />
+            </control>
+
+            <!-- ═══════════ INFO BOX — x=380 y=800 h=120 ═══════════
+                 id=6 MUST be the direct textbox, not on a group.
+                 Kodi's engine writes description text directly into id=6.
+            ════════════════════════════════════════════════════════════════ -->
+            <control type="group">
+                <left>380</left><top>800</top><width>1340</width><height>120</height>
+
+                <control type="image">
+                    <left>0</left><top>0</top><width>1340</width><height>120</height>
+                    <texture colordiffuse="40000000">special://skin/media/colors/white.png</texture>
+                </control>
+                <control type="image">
+                    <left>0</left><top>0</top><width>1340</width><height>1</height>
+                    <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+                </control>
+                <!-- info icon -->
+                <control type="image">
+                    <left>20</left><top>38</top><width>28</width><height>28</height>
+                    <texture colordiffuse="88FFCC00">special://skin/media/icons/settings/info.png</texture>
+                </control>
+                <!-- id=6 — Kodi fills with focused setting's help text -->
+                <control type="textbox" id="6">
+                    <left>60</left><top>10</top><right>20</right><bottom>10</bottom>
+                    <font>font13</font>
+                    <textcolor>FF8B92A5</textcolor>
+                    <autoscroll time="3000" delay="5000" repeat="5000">true</autoscroll>
+                </control>
+            </control>
+
+        </control>
+        <!-- END main panel -->
+
+        <!-- ════════════════════════════════════════════════════════════════
+             TEMPLATE CONTROLS — window top-level.
+             Kodi clones these controls and injects them into the grouplist.
+             Their on-disk position/size is irrelevant — the engine sets it.
+
+             Colour language:
+               Normal card  : FF13151E dark bg  |  FFFFFFFF white text
+               Focused card : 33FFCC00 gold bg  |  FFFFCC00 gold text
+               Section head : transparent bg   |  FF8B92A5 grey text
+               Toggle ON    : FF4EC94E green    |  Toggle OFF: FF8B92A5 grey
+        ════════════════════════════════════════════════════════════════════ -->
+
+        <!-- id=10  Category button (cloned into id=3 grouplist).
+             textoffsetx=22 aligns with our sidebar icon gap.
+             Kodi marks the active category as "selected". -->
+        <control type="button" id="10">
+            <left>0</left><top>0</top><width>380</width><height>64</height>
+            <textoffsetx>22</textoffsetx>
+            <aligny>center</aligny>
+            <font>font13</font>
+            <textcolor>88FFFFFF</textcolor>
+            <focusedcolor>FFFFCC00</focusedcolor>
+            <selectedcolor>CCFFFFFF</selectedcolor>
+            <texturenofocus></texturenofocus>
+            <texturefocus colordiffuse="22FFCC00">special://skin/media/colors/white.png</texturefocus>
+            <selectedtexture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</selectedtexture>
+        </control>
+
+        <!-- id=7  Button (generic settings + sub-menu entries).
+             label  = setting name (engine sets)
+             label2 = current value (engine sets for action/button types) -->
+        <control type="button" id="7">
+            <left>0</left><top>0</top><right>0</right><height>110</height>
+            <textoffsetx>30</textoffsetx>
+            <aligny>center</aligny>
+            <font>font_settings_item</font>
+            <textcolor>FFFFFFFF</textcolor>
+            <focusedcolor>FFFFCC00</focusedcolor>
+            <selectedcolor>CCFFCC00</selectedcolor>
+            <invalidcolor>FF8B92A5</invalidcolor>
+            <texturenofocus colordiffuse="FF13151E">special://skin/media/colors/white.png</texturenofocus>
+            <texturefocus   colordiffuse="33FFCC00">special://skin/media/colors/white.png</texturefocus>
+        </control>
+
+        <!-- id=8  RadioButton (bool toggle).
+             Engine calls SetSelected(true/false) — no skin conditions needed.
+             Radio textures: green ON (FF4EC94E), gold/grey OFF. -->
+        <control type="radiobutton" id="8">
+            <left>0</left><top>0</top><right>0</right><height>110</height>
+            <textoffsetx>30</textoffsetx>
+            <aligny>center</aligny>
+            <font>font_settings_item</font>
+            <textcolor>FFFFFFFF</textcolor>
+            <focusedcolor>FFFFCC00</focusedcolor>
+            <selectedcolor>CCFFCC00</selectedcolor>
+            <texturenofocus colordiffuse="FF13151E">special://skin/media/colors/white.png</texturenofocus>
+            <texturefocus   colordiffuse="33FFCC00">special://skin/media/colors/white.png</texturefocus>
+            <!-- radio at right: posx=1170 in a 1310px grouplist → 68px from right edge -->
+            <radioposx>1170</radioposx><radioposy>33</radioposy>
+            <radiowidth>72</radiowidth><radioheight>44</radioheight>
+            <textureradioonfocus    colordiffuse="FF4EC94E">special://skin/media/buttons/radio-button-on.png</textureradioonfocus>
+            <textureradioonnofocus  colordiffuse="FF4EC94E">special://skin/media/buttons/radio-button-on.png</textureradioonnofocus>
+            <textureradioofffocus   colordiffuse="CCFFCC00">special://skin/media/buttons/radio-button-off.png</textureradioofffocus>
+            <textureradiooffnofocus colordiffuse="FF8B92A5">special://skin/media/buttons/radio-button-off.png</textureradiooffnofocus>
+        </control>
+
+        <!-- id=9  SpinControlEx (list / number / dropdown).
+             Engine sets label (name) + label2 (current value). -->
+        <control type="spincontrolex" id="9">
+            <left>0</left><top>0</top><right>0</right><height>110</height>
+            <textoffsetx>30</textoffsetx>
+            <aligny>center</aligny>
+            <font>font_settings_item</font>
+            <textcolor>FFFFFFFF</textcolor>
+            <focusedcolor>FFFFCC00</focusedcolor>
+            <selectedcolor>CCFFCC00</selectedcolor>
+            <invalidcolor>FF8B92A5</invalidcolor>
+            <texturenofocus colordiffuse="FF13151E">special://skin/media/colors/white.png</texturenofocus>
+            <texturefocus   colordiffuse="33FFCC00">special://skin/media/colors/white.png</texturefocus>
+        </control>
+
+        <!-- id=11 Separator — 1px rule between setting groups -->
+        <control type="image" id="11">
+            <left>0</left><top>0</top><right>0</right><height>1</height>
+            <texture colordiffuse="14FFFFFF">special://skin/media/colors/white.png</texture>
+        </control>
+
+        <!-- id=13 SliderEx (percentage / volume style sliders) -->
+        <control type="sliderex" id="13">
+            <left>0</left><top>0</top><right>0</right><height>110</height>
+            <textoffsetx>30</textoffsetx>
+            <aligny>center</aligny>
+            <font>font_settings_item</font>
+            <textcolor>FFFFFFFF</textcolor>
+            <focusedcolor>FFFFCC00</focusedcolor>
+            <texturenofocus colordiffuse="FF13151E">special://skin/media/colors/white.png</texturenofocus>
+            <texturefocus   colordiffuse="33FFCC00">special://skin/media/colors/white.png</texturefocus>
+        </control>
+
+        <!-- id=14 Section-header label (e.g. "General", "Display") -->
+        <control type="label" id="14">
+            <left>0</left><top>0</top><right>0</right><height>44</height>
+            <textoffsetx>30</textoffsetx>
+            <font>font12</font>
+            <textcolor>FF8B92A5</textcolor>
+            <align>left</align><aligny>center</aligny>
+        </control>
+
+        <!-- id=15 ColorButton -->
+        <control type="colorbutton" id="15">
+            <left>0</left><top>0</top><right>0</right><height>110</height>
+            <textoffsetx>30</textoffsetx>
+            <aligny>center</aligny>
+            <font>font_settings_item</font>
+            <textcolor>FFFFFFFF</textcolor>
+            <focusedcolor>FFFFCC00</focusedcolor>
+            <texturenofocus colordiffuse="FF13151E">special://skin/media/colors/white.png</texturenofocus>
+            <texturefocus   colordiffuse="33FFCC00">special://skin/media/colors/white.png</texturefocus>
+        </control>
+
+        <!-- id=2  Hidden label — Kodi writes the current category name here.
+             The header breadcrumb reads it via $INFO[Control.GetLabel(2)]. -->
+        <control type="label" id="2">
+            <description>current category (Kodi-managed)</description>
+            <visible>false</visible>
+        </control>
+
+    </controls>
 </window>

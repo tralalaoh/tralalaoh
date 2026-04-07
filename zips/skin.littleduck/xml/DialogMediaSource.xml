@@ -59,7 +59,7 @@
 					<bottom>0</bottom>
 					<right>25</right>
 					<visible>Control.HasFocus(10)</visible>
-					<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+					<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 				</control>
 				<control type="label">
 					<left>10</left>

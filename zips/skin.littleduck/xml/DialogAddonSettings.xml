@@ -37,12 +37,11 @@
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>font25_title</font>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-				<texturenofocus border="12" colordiffuse="$VAR[ColorHighlight2]">masks/focus_pill.png</texturenofocus>
+				<texturefocus />
+				<texturenofocus />
 			</control>
 			<control type="grouplist" id="5">
 				<scrolltime condition="Skin.HasSetting(touchmode)">0</scrolltime>
-				<itemgap>8</itemgap>
 				<description>control area</description>
 				<left>404</left>
 				<top>100</top>
@@ -67,7 +66,7 @@
 			</control>
 			<control type="button" id="7">
 				<description>Default Button</description>
-				<include>DefaultSettingButtonAction</include>
+				<include>DefaultSettingButton</include>
 			</control>
 			<control type="radiobutton" id="8">
 				<description>Default RadioButton</description>
@@ -134,7 +133,7 @@
 				<textoffsety>0</textoffsety>
 				<textcolor>unfocused_text</textcolor>
 				<focusedcolor>focused_text</focusedcolor>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+				<texturefocus />
 				<texturenofocus />
 				<radioposx>40</radioposx>
 				<radioposy>0</radioposy>

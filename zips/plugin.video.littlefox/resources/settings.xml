@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+
+    <!-- Providers -->
+    <category label="Providers">
+        <setting label="Enable or disable each scraping provider individually." type="lsep"/>
+        <setting label="Disabled providers are skipped at search time, reducing latency." type="lsep"/>
+
+        <setting id="use_3sk"        type="bool" label="3SK (Arabic Audio)"                    default="true"/>
+        <setting id="use_3skmedia"   type="bool" label="3SK Media (Arabic Audio - AlbaPlayer)"  default="true"/>
+        <setting id="use_qrmzi"      type="bool" label="Qrmzi (Arabic Audio - Verified)"        default="true"/>
+        <setting id="use_turkish123" type="bool" label="Turkish123 (English Subs)"              default="true"/>
+        <setting id="use_egydead"    type="bool" label="EgyDead (Arabic Audio)"                 default="true"/>
+        <setting id="use_youtube"    type="bool" label="YouTube (Turkish Audio - opt-in)"       default="false"/>
+    </category>
+
+    <!-- Performance -->
+    <category label="Performance">
+        <setting label="Parallel mode fires all providers simultaneously." type="lsep"/>
+        <setting label="Sequential mode tries them one-by-one and stops at first success." type="lsep"/>
+
+        <setting id="provider_search_mode"      type="select" label="Provider Search Mode"          values="parallel|sequential" default="parallel"/>
+        <setting id="max_concurrent_providers"  type="slider" label="Max Concurrent Providers"      default="3"  range="1,1,5"  option="int"/>
+        <setting id="provider_timeout"          type="slider" label="Provider Timeout (seconds)"    default="10" range="5,1,30" option="int"/>
+        <setting id="resolution_timeout"        type="slider" label="Resolution Timeout (seconds)"  default="15" range="5,1,30" option="int"/>
+    </category>
+
+    <!-- Setup Player -->
+    <category label="Setup Player">
+        <setting label="Install the Little Fox player file into your metadata addon." type="lsep"/>
+        <setting label="This lets TMDb Helper (or similar) launch Little Fox for playback." type="lsep"/>
+        <setting label=" " type="lsep"/>
+        <setting id="setup_player" type="action" label="Setup Player" action="RunPlugin(plugin://plugin.video.littlefox/?action=setup_player)" option="close"/>
+    </category>
+
+    <!-- Advanced -->
+    <category label="Advanced">
+        <setting label="Developer and power-user options." type="lsep"/>
+
+        <setting id="tmdb_api_key"   type="text" label="TMDB API Key"        default="c8578981f94591042c8a9b9837571314"/>
+        <setting id="enable_debug"   type="bool" label="Enable Debug Logging" default="false"/>
+
+        <setting label=" " type="lsep"/>
+        <setting id="open_resolveurl" type="action" label="Open ResolveURL Settings" action="Addon.OpenSettings(script.module.resolveurl)"/>
+    </category>
+
+</settings>

@@ -118,7 +118,7 @@
 						<height>46</height>
 						<aligny>center</aligny>
 						<font>font25_title</font>
-						<textcolor>accent_color</textcolor>
+						<textcolor>FFFFFFFF</textcolor>
 						<label>[B]$INFO[ListItem.Label][/B]</label>
 					</control>
 				</focusedlayout>
@@ -253,7 +253,7 @@
 							<height>52</height>
 							<label>$INFO[ListItem.Label]</label>
 							<font>font10</font>
-							<textcolor>accent_color</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 							<align>left</align>
 							<shadowcolor>text_shadow</shadowcolor>
 							<autoscroll time="2000" delay="1500" repeat="2000">true</autoscroll>

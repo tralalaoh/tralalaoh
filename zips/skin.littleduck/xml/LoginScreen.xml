@@ -126,8 +126,8 @@
 				<onright>52</onright>
 				<onup>52</onup>
 				<ondown>52</ondown>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
-				<texturenofocus border="12" colordiffuse="$VAR[ColorHighlight2]">masks/focus_pill.png</texturenofocus>
+				<texturefocus />
+				<texturenofocus />
 			</control>
 		</control>
 		<include>TopBar</include>

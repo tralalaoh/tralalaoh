@@ -539,7 +539,7 @@
 						<top>$PARAM[label1_top]</top>
 						<align>center</align>
 						<font>font12</font>
-						<textcolor>accent_color</textcolor>
+						<textcolor>FFFFFFFF</textcolor>
 						<scroll>true</scroll>
 						<label>$INFO[ListItem.Label]</label>
 					</control>
@@ -770,7 +770,7 @@
 							<top>$PARAM[label1_top]</top>
 							<align>center</align>
 							<font>font12</font>
-							<textcolor>accent_color</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 							<scroll>true</scroll>
 							<label>$INFO[ListItem.Label]</label>
 						</control>
@@ -983,7 +983,7 @@
 							<top>$PARAM[label1_top]</top>
 							<align>center</align>
 							<font>font12</font>
-							<textcolor>accent_color</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 							<scroll>true</scroll>
 							<label>$INFO[ListItem.Label]</label>
 						</control>
@@ -1155,7 +1155,7 @@
 					<height>90</height>
 					<aligny>center</aligny>
 					<font>font14</font>
-					<textcolor>accent_color</textcolor>
+					<textcolor>FFFFFFFF</textcolor>
 					<label>[B][UPPERCASE]$INFO[ListItem.Label][/UPPERCASE][/B]</label>
 				</control>
 				<control type="label">

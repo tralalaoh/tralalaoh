@@ -142,7 +142,7 @@
 						</itemlayout>
 						<focusedlayout condition="!Control.IsVisible(2200)" width="700" height="80">
 							<control type="image">
-								<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+								<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 								<visible>Control.HasFocus(1103)</visible>
 							</control>
 							<control type="image">
@@ -174,7 +174,7 @@
 						</focusedlayout>
 						<focusedlayout condition="Control.IsVisible(2200)" width="688" height="80">
 							<control type="image">
-								<texture border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texture>
+								<texture border="12" colordiffuse="00FFFFFF">masks/focus_pill.png</texture>
 								<visible>Control.HasFocus(1103)</visible>
 							</control>
 							<control type="image">

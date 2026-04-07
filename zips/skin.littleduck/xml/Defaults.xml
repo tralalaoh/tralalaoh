@@ -27,7 +27,7 @@
 		<disabledcolor>disabled</disabledcolor>
 	</default>
 	<default type="button">
-		<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+		<texturefocus />
 		<texturenofocus />
 		<font>font13</font>
 		<textcolor>unfocused_text</textcolor>
@@ -38,9 +38,9 @@
 		<pulseonselect>no</pulseonselect>
 	</default>
 	<default type="togglebutton">
-		<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+		<texturefocus />
 		<texturenofocus />
-		<alttexturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</alttexturefocus>
+		<alttexturefocus />
 		<alttexturenofocus />
 		<textcolor>white</textcolor>
 		<font>font13</font>
@@ -106,7 +106,7 @@
 		<textureradiooffnofocus colordiffuse="unfocused_text">buttons/radio-button-off.png</textureradiooffnofocus>
 		<textureradioondisabled colordiffuse="disabled">buttons/radio-button-on.png</textureradioondisabled>
 		<textureradiooffdisabled colordiffuse="disabled">buttons/radio-button-off.png</textureradiooffdisabled>
-		<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+		<texturefocus />
 		<texturenofocus />
 		<font>font13</font>
 		<textcolor>white</textcolor>

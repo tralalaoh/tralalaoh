@@ -1,0 +1,167 @@
+# Kodi Media Center language file
+# Addon Name: Rabite Watch
+# Addon id: plugin.video.rabitewatch
+# Addon Provider: Tralalaoh
+msgid ""
+msgstr ""
+"Project-Id-Version: Rabite Watch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-20 00:00+0000\n"
+"PO-Revision-Date: 2026-02-20 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# ---------------------------------------------------------------------------
+# UI labels
+# ---------------------------------------------------------------------------
+msgctxt "#32000"
+msgid "Continue Watching"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Sync All"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Category labels
+# ---------------------------------------------------------------------------
+msgctxt "#32100"
+msgid "General"
+msgstr ""
+
+msgctxt "#32300"
+msgid "Services & Metadata"
+msgstr ""
+
+msgctxt "#32400"
+msgid "Advanced"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# General — Sync
+# ---------------------------------------------------------------------------
+msgctxt "#32111"
+msgid "Sync on Kodi startup"
+msgstr ""
+
+msgctxt "#32112"
+msgid "Auto-sync interval (minutes, 0 = disabled)"
+msgstr ""
+
+msgctxt "#32113"
+msgid "Sync now"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# General — Continue Watching
+# ---------------------------------------------------------------------------
+msgctxt "#32121"
+msgid "Max items shown"
+msgstr ""
+
+msgctxt "#32122"
+msgid "Hide completed items"
+msgstr ""
+
+msgctxt "#32123"
+msgid "Hide if watched above % (treated as complete)"
+msgstr ""
+
+msgctxt "#32124"
+msgid "Show items from"
+msgstr ""
+
+msgctxt "#32125"
+msgid "All Services"
+msgstr ""
+
+msgctxt "#32126"
+msgid "Trakt only"
+msgstr ""
+
+msgctxt "#32127"
+msgid "AniList only"
+msgstr ""
+
+msgctxt "#32128"
+msgid "Simkl only"
+msgstr ""
+
+msgctxt "#32129"
+msgid "Include Simkl-only items in Continue Watching (no resume points)"
+msgstr ""
+
+msgctxt "#32130"
+msgid "Items to refresh from cloud on startup (0 if DB empty = full sync)"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Services — Trakt
+# ---------------------------------------------------------------------------
+msgctxt "#32311"
+msgid "Enable Trakt"
+msgstr ""
+
+msgctxt "#32312"
+msgid "Use Trakt images and metadata"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Services — AniList
+# ---------------------------------------------------------------------------
+msgctxt "#32321"
+msgid "Enable AniList"
+msgstr ""
+
+msgctxt "#32322"
+msgid "Use AniList images and metadata"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Services — Simkl
+# ---------------------------------------------------------------------------
+msgctxt "#32331"
+msgid "Enable Simkl"
+msgstr ""
+
+msgctxt "#32332"
+msgid "Use Simkl images and metadata"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Metadata — TMDB Enrichment
+# ---------------------------------------------------------------------------
+msgctxt "#32211"
+msgid "Enrich metadata from TMDB"
+msgstr ""
+
+msgctxt "#32212"
+msgid "TMDB API key (leave blank to use built-in)"
+msgstr ""
+
+msgctxt "#32213"
+msgid "Fetch clearlogo from TMDB"
+msgstr ""
+
+msgctxt "#32214"
+msgid "Overwrite missing plot from TMDB"
+msgstr ""
+
+msgctxt "#32215"
+msgid "Fetch runtime / duration from TMDB"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Advanced
+# ---------------------------------------------------------------------------
+msgctxt "#32411"
+msgid "Enable debug logging"
+msgstr ""
+
+msgctxt "#32421"
+msgid "Clear local database"
+msgstr ""

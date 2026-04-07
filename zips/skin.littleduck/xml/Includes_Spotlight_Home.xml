@@ -119,8 +119,8 @@
 					<onright>9000</onright>
 					<scrolltime tween="cubic" easing="out">500</scrolltime>
 					<texturefocus />
-					<texturenofocus />
-					<focusedlayout height="90">
+<texturenofocus />
+<focusedlayout height="90">
 						<!-- Icon full brightness when focused — no circle -->
 						<control type="image">
 							<include>FocusBounce</include>
@@ -333,11 +333,11 @@
 						<param name="type_prop" value="spotlight.custom1.type"/>
 						<param name="tab_up_id" value="39061"/>
 						<param name="content_prop" value="spotlight.custom1.path"/>
-						<param name="tab_prop" value="spotlight.custom1.tab"/>
-						<param name="tab2_id" value="39062"/>
-						<param name="tab3_id" value="39063"/>
-						<param name="tab4_id" value="39064"/>
-						<param name="tab5_id" value="39065"/>
+					<param name="tab_prop" value="spotlight.custom1.tab"/>
+					<param name="tab2_id" value="39062"/>
+					<param name="tab3_id" value="39063"/>
+					<param name="tab4_id" value="39064"/>
+					<param name="tab5_id" value="39065"/>
 						<param name="widget_target" value="videos"/>
 					</include>
 				</control>
@@ -355,11 +355,11 @@
 						<param name="type_prop" value="spotlight.movie.type"/>
 						<param name="tab_up_id" value="38061"/>
 						<param name="content_prop" value="spotlight.movie.path"/>
-						<param name="tab_prop" value="spotlight.movie.tab"/>
-						<param name="tab2_id" value="38062"/>
-						<param name="tab3_id" value="38063"/>
-						<param name="tab4_id" value="38064"/>
-						<param name="tab5_id" value="38065"/>
+					<param name="tab_prop" value="spotlight.movie.tab"/>
+					<param name="tab2_id" value="38062"/>
+					<param name="tab3_id" value="38063"/>
+					<param name="tab4_id" value="38064"/>
+					<param name="tab5_id" value="38065"/>
 						<param name="widget_target" value="videos"/>
 					</include>
 				</control>
@@ -377,11 +377,11 @@
 						<param name="type_prop" value="spotlight.tvshow.type"/>
 						<param name="tab_up_id" value="37061"/>
 						<param name="content_prop" value="spotlight.tvshow.path"/>
-						<param name="tab_prop" value="spotlight.tvshow.tab"/>
-						<param name="tab2_id" value="37062"/>
-						<param name="tab3_id" value="37063"/>
-						<param name="tab4_id" value="37064"/>
-						<param name="tab5_id" value="37065"/>
+					<param name="tab_prop" value="spotlight.tvshow.tab"/>
+					<param name="tab2_id" value="37062"/>
+					<param name="tab3_id" value="37063"/>
+					<param name="tab4_id" value="37064"/>
+					<param name="tab5_id" value="37065"/>
 						<param name="widget_target" value="videos"/>
 					</include>
 				</control>
@@ -399,11 +399,11 @@
 						<param name="type_prop" value="spotlight.custom2.type"/>
 						<param name="tab_up_id" value="36061"/>
 						<param name="content_prop" value="spotlight.custom2.path"/>
-						<param name="tab_prop" value="spotlight.custom2.tab"/>
-						<param name="tab2_id" value="36062"/>
-						<param name="tab3_id" value="36063"/>
-						<param name="tab4_id" value="36064"/>
-						<param name="tab5_id" value="36065"/>
+					<param name="tab_prop" value="spotlight.custom2.tab"/>
+					<param name="tab2_id" value="36062"/>
+					<param name="tab3_id" value="36063"/>
+					<param name="tab4_id" value="36064"/>
+					<param name="tab5_id" value="36065"/>
 						<param name="widget_target" value="videos"/>
 					</include>
 				</control>
@@ -421,11 +421,11 @@
 						<param name="type_prop" value="spotlight.custom3.type"/>
 						<param name="tab_up_id" value="35061"/>
 						<param name="content_prop" value="spotlight.custom3.path"/>
-						<param name="tab_prop" value="spotlight.custom3.tab"/>
-						<param name="tab2_id" value="35062"/>
-						<param name="tab3_id" value="35063"/>
-						<param name="tab4_id" value="35064"/>
-						<param name="tab5_id" value="35064"/>
+					<param name="tab_prop" value="spotlight.custom3.tab"/>
+					<param name="tab2_id" value="35062"/>
+					<param name="tab3_id" value="35063"/>
+					<param name="tab4_id" value="35064"/>
+					<param name="tab5_id" value="35064"/>
 						<param name="widget_target" value="videos"/>
 					</include>
 				</control>

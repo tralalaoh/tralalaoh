@@ -36,7 +36,7 @@
 				<onclick>back</onclick>
 				<onclick>RunScript(script.littleduck.helper,mode=remake_all_widgets)</onclick>
 				<align>center</align>
-				<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+				<texturefocus />
 				<texturenofocus />
 			</control>
 		</control>

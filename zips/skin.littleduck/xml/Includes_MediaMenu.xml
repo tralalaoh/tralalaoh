@@ -12,9 +12,9 @@
 		<invalidcolor>invalid</invalidcolor>
 		<label2color>white</label2color>
 		<label2focusedcolor>focused_text</label2focusedcolor>
-		<texturefocus border="12" colordiffuse="FFF0F0F0">masks/focus_pill.png</texturefocus>
+		<texturefocus />
 		<texturenofocus />
-		<alttexturefocus border="12" colordiffuse="FFF0F0F0">masks/focus_pill.png</alttexturefocus>
+		<alttexturefocus />
 		<alttexturenofocus></alttexturenofocus>
 	</include>
 	<include name="PVRQuickNavItemsCommon">

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <!-- General Settings -->
+    <category label="30100">
+        <setting id="general_header" label="30101" type="lsep"/>
+        
+        <!-- Sync Interval -->
+        <setting id="sync_interval" type="slider" label="30102" default="60">
+            <level>0</level>
+            <constraints>
+                <minimum>5</minimum>
+                <step>5</step>
+                <maximum>180</maximum>
+            </constraints>
+        </setting>
+        
+        <setting id="auto_sync_enabled" type="bool" label="Enable automatic background sync" default="true">
+            <level>0</level>
+        </setting>
+        
+        <setting id="show_notifications" type="bool" label="Show Notifications" default="true">
+            <level>0</level>
+        </setting>
+        
+        <setting id="show_sync_notifications" type="bool" label="Display notifications for sync operations" default="false">
+            <level>0</level>
+        </setting>
+    </category>
+    
+    <!-- Account: Trakt -->
+    <category label="Account: Trakt">
+        <setting id="trakt_header" label="Trakt Configuration" type="lsep"/>
+        
+        <setting id="trakt_enabled" type="bool" label="Enable Trakt" default="true">
+            <level>0</level>
+        </setting>
+        
+        <setting id="trakt_authenticate" type="action" label="Authenticate with Trakt" enable="eq(-1,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=trakt_auth)</data>
+        </setting>
+        
+        <setting id="trakt_sync" type="action" label="Sync Now" enable="eq(-2,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=trakt_sync)</data>
+        </setting>
+        
+        <setting id="trakt_logout" type="action" label="Logout" enable="eq(-3,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=trakt_logout)</data>
+        </setting>
+        
+        <!-- Hidden token storage -->
+        <setting id="trakt_access_token" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <setting id="trakt_refresh_token" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <setting id="trakt_expires_at" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <!-- Show username (read-only) -->
+        <setting id="trakt_username" type="text" label="Logged in as" default="" enable="false">
+            <level>0</level>
+        </setting>
+        
+        <setting id="trakt_user_id" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+    </category>
+    
+    <!-- Account: AniList -->
+    <category label="Account: AniList">
+        <setting id="anilist_header" label="AniList Configuration" type="lsep"/>
+        
+        <setting id="anilist_enabled" type="bool" label="Enable AniList" default="false">
+            <level>0</level>
+        </setting>
+        
+        <setting id="anilist_authenticate" type="action" label="Authenticate with AniList" enable="eq(-1,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=anilist_auth)</data>
+        </setting>
+        
+        <setting id="anilist_sync" type="action" label="Sync Now" enable="eq(-2,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=anilist_sync)</data>
+        </setting>
+        
+        <setting id="anilist_logout" type="action" label="Logout" enable="eq(-3,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=anilist_logout)</data>
+        </setting>
+        
+        <!-- Hidden token storage -->
+        <setting id="anilist_access_token" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <!-- Show username (read-only) -->
+        <setting id="anilist_username" type="text" label="Logged in as" default="" enable="false">
+            <level>0</level>
+        </setting>
+        
+        <setting id="anilist_user_id" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <setting id="anilist_info" type="label" label="AniList syncs anime from your watching lists">
+            <level>0</level>
+        </setting>
+    </category>
+    
+    <!-- Account: Simkl -->
+    <category label="Account: Simkl">
+        <setting id="simkl_header" label="Simkl Configuration" type="lsep"/>
+        
+        <setting id="simkl_enabled" type="bool" label="Enable Simkl" default="false">
+            <level>0</level>
+        </setting>
+        
+        <setting id="simkl_authenticate" type="action" label="Authenticate with Simkl" enable="eq(-1,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=simkl_auth)</data>
+        </setting>
+        
+        <setting id="simkl_sync" type="action" label="Sync Now" enable="eq(-2,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=simkl_sync)</data>
+        </setting>
+        
+        <setting id="simkl_logout" type="action" label="Logout" enable="eq(-3,true)">
+            <level>0</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=simkl_logout)</data>
+        </setting>
+        
+        <!-- Hidden token storage -->
+        <setting id="simkl_access_token" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <!-- Show username (read-only) -->
+        <setting id="simkl_username" type="text" label="Logged in as" default="" enable="false">
+            <level>0</level>
+        </setting>
+        
+        <setting id="simkl_user_id" type="text" default="" visible="false">
+            <level>3</level>
+        </setting>
+        
+        <setting id="simkl_info" type="label" label="Simkl syncs anime from your watching lists">
+            <level>0</level>
+        </setting>
+    </category>
+    
+    <!-- Advanced Settings -->
+    <category label="30500">
+        <setting id="advanced_header" label="30501" type="lsep"/>
+        
+        <setting id="debug_logging" type="bool" label="Enable Debug Logging" default="false">
+            <level>1</level>
+        </setting>
+        
+        <setting id="clear_header" label="Database Management" type="lsep"/>
+        
+        <setting id="clear_database" type="action" label="Clear Database">
+            <level>1</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=clear_database)</data>
+        </setting>
+        
+        <setting id="clear_sync_queue" type="action" label="Clear pending sync operations">
+            <level>1</level>
+            <data>RunPlugin(plugin://plugin.video.littlerabite/?action=clear_sync_queue)</data>
+        </setting>
+        
+        <setting id="database_path" type="text" label="Database Path" default="" enable="false">
+            <level>1</level>
+        </setting>
+    </category>
+</settings>

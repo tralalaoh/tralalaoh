@@ -37,6 +37,12 @@
             <param name="widget_target" value="videos"/>
             <param name="list_id" value="23016"/>
         </include>
+        <include content="WidgetListBigEpisodes">
+            <param name="content_path" value="plugin://plugin.video.littleracun/?mode=list_items&catalog_id=streaming.hbm&catalog_type=movie&catalog_source=aiometadata&catalog_name=HBO+Max+%28Movies%29&catalog_extras=%5B%7B%22name%22%3A+%22genre%22%2C+%22options%22%3A+%5B%22Action%22%2C+%22Adventure%22%2C+%22Animation%22%2C+%22Comedy%22%2C+%22Crime%22%2C+%22Documentary%22%2C+%22Drama%22%2C+%22Family%22%2C+%22Fantasy%22%2C+%22History%22%2C+%22Horror%22%2C+%22Music%22%2C+%22Mystery%22%2C+%22Romance%22%2C+%22Science+Fiction%22%2C+%22TV+Movie%22%2C+%22Thriller%22%2C+%22War%22%2C+%22Western%22%5D%2C+%22isRequired%22%3A+false%2C+%22default%22%3A+%22Action%22%7D%2C+%7B%22name%22%3A+%22skip%22%7D%5D"/>
+            <param name="widget_header" value="test"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23017"/>
+        </include>
     </include>
 
     <include name="Custom1SpotlightTabs">
@@ -48,7 +54,7 @@
             <orientation>horizontal</orientation>
             <itemgap>20</itemgap>
                 <control type="group">
-                    <width>287</width>
+                    <width>272</width>
                     <height>50</height>
                     <defaultcontrol>39061</defaultcontrol>
                     <control type="button" id="39061">
@@ -87,7 +93,7 @@
                     </control>
                 </control>
                 <control type="group">
-                    <width>255</width>
+                    <width>241</width>
                     <height>50</height>
                     <defaultcontrol>39062</defaultcontrol>
                     <control type="button" id="39062">
@@ -126,7 +132,7 @@
                     </control>
                 </control>
                 <control type="group">
-                    <width>287</width>
+                    <width>272</width>
                     <height>50</height>
                     <defaultcontrol>39063</defaultcontrol>
                     <control type="button" id="39063">
@@ -165,7 +171,7 @@
                     </control>
                 </control>
                 <control type="group">
-                    <width>351</width>
+                    <width>333</width>
                     <height>50</height>
                     <defaultcontrol>39064</defaultcontrol>
                     <control type="button" id="39064">
@@ -204,7 +210,7 @@
                     </control>
                 </control>
                 <control type="group">
-                    <width>351</width>
+                    <width>333</width>
                     <height>50</height>
                     <defaultcontrol>39065</defaultcontrol>
                     <control type="button" id="39065">
@@ -243,7 +249,7 @@
                     </control>
                 </control>
                 <control type="group">
-                    <width>207</width>
+                    <width>196</width>
                     <height>50</height>
                     <defaultcontrol>39066</defaultcontrol>
                     <control type="button" id="39066">
@@ -264,7 +270,7 @@
                         <onfocus>SetProperty(spotlight.custom1.path,plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&list_id=140374&list_name=Turkish+Show&plugin_category=Turkish+Show,home)</onfocus>
                         <onfocus>Skin.SetString(spotlight.custom1.type,landscapeinfo)</onfocus>
                         <onleft>39065</onleft>
-                        <onright>39066</onright>
+                        <onright>39067</onright>
                         <onup>9000</onup>
                         <ondown condition="String.IsEqual(Skin.String(spotlight.custom1.type),landscape)">39110</ondown>
                         <ondown condition="String.IsEqual(Skin.String(spotlight.custom1.type),landscapeinfo)">39121</ondown>
@@ -279,6 +285,45 @@
                         <height>3</height>
                         <texture colordiffuse="accent_color">colors/white.png</texture>
                         <visible>String.IsEqual(Window(Home).Property(spotlight.custom1.tab),6)</visible>
+                    </control>
+                </control>
+                <control type="group">
+                    <width>78</width>
+                    <height>50</height>
+                    <defaultcontrol>39067</defaultcontrol>
+                    <control type="button" id="39067">
+                        <left>0</left>
+                        <top>0</top>
+                        <width>auto</width>
+                        <height>40</height>
+                        <label>test</label>
+                        <font>font25_title</font>
+                        <textcolor>unfocused_text</textcolor>
+                        <focusedcolor>accent_color</focusedcolor>
+                        <shadowcolor>text_shadow</shadowcolor>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <texturefocus />
+                        <texturenofocus />
+                        <onfocus>SetProperty(spotlight.custom1.tab,7,home)</onfocus>
+                        <onfocus>SetProperty(spotlight.custom1.path,plugin://plugin.video.littleracun/?mode=list_items&catalog_id=streaming.hbm&catalog_type=movie&catalog_source=aiometadata&catalog_name=HBO+Max+%28Movies%29&catalog_extras=%5B%7B%22name%22%3A+%22genre%22%2C+%22options%22%3A+%5B%22Action%22%2C+%22Adventure%22%2C+%22Animation%22%2C+%22Comedy%22%2C+%22Crime%22%2C+%22Documentary%22%2C+%22Drama%22%2C+%22Family%22%2C+%22Fantasy%22%2C+%22History%22%2C+%22Horror%22%2C+%22Music%22%2C+%22Mystery%22%2C+%22Romance%22%2C+%22Science+Fiction%22%2C+%22TV+Movie%22%2C+%22Thriller%22%2C+%22War%22%2C+%22Western%22%5D%2C+%22isRequired%22%3A+false%2C+%22default%22%3A+%22Action%22%7D%2C+%7B%22name%22%3A+%22skip%22%7D%5D,home)</onfocus>
+                        <onfocus>Skin.SetString(spotlight.custom1.type,landscapeinfo)</onfocus>
+                        <onleft>39066</onleft>
+                        <onright>39067</onright>
+                        <onup>9000</onup>
+                        <ondown condition="String.IsEqual(Skin.String(spotlight.custom1.type),landscape)">39110</ondown>
+                        <ondown condition="String.IsEqual(Skin.String(spotlight.custom1.type),landscapeinfo)">39121</ondown>
+                        <ondown condition="String.IsEqual(Skin.String(spotlight.custom1.type),walll)">39151</ondown>
+                        <ondown condition="String.IsEqual(Skin.String(spotlight.custom1.type),wallp)">39161</ondown>
+                        <ondown>39100</ondown>
+                    </control>
+                    <control type="image">
+                        <left>0</left>
+                        <top>43</top>
+                        <right>0</right>
+                        <height>3</height>
+                        <texture colordiffuse="accent_color">colors/white.png</texture>
+                        <visible>String.IsEqual(Window(Home).Property(spotlight.custom1.tab),7)</visible>
                     </control>
                 </control>
         </control>

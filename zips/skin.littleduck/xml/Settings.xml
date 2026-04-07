@@ -129,7 +129,7 @@
 				<content>
 					<item>
 						<label>Skin settings</label>
-						<onclick>ActivateWindow(skinsettings)</onclick>
+						<onclick>RunScript(script.littleduck.helper,mode=open_skin_settings)</onclick>
 						<icon>icons/settings/skin.png</icon>
 					</item>
 					<item>

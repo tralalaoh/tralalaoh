@@ -53,7 +53,7 @@
 					<align>center</align>
 					<aligny>center</aligny>
 					<font>font25_title</font>
-					<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+					<texturefocus />
 					<texturenofocus />
 				</control>
 			</control>
@@ -104,7 +104,7 @@
 					<align>center</align>
 					<aligny>center</aligny>
 					<font>font27</font>
-					<texturefocus border="12" colordiffuse="$VAR[ColorHighlight]">masks/focus_pill.png</texturefocus>
+					<texturefocus />
 					<texturenofocus />
 				</control>
 				<control type="label" id="8">

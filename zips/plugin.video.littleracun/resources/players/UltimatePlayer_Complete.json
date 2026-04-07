@@ -1,0 +1,64 @@
+{
+    "name": "Ultimate Player 🎬",
+    "id": "ultimate_player_complete",
+    "plugin": "plugin.video.ultimateplayer",
+    "priority": 1000,
+    "is_resolvable": "true",
+    "description": "Example player that uses ALL 17+ IDs and metadata from Little Racun. Perfect template for player developers!",
+    "assert": {
+        "playable": true
+    },
+    "play_movie": "plugin://plugin.video.ultimateplayer/?action=play&imdb={imdb}&tmdb={tmdb}&tvdb={tvdb}&tvdbc={tvdbc}&trakt={trakt}&tvmaze={tvmaze}&mal={mal}&anilist={anilist}&kitsu={kitsu}&anidb={anidb}&anisearch={anisearch}&livechart={livechart}&notify={notify}&simkl={simkl}&slug={slug}&youtube={youtube}&generic_id={generic_id}&title={title}&year={year}&type=movie",
+    "play_episode": "plugin://plugin.video.ultimateplayer/?action=play&imdb={imdb}&tmdb={tmdb}&tvdb={tvdb}&tvdbc={tvdbc}&trakt={trakt}&tvmaze={tvmaze}&mal={mal}&anilist={anilist}&kitsu={kitsu}&anidb={anidb}&anisearch={anisearch}&livechart={livechart}&notify={notify}&simkl={simkl}&slug={slug}&youtube={youtube}&generic_id={generic_id}&title={title}&year={year}&season={season}&episode={episode}&type=episode",
+    
+    "_notes": {
+        "available_ids": [
+            "imdb - IMDb ID (tt1234567)",
+            "tmdb - The Movie Database ID", 
+            "tvdb - TheTVDB ID",
+            "tvdbc - TheTVDB Collection ID",
+            "trakt - Trakt.tv ID",
+            "tvmaze - TVmaze ID",
+            "mal - MyAnimeList ID",
+            "anilist - AniList ID",
+            "kitsu - Kitsu ID",
+            "anidb - AniDB ID",
+            "anisearch - AniSearch ID",
+            "livechart - LiveChart ID",
+            "notify - Notify.moe ID",
+            "simkl - Simkl ID",
+            "slug - URL-friendly slug",
+            "youtube - YouTube video ID",
+            "generic_id - Generic fallback ID"
+        ],
+        "available_metadata": [
+            "title - Content title",
+            "year - Release year",
+            "season - Season number (episodes only)",
+            "episode - Episode number (episodes only)",
+            "type - Content type (movie/episode)"
+        ],
+        "kodi_properties_access": {
+            "description": "Players can also access metadata via Kodi properties",
+            "example_python": "list_item.getProperty('imdb_id')",
+            "available_properties": [
+                "imdb_id, tmdb_id, tvdb_id, mal_id, anilist_id, kitsu_id, anidb_id, trakt_id, tvmaze_id, simkl_id, slug_id, youtube_id, generic_id"
+            ]
+        },
+        "infotag_access": {
+            "description": "Players can access full metadata via InfoTagVideo",
+            "example_python": "video_info = list_item.getVideoInfoTag(); title = video_info.getTitle(); plot = video_info.getPlot(); rating = video_info.getRating()",
+            "available_methods": [
+                "getTitle(), getPlot(), getYear(), getRating(), getSeason(), getEpisode(), getTVShowTitle(), getGenres(), getStudios(), getTvShowStatus()"
+            ]
+        },
+        "usage_tips": [
+            "1. Use multiple ID types for better source finding",
+            "2. Prioritize IDs based on your source providers",
+            "3. Implement fallback logic (try imdb, then tmdb, then search)",
+            "4. Access Kodi properties for additional metadata",
+            "5. Use InfoTagVideo for rich user dialogs",
+            "6. Handle missing IDs gracefully"
+        ]
+    }
+}
