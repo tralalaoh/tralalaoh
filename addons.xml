@@ -289,7 +289,7 @@ provider-name="jurialmunkey">
   </assets>
 </extension>
 </addon>
-<addon id="repository.tralalaoh" name="Tralalaoh Repository" version="0.0.2" provider-name="tralalaoh">
+<addon id="repository.tralalaoh" name="Tralalaoh Repository" version="0.0.3" provider-name="tralalaoh">
     <extension point="xbmc.addon.repository" name="Tralalaoh Add-ons">
         <dir>
             <info compressed="false">https://tralalaoh.github.io/tralalaoh/addons.xml</info>
@@ -306,7 +306,7 @@ provider-name="jurialmunkey">
         </assets>
     </extension>
 </addon>
-<addon id="script.littleduck.helper" name="littleduck Helper" version="0.6.21" provider-name="Tralalaoh">
+<addon id="script.littleduck.helper" name="littleduck Helper" version="0.6.22" provider-name="Tralalaoh">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.19.1"/>
@@ -389,7 +389,7 @@ provider-name="jurialmunkey">
   </assets>
 </extension>
 </addon>
-<addon id="skin.littleduck" version="1.0.3" name="littleduck"
+<addon id="skin.littleduck" version="1.0.4" name="littleduck"
 	provider-name="Tralalaoh">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0" />
@@ -399,11 +399,13 @@ provider-name="jurialmunkey">
 	</requires>
 	<extension point="xbmc.gui.skin" debugging="false">
 		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
-		<res width="1920" height="1357" aspect="1920:1357" default="false" folder="xml" />
-		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
-		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="1620" height="1080" aspect="3:2" default="false" folder="xml" />
+		<res width="1440" height="1080" aspect="4:3" default="false" folder="xml" />
+		<res width="1728" height="1080" aspect="16:10" default="false" folder="xml" />
 		<res width="2040" height="1080" aspect="17:9" default="false" folder="xml" />
-		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2520" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2340" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
 		<theme name="curial" mediadir="themes/curial" />
 		<theme name="flat" mediadir="themes/flat" />
 	</extension>
