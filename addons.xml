@@ -244,7 +244,7 @@ Features:
     </extension>
 </addon>
 <addon id="plugin.video.themoviedb.helper"
-version="6.16.0"
+version="6.16.1"
 name="TMDb Helper"
 provider-name="jurialmunkey">
 <requires>
