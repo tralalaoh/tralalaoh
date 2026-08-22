@@ -244,7 +244,7 @@ Features:
     </extension>
 </addon>
 <addon id="plugin.video.themoviedb.helper"
-version="6.16.2"
+version="6.16.4"
 name="TMDb Helper"
 provider-name="jurialmunkey">
 <requires>
@@ -331,7 +331,7 @@ provider-name="jurialmunkey">
         </assets>
     </extension>
 </addon>
-<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.206" provider-name="gujal">
+<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.207" provider-name="gujal">
     <requires>
         <!-- <import addon="xbmc.python" version="3.0.0" /> -->
         <import addon="script.module.six" />
